@@ -10,50 +10,172 @@
   <body>
     <div class="page">
       <div class="page__content">
-        <header class="header">
+        <header class="header page__container">
           <img src="./images/logo.png" alt="About Around the US" />
         </header>
         <main class="content">
-          <section class="profile">
+          <section class="profile page__container">
             <img src="./images/profile-pic.png" alt="avatar" />
             <div class="profile__info">
               <h1 class="profile__title">Jacques Cousteau</h1>
-              <button class="profile__edit-button"></button>
+              <button class="profile__edit-button">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect x="0.5" y="0.5" width="23" height="23" stroke="white" />
+                  <path
+                    d="M17 8.32827L9.60377 15.7666L8.28302 14.4194L15.6604 7L17 8.32827ZM7 17L8.96226 16.4118L7.58491 15.0835L7 17Z"
+                    fill="white"
+                  />
+                </svg>
+              </button>
               <p class="profile__subtitle">Explorer</p>
             </div>
-            <button class="profile__add-button"></button>
+            <button class="profile__add-button">
+              <svg
+                width="150"
+                height="50"
+                viewBox="0 0 150 50"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  x="1"
+                  y="1"
+                  width="148"
+                  height="48"
+                  rx="1"
+                  stroke="white"
+                  stroke-width="2"
+                />
+                <path
+                  d="M86 23.7778H76.2222V14H73.7778V23.7778H64V26.2222H73.7778V36H76.2222V26.2222H86V23.7778Z"
+                  fill="white"
+                />
+              </svg>
+            </button>
           </section>
-          <section class="elements">
-            <div class="elements__list">
-              <img src="./images/yosemite.jpg" />
-              <p>Vanoise Nationa...</p>
-              <img src="./images/favorite-icon.svg" />
-            </div>
-            <div class="elements__list">
-              <img src="./images/lake-louise.jpg" />
-              <p>Vanoise Nationa...</p>
-              <img src="./images/favorite-icon.svg" />
-            </div>
-            <div class="elements__list">
-              <img src="./images/bald-mountains.jpg" />
-              <p>Vanoise Nationa...</p>
-              <img src="./images/favorite-icon.svg" />
-            </div>
-            <div class="elements__list">
-              <img src="./images/latemar.jpg" />
-              <p>Vanoise Nationa...</p>
-              <img src="./images/favorite-icon.svg" />
-            </div>
-            <div class="elements__list">
-              <img src="./images/latemar.jpg" />
-              <p>Vanoise Nationa...</p>
-              <img src="./images/favorite-icon.svg" />
-            </div>
-            <div class="elements__list">
-              <img src="./images/vanoise.jpg" />
-              <p>Vanoise Nationa...</p>
-              <img src="./images/lago.jpg" />
-            </div>
+          <section class="cards page__container">
+            <ul class="card__list">
+              <li class="card">
+                <img src="./images/yosemite.jpg" class="card__image" />
+                <div class="card__description">
+                  <h2>Yosemite Valley</h2>
+                  <svg
+                    class="card__fav-icon"
+                    width="20"
+                    height="18"
+                    viewBox="0 0 20 18"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M18.4537 9.27081C20.5154 7.14636 20.5154 3.69676 18.4537 1.59334C16.3919 -0.531113 13.0441 -0.531113 10.9824 1.59334L9.98214 2.64505L8.98188 1.61437C6.92013 -0.531113 3.57234 -0.531113 1.531 1.59334C0.530748 2.62401 0 3.99124 0 5.44259C0 6.89395 0.551161 8.26117 1.531 9.29185L9.98214 18L18.4537 9.27081ZM1.30646 5.44259C1.30646 4.34882 1.71472 3.33918 2.47002 2.58195C3.24573 1.78265 4.24598 1.383 5.24624 1.383C6.24649 1.383 7.24675 1.78265 8.02246 2.58195L9.98214 4.58019L11.9418 2.56091C13.4728 0.983348 15.9837 0.983348 17.4943 2.56091C18.2291 3.31814 18.6578 4.32778 18.6578 5.42156C18.6578 6.51534 18.2496 7.52498 17.4943 8.28221L9.98214 16.0438L2.47002 8.30324C1.73514 7.52498 1.30646 6.51534 1.30646 5.44259Z"
+                      fill="black"
+                    />
+                  </svg>
+                </div>
+              </li>
+              <li class="card">
+                <img src="./images/lake-louise.jpg" class="card__image" />
+                <div class="card__description">
+                  <h2>Lake Louise</h2>
+                  <svg
+                    class="card__fav-icon"
+                    width="20"
+                    height="18"
+                    viewBox="0 0 20 18"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M18.4537 9.27081C20.5154 7.14636 20.5154 3.69676 18.4537 1.59334C16.3919 -0.531113 13.0441 -0.531113 10.9824 1.59334L9.98214 2.64505L8.98188 1.61437C6.92013 -0.531113 3.57234 -0.531113 1.531 1.59334C0.530748 2.62401 0 3.99124 0 5.44259C0 6.89395 0.551161 8.26117 1.531 9.29185L9.98214 18L18.4537 9.27081ZM1.30646 5.44259C1.30646 4.34882 1.71472 3.33918 2.47002 2.58195C3.24573 1.78265 4.24598 1.383 5.24624 1.383C6.24649 1.383 7.24675 1.78265 8.02246 2.58195L9.98214 4.58019L11.9418 2.56091C13.4728 0.983348 15.9837 0.983348 17.4943 2.56091C18.2291 3.31814 18.6578 4.32778 18.6578 5.42156C18.6578 6.51534 18.2496 7.52498 17.4943 8.28221L9.98214 16.0438L2.47002 8.30324C1.73514 7.52498 1.30646 6.51534 1.30646 5.44259Z"
+                      fill="black"
+                    />
+                  </svg>
+                </div>
+              </li>
+              <li class="card">
+                <img src="./images/bald-mountains.jpg" class="card__image" />
+                <div class="card__description">
+                  <h2>Bald Mountains</h2>
+                  <svg
+                    class="card__fav-icon"
+                    width="20"
+                    height="18"
+                    viewBox="0 0 20 18"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M18.4537 9.27081C20.5154 7.14636 20.5154 3.69676 18.4537 1.59334C16.3919 -0.531113 13.0441 -0.531113 10.9824 1.59334L9.98214 2.64505L8.98188 1.61437C6.92013 -0.531113 3.57234 -0.531113 1.531 1.59334C0.530748 2.62401 0 3.99124 0 5.44259C0 6.89395 0.551161 8.26117 1.531 9.29185L9.98214 18L18.4537 9.27081ZM1.30646 5.44259C1.30646 4.34882 1.71472 3.33918 2.47002 2.58195C3.24573 1.78265 4.24598 1.383 5.24624 1.383C6.24649 1.383 7.24675 1.78265 8.02246 2.58195L9.98214 4.58019L11.9418 2.56091C13.4728 0.983348 15.9837 0.983348 17.4943 2.56091C18.2291 3.31814 18.6578 4.32778 18.6578 5.42156C18.6578 6.51534 18.2496 7.52498 17.4943 8.28221L9.98214 16.0438L2.47002 8.30324C1.73514 7.52498 1.30646 6.51534 1.30646 5.44259Z"
+                      fill="black"
+                    />
+                  </svg>
+                </div>
+              </li>
+              <li class="card">
+                <img src="./images/latemar.jpg" class="card__image" />
+                <div class="card__description">
+                  <h2>Latemar</h2>
+                  <svg
+                    class="card__fav-icon"
+                    width="20"
+                    height="18"
+                    viewBox="0 0 20 18"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M18.4537 9.27081C20.5154 7.14636 20.5154 3.69676 18.4537 1.59334C16.3919 -0.531113 13.0441 -0.531113 10.9824 1.59334L9.98214 2.64505L8.98188 1.61437C6.92013 -0.531113 3.57234 -0.531113 1.531 1.59334C0.530748 2.62401 0 3.99124 0 5.44259C0 6.89395 0.551161 8.26117 1.531 9.29185L9.98214 18L18.4537 9.27081ZM1.30646 5.44259C1.30646 4.34882 1.71472 3.33918 2.47002 2.58195C3.24573 1.78265 4.24598 1.383 5.24624 1.383C6.24649 1.383 7.24675 1.78265 8.02246 2.58195L9.98214 4.58019L11.9418 2.56091C13.4728 0.983348 15.9837 0.983348 17.4943 2.56091C18.2291 3.31814 18.6578 4.32778 18.6578 5.42156C18.6578 6.51534 18.2496 7.52498 17.4943 8.28221L9.98214 16.0438L2.47002 8.30324C1.73514 7.52498 1.30646 6.51534 1.30646 5.44259Z"
+                      fill="black"
+                    />
+                  </svg>
+                </div>
+              </li>
+              <li class="card">
+                <img src="./images/vanoise.jpg" class="card__image" />
+                <div class="card__description">
+                  <h2>Vanoise nationa...</h2>
+                  <svg
+                    class="card__fav-icon"
+                    width="20"
+                    height="18"
+                    viewBox="0 0 20 18"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M18.4537 9.27081C20.5154 7.14636 20.5154 3.69676 18.4537 1.59334C16.3919 -0.531113 13.0441 -0.531113 10.9824 1.59334L9.98214 2.64505L8.98188 1.61437C6.92013 -0.531113 3.57234 -0.531113 1.531 1.59334C0.530748 2.62401 0 3.99124 0 5.44259C0 6.89395 0.551161 8.26117 1.531 9.29185L9.98214 18L18.4537 9.27081ZM1.30646 5.44259C1.30646 4.34882 1.71472 3.33918 2.47002 2.58195C3.24573 1.78265 4.24598 1.383 5.24624 1.383C6.24649 1.383 7.24675 1.78265 8.02246 2.58195L9.98214 4.58019L11.9418 2.56091C13.4728 0.983348 15.9837 0.983348 17.4943 2.56091C18.2291 3.31814 18.6578 4.32778 18.6578 5.42156C18.6578 6.51534 18.2496 7.52498 17.4943 8.28221L9.98214 16.0438L2.47002 8.30324C1.73514 7.52498 1.30646 6.51534 1.30646 5.44259Z"
+                      fill="black"
+                    />
+                  </svg>
+                </div>
+              </li>
+              <li class="card">
+                <img src="./images/lago.jpg" class="card__image" />
+                <div class="card__description">
+                  <h2>Lago di Braies</h2>
+                  <svg
+                    class="card__fav-icon"
+                    width="20"
+                    height="18"
+                    viewBox="0 0 20 18"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M18.4537 9.27081C20.5154 7.14636 20.5154 3.69676 18.4537 1.59334C16.3919 -0.531113 13.0441 -0.531113 10.9824 1.59334L9.98214 2.64505L8.98188 1.61437C6.92013 -0.531113 3.57234 -0.531113 1.531 1.59334C0.530748 2.62401 0 3.99124 0 5.44259C0 6.89395 0.551161 8.26117 1.531 9.29185L9.98214 18L18.4537 9.27081ZM1.30646 5.44259C1.30646 4.34882 1.71472 3.33918 2.47002 2.58195C3.24573 1.78265 4.24598 1.383 5.24624 1.383C6.24649 1.383 7.24675 1.78265 8.02246 2.58195L9.98214 4.58019L11.9418 2.56091C13.4728 0.983348 15.9837 0.983348 17.4943 2.56091C18.2291 3.31814 18.6578 4.32778 18.6578 5.42156C18.6578 6.51534 18.2496 7.52498 17.4943 8.28221L9.98214 16.0438L2.47002 8.30324C1.73514 7.52498 1.30646 6.51534 1.30646 5.44259Z"
+                      fill="black"
+                    />
+                  </svg>
+                </div>
+              </li>
+            </ul>
           </section>
         </main>
         <footer class="footer" id="footer-section"></footer>

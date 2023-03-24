@@ -1,5 +1,5 @@
 @import url(../vendor/normalize.css);
-@media screen and {
+@media screen and (max-width: 1280px) and (min-width: 768px) {
 }
 
 .page {
@@ -7,10 +7,17 @@
   color: white;
 }
 
-.page__content {
-  margin-left: auto;
-  margin-right: auto;
+.page__container {
+  margin: 0 auto;
   max-width: 880px;
+  width: 100%;
+  position: relative;
+}
+
+.page__content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .header {
@@ -21,6 +28,8 @@
 .profile {
   display: flex;
   align-items: center;
+  margin-top: 40px;
+  margin-bottom: 51px;
 }
 
 .profile__info {
@@ -44,7 +53,7 @@
 }
 
 .profile__edit-button {
-  background: transparent url(../images/edit-button.png) no-repeat;
+  background: transparent no-repeat;
   padding: 0;
   width: 24px;
   height: 24px;
@@ -57,18 +66,46 @@
 }
 
 .profile__add-button {
-  background: transparent url(../images/add-button.svg) no-repeat;
+  background: transparent no-repeat;
   width: 150px;
   height: 50px;
   border: none;
   padding: 0;
 }
 
-.elements {
+.card__list {
   display: grid;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0px;
+  justify-content: start;
+  grid-template-columns: repeat(auto-fit, 282px);
+  row-gap: 20px;
+  column-gap: 17px;
 }
 
-.elements__list {
+.card {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.card__image {
   width: 282px;
-  height: 361px;
+  height: 282px;
+}
+
+.card__description {
+  width: 283px;
+  background-color: #fff;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 29px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.card__fav-icon {
 }
