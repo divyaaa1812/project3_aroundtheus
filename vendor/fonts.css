@@ -1,0 +1,11 @@
+@font-face {
+  src: url(./fonts/Inter\ Web/Inter) format("woff2");
+  font-family: Inter-regular;
+  font-weight: normal;
+}
+
+@font-face {
+  src: url(./fonts/Inter\ Web/\Inter-Bold) format("woff2");
+  font-family: Inter-bold;
+  font-weight: 900;
+}
