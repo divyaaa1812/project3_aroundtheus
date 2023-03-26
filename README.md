@@ -17,7 +17,7 @@ Technologies Used: CSS, HTML - Grid Layout, Flex
 - [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)
 
 **Website Link**
-https://divyaaa1812.github.io/project3_aroundtheus/
+- https://divyaaa1812.github.io/project3_aroundtheus/
 
 **Images**
 Desktop View:
