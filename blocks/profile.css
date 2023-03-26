@@ -5,6 +5,10 @@
   margin-bottom: 51px;
 }
 
+.profile_font_inter_medium {
+  font-weight: 500;
+}
+
 .profile__info {
   display: grid;
   grid-template-areas:
@@ -42,6 +46,7 @@
   margin-top: 0px;
   margin-bottom: 0px;
   grid-area: description;
+  font-size: 16px;
 }
 
 .profile__add-button {

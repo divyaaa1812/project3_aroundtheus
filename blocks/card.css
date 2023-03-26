@@ -17,6 +17,10 @@
   overflow: hidden;
 }
 
+.card_font_bold {
+  font-weight: 900;
+}
+
 .card__image {
   width: 282px;
   height: 282px;
@@ -30,7 +34,6 @@
   align-items: center;
   justify-content: space-between;
   line-height: 29px;
-  font-family: "Inter-bold";
 }
 
 .card__title {
