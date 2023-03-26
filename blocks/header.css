@@ -1,0 +1,9 @@
+.header {
+  padding-top: 45px;
+}
+
+.border {
+  border-bottom: 1px solid #545454;
+  margin-top: 41px;
+  opacity: 0.5;
+}
