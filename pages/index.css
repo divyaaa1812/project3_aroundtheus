@@ -73,7 +73,6 @@
   margin-top: 0px;
   margin-bottom: 0px;
   grid-area: description;
-  padding-bottom: 36px;
 }
 
 .profile__add-button {
@@ -162,6 +161,7 @@
   .profile {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     margin-top: 42px;
     margin-bottom: 36px;
     width: 282px;
@@ -169,7 +169,6 @@
   .profile__info {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     width: 100%;
     margin: 0;
   }
