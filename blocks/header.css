@@ -2,8 +2,22 @@
   padding-top: 45px;
 }
 
-.border {
+.header:after {
+  content: "";
+  width: 100%;
   border-bottom: 1px solid #545454;
-  margin-top: 41px;
   opacity: 0.5;
+  left: 0;
+  top: 100%;
+  position: absolute;
+}
+
+@media screen and (max-width: 500px) {
+  .header {
+    padding-top: 28px;
+  }
+
+  .border {
+    margin-top: 32px;
+  }
 }
