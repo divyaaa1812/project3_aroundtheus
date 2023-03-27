@@ -9,10 +9,8 @@
 
 @media screen and (max-width: 500px) {
   .footer__text {
-    margin-left: 19px;
-    margin-right: 19px;
     padding-bottom: 36px;
     padding-top: 48px;
-    width: 282px;
+    width: 100%;
   }
 }

@@ -11,7 +11,6 @@
   margin: 0 auto;
   max-width: 880px;
   width: 100%;
-  position: relative;
 }
 
 .page__content {
@@ -20,9 +19,9 @@
   min-height: 100vh;
 }
 
-@media screen and (max-width: 999px) {
-  .page__content {
+@media screen and (max-width: 800px) {
+  .page__container {
     margin: 0 19px;
-    max-width: calc(100% - 40px);
+    max-width: calc(100% - 38px);
   }
 }
