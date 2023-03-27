@@ -22,10 +22,10 @@ Technologies Used: CSS, HTML - Grid Layout, Flex
 
 **Images**
 Desktop View:
-![Desktop View](./images/desktop.png)
+![Desktop View](<./images/desktop%20(2).png>)
 
 Tablet View:
-![Tablet View](<./images/Tablet%20(2).png>)
+![Tablet View](./images/Tablet.png)
 
 Mobile View:
 ![Mobile View](./images/mobile.png)
