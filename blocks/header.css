@@ -4,6 +4,7 @@
   width: 100%;
   margin: 0 auto;
   position: relative;
+  padding-bottom: 41px;
 }
 
 .header:after {
@@ -23,12 +24,14 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 320px) {
   .header {
-    padding-top: 28px;
+    margin: 0;
+    max-width: 320px;
+    width: 100%;
   }
 
-  .border {
-    margin-top: 32px;
+  .logo {
+    margin-left: 27px;
   }
 }
