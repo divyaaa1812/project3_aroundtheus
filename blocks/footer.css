@@ -5,6 +5,7 @@
   padding-top: 67px;
   width: 318px;
   color: #545454;
+  font-size: 18px;
 }
 
 @media screen and (max-width: 500px) {
@@ -12,5 +13,6 @@
     padding-bottom: 36px;
     padding-top: 48px;
     width: 100%;
+    font-size: 14px;
   }
 }
