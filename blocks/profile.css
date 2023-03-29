@@ -5,16 +5,13 @@
   margin-bottom: 51px;
 }
 
-.profile__font-inter-medium {
-  font-weight: 500;
-}
-
 .profile__info {
   display: grid;
   grid-template-areas:
     "title button"
     "description description";
   row-gap: 8px;
+  column-gap: 18px;
   align-items: center;
   margin-left: 30px;
 }
@@ -24,6 +21,7 @@
   font-size: 42px;
   line-height: 48px;
   grid-area: title;
+  font-weight: 500;
 }
 
 .profile__edit-button {
@@ -33,11 +31,10 @@
   height: 24px;
   border: 1px solid #ffffff;
   grid-area: button;
-  margin-left: 18px;
 }
 
 .profile__edit-button:hover {
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 .profile__subtitle {
@@ -50,14 +47,15 @@
 .profile__add-button {
   background: transparent url(../images/Addicon.svg) center no-repeat;
   padding: 0;
-  border: #fff solid 1px;
+  border: 2px solid #ffffff;
+  border-radius: 2px;
   height: 50px;
   width: 150px;
   margin-left: auto;
 }
 
 .profile__add-button:hover {
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 500px) {
@@ -73,17 +71,21 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    margin: 0;
+    margin-top: 30px;
+    margin-left: 0px;
     justify-content: center;
   }
 
   .profile__title {
     font-size: 22px;
     margin-right: 10px;
+    line-height: 26.63px;
   }
 
   .profile__edit-button {
-    background-size: 18px 18px;
+    width: 18px;
+    height: 18px;
+    background-size: 7.5px 7.5px;
   }
 
   .profile__add-button {
@@ -95,5 +97,7 @@
   .profile__subtitle {
     text-align: center;
     width: 100%;
+    line-height: 17px;
+    font-size: 14px;
   }
 }

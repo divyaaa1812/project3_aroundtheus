@@ -6,10 +6,6 @@
   overflow: hidden;
 }
 
-.card__font-bold {
-  font-weight: 900;
-}
-
 .card__image {
   width: 282px;
   height: 282px;
@@ -32,6 +28,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  font-weight: 900;
 }
 
 .card__fav-icon {
