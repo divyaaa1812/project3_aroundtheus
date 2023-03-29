@@ -33,16 +33,12 @@
 
 .card__fav-icon {
   margin-right: 20px;
+  background: transparent url(../images/fav-icon.svg) center no-repeat;
+  width: 21px;
+  height: 18px;
+  border: none;
 }
 
 .card__fav-icon:hover {
   opacity: 0.5;
 }
-
-/* @media screen and (max-width: 999px) {
-  .card__list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-} */
