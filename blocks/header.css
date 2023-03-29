@@ -11,27 +11,30 @@
   content: "";
   width: 100%;
   border-bottom: 1px solid #545454;
-  opacity: 0.5;
+  opacity: 0.7;
   left: 0;
   top: 100%;
   position: absolute;
 }
 
-@media screen and (max-width: 800px) {
+/* @media screen and (max-width: 800px) {
   .header {
     margin: 0 19px;
     max-width: calc(100% - 38px);
   }
-}
+} */
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 800px) {
   .header {
     margin: 0;
-    max-width: 320px;
     width: 100%;
+    padding-top: 28px;
+    padding-bottom: 32px;
   }
 
   .logo {
-    margin-left: 27px;
+    padding-left: 27px;
+    width: 126px;
+    height: 24px;
   }
 }
