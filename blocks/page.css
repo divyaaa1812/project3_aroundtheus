@@ -4,7 +4,7 @@
 }
 
 .page__font {
-  font-family: "Inter";
+  font-family: "Inter", sans-serif;
 }
 
 .page__container {
@@ -19,9 +19,8 @@
   min-height: 100vh;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1080px) {
   .page__container {
-    margin: 0 19px;
     max-width: calc(100% - 38px);
   }
 }
