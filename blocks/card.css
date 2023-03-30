@@ -41,4 +41,5 @@
 
 .card__fav-icon:hover {
   opacity: 0.5;
+  cursor: pointer;
 }
