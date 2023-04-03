@@ -5,7 +5,7 @@ const initialCards = [
   },
   {
     name: "Lake Louise",
-    link: "",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
   },
   {
     name: "Bald Mountains",
