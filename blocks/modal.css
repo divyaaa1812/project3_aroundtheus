@@ -8,7 +8,7 @@
   display: none;
 }
 
-.modal__open {
+.modal_opened {
   display: flex;
 }
 
