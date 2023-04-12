@@ -1,0 +1,113 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+}
+
+.modal__open {
+  display: flex;
+}
+
+.modal__content {
+  margin: auto;
+  color: #000;
+  background-color: #fff;
+  border-radius: 10px;
+  position: relative;
+  width: 430px;
+  height: 330px;
+}
+
+.modal__close-button {
+  background: url(../images/Close\ Icon.svg) no-repeat;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: -48px;
+  right: -48px;
+  border: none;
+  background-size: contain;
+}
+
+.modal__title {
+  font-size: 24px;
+  line-height: 29px;
+  margin-top: 34px;
+  margin-bottom: 54px;
+  margin-left: 36px;
+  width: 358px;
+  font-family: "Inter", sans-serif;
+  font-weight: 900;
+}
+
+.modal__text-input {
+  height: 0;
+  padding: 0;
+  margin-left: 36px;
+  margin-right: 36px;
+  border: 1px solid #000000;
+  opacity: 0.2;
+  width: 358px;
+}
+
+.modal__text-input:first-of-type {
+  margin-bottom: 57px;
+}
+
+.modal__button {
+  margin-top: 48px;
+  height: 50.15px;
+  padding: 0;
+  margin-left: 36px;
+  margin-right: 36px;
+  background: #000000;
+  border-radius: 2px;
+  color: #ffffff;
+  font-size: 18px;
+  font-family: "Inter", sans-serif;
+  width: 358px;
+  line-height: 22px;
+}
+
+.modal__button:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 500px) {
+  .modal__content {
+    max-width: 282px;
+  }
+
+  .modal__title {
+    width: 238px;
+    margin-left: 22px;
+    margin-right: 22px;
+    margin-top: 25px;
+    margin-bottom: 75px;
+  }
+
+  .modal__close-button {
+    width: 26px;
+    height: 26px;
+  }
+
+  .modal__text-input {
+    width: 238px;
+    margin-left: 22px;
+    margin-right: 22px;
+    margin-bottom: 0px;
+  }
+
+  .modal__button {
+    width: 238px;
+    margin-left: 22px;
+    margin-right: 22px;
+    margin-top: 45px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
