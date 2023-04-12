@@ -31,6 +31,7 @@
   right: -48px;
   border: none;
   background-size: contain;
+  padding: 0;
 }
 
 .modal__title {
@@ -45,17 +46,19 @@
 }
 
 .modal__text-input {
-  height: 0;
   padding: 0;
   margin-left: 36px;
   margin-right: 36px;
   border: 1px solid #000000;
   opacity: 0.2;
   width: 358px;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
 }
 
 .modal__text-input:first-of-type {
-  margin-bottom: 57px;
+  margin-bottom: 30px;
 }
 
 .modal__button {
@@ -93,6 +96,7 @@
   .modal__close-button {
     width: 26px;
     height: 26px;
+    right: 18.62px;
   }
 
   .modal__text-input {
@@ -100,6 +104,10 @@
     margin-left: 22px;
     margin-right: 22px;
     margin-bottom: 0px;
+  }
+
+  .modal__text-input:first-of-type {
+    margin-bottom: 30px;
   }
 
   .modal__button {
