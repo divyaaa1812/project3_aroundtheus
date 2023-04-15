@@ -30,12 +30,11 @@ const editProfileModal = document.querySelector(".js-modal");
 const modalCloseButton = document.querySelector(".js-modal-close-button");
 
 function openModal() {
-  console.log("clicked button");
-  editButton.classList.add("modal_opened");
+  editProfileModal.classList.add("modal_opened");
 }
 editButton.addEventListener("click", openModal);
 
 function closeModal() {
-  modalCloseButton.classList.remove("modal_opened");
+  editProfileModal.classList.remove("modal_opened");
 }
 modalCloseButton.addEventListener("click", closeModal);
