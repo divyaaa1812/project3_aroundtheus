@@ -118,11 +118,18 @@
             ></button>
             <form class="modal__form-content">
               <p class="modal__title">Edit profile</p>
-              <input type="text" class="modal__text-input" placeholder="Name" />
+              <input
+                type="text"
+                class="modal__text-input"
+                id="profile-title-input"
+                name="name"
+                placeholder="Name"
+              />
               <input
                 type="text"
                 class="modal__text-input"
                 placeholder="Description"
+                id="profile-subtitle-input"
               />
               <button class="modal__button" type="submit">Save</button>
             </form>
@@ -130,6 +137,17 @@
         </div>
       </div>
     </div>
+
+    <template id="card-template">
+      <li class="card">
+        <img class="card__image" src="" alt="" />
+        <div class="card__description">
+          <h2 class="card__title"></h2>
+          <button class="card__fav-icon" type="button"></button>
+        </div>
+      </li>
+    </template>
+
     <script src="./scripts/index.js"></script>
   </body>
 </html>
