@@ -25,6 +25,7 @@ const initialCards = [
   },
 ];
 
+/*Declare Elements */
 const editButton = document.querySelector(".js-profile-edit-button");
 const editProfileModal = document.querySelector(".js-modal");
 const modalCloseButton = document.querySelector(".js-modal-close-button");
@@ -36,25 +37,43 @@ const profileTitleInputField = document.querySelector("#profile-title-input");
 const profileSubtitleInputField = document.querySelector(
   "#profile-subtitle-input"
 );
+//extract form element
+const profileFormElement = editProfileModal.querySelector(
+  "#modal-form-content"
+);
 
 function openModal() {
   editProfileModal.classList.add("modal_opened");
-  //set values for input fileds after form is opened
+  //set values for input fields after form is opened
   profileTitleInputField.value = profileTitle.textContent;
   profileSubtitleInputField.value = profileSubtitle.textContent;
 }
-editButton.addEventListener("click", openModal);
 
 function closeModal() {
   editProfileModal.classList.remove("modal_opened");
 }
-modalCloseButton.addEventListener("click", closeModal);
 
-for (i = 0; i <= initialCards.length; i++) {}
+function handleProfileFormSubmit(event) {
+  event.preventDefault();
+  profileTitle.textContent = profileTitleInputField.value;
+  profileSubtitle.textContent = profileSubtitleInputField.value;
+  closeModal();
+}
 
 function getCardElement(data) {
   const cardElement = document.querySelector("#card-template").cloneNode(true);
-  console.log(cardElement);
-  const cardTitle = document.querySelector(".card__title");
-  const images = document.querySelector(".card__image");
+  const cardTitle = cardElement.content.querySelector(".card__title");
+  const cardImage = cardElement.content.querySelector(".card__image");
+  cardTitle.textContent = data.name;
+  cardImage.setAttribute("src", data.link);
+  document.querySelector(".cards__list").appendChild(cardElement.content);
 }
+
+for (i = 0; i < initialCards.length; i++) {
+  getCardElement(initialCards[i]);
+}
+
+/* Event Listeners */
+editButton.addEventListener("click", openModal);
+modalCloseButton.addEventListener("click", closeModal);
+profileFormElement.addEventListener("submit", handleProfileFormSubmit);
