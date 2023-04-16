@@ -66,11 +66,12 @@ function getCardElement(data) {
   const cardImage = cardElement.content.querySelector(".card__image");
   cardTitle.textContent = data.name;
   cardImage.setAttribute("src", data.link);
-  document.querySelector(".cards__list").appendChild(cardElement.content);
+  return cardElement;
 }
 
 for (i = 0; i < initialCards.length; i++) {
-  getCardElement(initialCards[i]);
+  const cardElement = getCardElement(initialCards[i]);
+  document.querySelector(".cards__list").appendChild(cardElement.content);
 }
 
 /* Event Listeners */
