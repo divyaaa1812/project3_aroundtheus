@@ -69,9 +69,9 @@ function getCardElement(data) {
   return cardElement;
 }
 
-initialCards.forEach((item) => {
-  const cardElement = getCardElement(item);
-  document.querySelector(".cards__list").appendChild(cardElement.content);
+initialCards.forEach((data) => {
+  const cardElement = getCardElement(data);
+  document.querySelector(".cards__list").append(cardElement.content);
 });
 
 /* Event Listeners */
