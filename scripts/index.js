@@ -69,11 +69,10 @@ function getCardElement(data) {
   return cardElement;
 }
 
-let index = 0;
-for (let i = index; i < initialCards.length; i++) {
-  const cardElement = getCardElement(initialCards[i]);
+initialCards.forEach((item) => {
+  const cardElement = getCardElement(item);
   document.querySelector(".cards__list").appendChild(cardElement.content);
-}
+});
 
 /* Event Listeners */
 editButton.addEventListener("click", openModal);
