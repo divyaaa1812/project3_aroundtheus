@@ -69,7 +69,8 @@ function getCardElement(data) {
   return cardElement;
 }
 
-for (let i = 0; i < initialCards.length; i++) {
+let index = 0;
+for (let i = index; i < initialCards.length; i++) {
   const cardElement = getCardElement(initialCards[i]);
   document.querySelector(".cards__list").appendChild(cardElement.content);
 }
