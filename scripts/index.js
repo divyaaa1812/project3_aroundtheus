@@ -60,7 +60,7 @@ function handleProfileFormSubmit(event) {
   closeModal();
 }
 
-function getCardElement(data) {
+function getCardElement(cardData) {
   const cardElement = document.querySelector("#card-template").cloneNode(true);
   const cardTitle = cardElement.content.querySelector(".card__title");
   const cardImage = cardElement.content.querySelector(".card__image");
@@ -69,8 +69,8 @@ function getCardElement(data) {
   return cardElement;
 }
 
-initialCards.forEach((data) => {
-  const cardElement = getCardElement(data);
+initialCards.forEach((cardData) => {
+  const cardElement = getCardElement(cardData);
   document.querySelector(".cards__list").append(cardElement.content);
 });
 
