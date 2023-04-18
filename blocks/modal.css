@@ -14,7 +14,6 @@
 
 .modal__content {
   margin: auto;
-  color: #000;
   background-color: #fff;
   border-radius: 10px;
   position: relative;
@@ -43,6 +42,7 @@
   width: 358px;
   font-family: "Inter", sans-serif;
   font-weight: 900;
+  color: #000000;
 }
 
 .modal__text-input {
@@ -50,7 +50,6 @@
   margin-left: 36px;
   margin-right: 36px;
   border: 1px solid #000000;
-  opacity: 0.2;
   width: 358px;
   border-top: 0;
   border-left: 0;
@@ -96,7 +95,7 @@
   .modal__close-button {
     width: 26px;
     height: 26px;
-    right: 18.62px;
+    right: 0px;
   }
 
   .modal__text-input {
