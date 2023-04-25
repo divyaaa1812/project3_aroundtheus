@@ -49,7 +49,7 @@ const addNewCardLink = document.querySelector(".card__image");
 const addNewCardTitleInput = document.querySelector("#add-title-input");
 const addNewCardImageURLInput = document.querySelector("#image-link-input");
 
-//extract form element
+//extract form elements
 const profileFormElement = editProfileModal.querySelector(
   "#modal-form-content"
 );
@@ -67,8 +67,10 @@ function closeAddNewCardModal() {
 
 function handleAddNewCardFormSubmit(event) {
   event.preventDefault();
-  addNewCardTitle.textContent = addNewCardTitleInput.value;
-  addNewCardLink.textContent = addNewCardImageURLInput.value;
+  const newCardTitle = addNewCardTitleInput.value;
+  const newCardLink = addNewCardImageURLInput.value;
+  const cardElement = getCardElement({ newCardTitle, newCardLink });
+  document.querySelector(".cards__list").prepend(cardElement.content);
   closeAddNewCardModal();
 }
 
