@@ -27,26 +27,53 @@ const initialCards = [
 
 /*Declare Elements */
 const editButton = document.querySelector(".js-profile-edit-button");
-const editProfileModal = document.querySelector(".js-modal");
+const editProfileModal = document.querySelector("#edit-profile");
+const addNewCardButton = document.querySelector(".profile__add-button");
+const addNewCardModal = document.querySelector("#add-new-card");
+const addNewCardModalCloseButton = document.querySelector(
+  "#add-new-card-modal-close-button"
+);
 const modalCloseButton = document.querySelector(".js-modal-close-button");
 //Extract title and subtitle elements
 const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__subtitle");
-//Extract input fields from modal
+//Extract input fields from edit profile modal
 const profileTitleInputField = document.querySelector("#profile-title-input");
 const profileSubtitleInputField = document.querySelector(
   "#profile-subtitle-input"
 );
+//extract add new card elements
+const addNewCardTitle = document.querySelector(".card__title");
+const addNewCardLink = document.querySelector(".card__image");
+//extract add new card input fields
+const addNewCardTitleInput = document.querySelector("#add-title-input");
+const addNewCardImageURLInput = document.querySelector("#image-link-input");
+
 //extract form element
 const profileFormElement = editProfileModal.querySelector(
   "#modal-form-content"
 );
+const addNewCardFormElement = addNewCardModal.querySelector(
+  "#add-card-form-content"
+);
+
+function openAddNewCardModal() {
+  addNewCardModal.classList.add("modal_opened");
+}
+
+function closeAddNewCardModal() {
+  addNewCardModal.classList.remove("modal_opened");
+}
+
+function handleAddNewCardFormSubmit(event) {
+  event.preventDefault();
+  addNewCardTitle.textContent = addNewCardTitleInput.value;
+  addNewCardLink.textContent = addNewCardImageURLInput.value;
+  closeAddNewCardModal();
+}
 
 function openModal() {
   editProfileModal.classList.add("modal_opened");
-  //set values for input fields after form is opened
-  profileTitleInputField.value = profileTitle.textContent;
-  profileSubtitleInputField.value = profileSubtitle.textContent;
 }
 
 function closeModal() {
@@ -78,3 +105,7 @@ initialCards.forEach((cardData) => {
 editButton.addEventListener("click", openModal);
 modalCloseButton.addEventListener("click", closeModal);
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
+
+addNewCardButton.addEventListener("click", openAddNewCardModal);
+addNewCardModalCloseButton.addEventListener("click", closeAddNewCardModal);
+addNewCardFormElement.addEventListener("submit", handleAddNewCardFormSubmit);
