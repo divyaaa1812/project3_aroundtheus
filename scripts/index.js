@@ -30,7 +30,7 @@ const editButton = document.querySelector(".js-profile-edit-button");
 const editProfileModal = document.querySelector("#edit-profile");
 const addNewCardButton = document.querySelector(".profile__add-button");
 const addNewCardModal = document.querySelector("#add-new-card");
-const addNewCardModalCloseButton = document.querySelector(
+const addNewCardModalCloseButton = addNewCardModal.querySelector(
   "#add-new-card-modal-close-button"
 );
 const modalCloseButton = document.querySelector(".js-modal-close-button");
@@ -93,6 +93,10 @@ function getCardElement(cardData) {
   const cardElement = document.querySelector("#card-template").cloneNode(true);
   const cardTitle = cardElement.content.querySelector(".card__title");
   const cardImage = cardElement.content.querySelector(".card__image");
+  const favIconElement = cardElement.querySelectorAll(".card__fav-icon");
+  // favIconElement.addEventListener("click", () => {
+  //   favIconElement.classList.toggle("card__fav-icon-selected");
+  // });
   cardTitle.textContent = cardData.name;
   cardImage.setAttribute("src", cardData.link);
   return cardElement;

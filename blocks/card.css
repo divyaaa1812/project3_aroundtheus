@@ -43,3 +43,7 @@
   opacity: 0.5;
   cursor: pointer;
 }
+
+.card__fav-icon-selected {
+  background-image: url(../images/fav-icon-selected.svg);
+}
