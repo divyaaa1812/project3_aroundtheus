@@ -84,28 +84,10 @@ function handleAddNewCardFormSubmit(event) {
   event.preventDefault();
   const newCardTitle = addNewCardTitleInput.value;
   const newCardLink = addNewCardImageURLInput.value;
-  const cardElement = getCardElement({ newCardTitle, newCardLink });
+  const cardElement = getCardElement({ name: newCardTitle, link: newCardLink });
   document.querySelector(".cards__list").prepend(cardElement.content);
   closeAddNewCardModal();
 }
-
-function getCardElement(cardData) {
-  const cardElement = document.querySelector("#card-template").cloneNode(true);
-  const cardTitle = cardElement.content.querySelector(".card__title");
-  const cardImage = cardElement.content.querySelector(".card__image");
-  const favIconElement = cardElement.querySelectorAll(".card__fav-icon");
-  // favIconElement.addEventListener("click", () => {
-  //   favIconElement.classList.toggle("card__fav-icon-selected");
-  // });
-  cardTitle.textContent = cardData.name;
-  cardImage.setAttribute("src", cardData.link);
-  return cardElement;
-}
-
-initialCards.forEach((cardData) => {
-  const cardElement = getCardElement(cardData);
-  document.querySelector(".cards__list").append(cardElement.content);
-});
 
 /* Event Listeners */
 editButton.addEventListener("click", openEditProfileModal);
@@ -115,3 +97,21 @@ profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 addNewCardButton.addEventListener("click", openAddNewCardModal);
 addNewCardModalCloseButton.addEventListener("click", closeAddNewCardModal);
 addNewCardFormElement.addEventListener("submit", handleAddNewCardFormSubmit);
+
+function getCardElement(cardData) {
+  const cardElement = document.querySelector("#card-template").cloneNode(true);
+  const cardTitle = cardElement.content.querySelector(".card__title");
+  const cardImage = cardElement.content.querySelector(".card__image");
+  const favIconElement = cardElement.content.querySelector(".card__fav-icon");
+  favIconElement.addEventListener("click", () => {
+    favIconElement.classList.toggle("card__fav-icon-selected");
+  });
+  cardTitle.textContent = cardData.name;
+  cardImage.setAttribute("src", cardData.link);
+  return cardElement;
+}
+
+initialCards.forEach((cardData) => {
+  const cardElement = getCardElement(cardData);
+  document.querySelector(".cards__list").append(cardElement.content);
+});
