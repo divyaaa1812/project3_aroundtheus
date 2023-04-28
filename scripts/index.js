@@ -42,6 +42,8 @@ const profileTitleInputField = document.querySelector("#profile-title-input");
 const profileSubtitleInputField = document.querySelector(
   "#profile-subtitle-input"
 );
+//find card template
+const cardTemplate = document.querySelector("#card-template");
 //extract add new card elements
 const addNewCardTitle = document.querySelector(".card__title");
 const addNewCardLink = document.querySelector(".card__image");
@@ -99,10 +101,17 @@ addNewCardModalCloseButton.addEventListener("click", closeAddNewCardModal);
 addNewCardFormElement.addEventListener("submit", handleAddNewCardFormSubmit);
 
 function getCardElement(cardData) {
-  const cardElement = document.querySelector("#card-template").cloneNode(true);
+  const cardElement = cardTemplate.cloneNode(true);
   const cardTitle = cardElement.content.querySelector(".card__title");
   const cardImage = cardElement.content.querySelector(".card__image");
   const favIconElement = cardElement.content.querySelector(".card__fav-icon");
+  //del button
+  const delIcon = cardElement.content.querySelector(".card__del-button");
+  delIcon.addEventListener("click", (event) => {
+    event.target.parentElement.parentElement.remove();
+    cardElement.remove();
+  });
+
   favIconElement.addEventListener("click", () => {
     favIconElement.classList.toggle("card__fav-icon-selected");
   });
