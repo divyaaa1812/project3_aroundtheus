@@ -33,6 +33,10 @@ const addNewCardModal = document.querySelector("#add-new-card");
 const addNewCardModalCloseButton = addNewCardModal.querySelector(
   "#add-new-card-modal-close-button"
 );
+const previewImageModal = document.querySelector("#preview-image-modal");
+const imageModalCloseButton = document.querySelector(
+  "#image-modal-close-button"
+);
 const modalCloseButton = document.querySelector(".js-modal-close-button");
 //Extract title and subtitle elements
 const profileTitle = document.querySelector(".profile__title");
@@ -71,6 +75,7 @@ function handleProfileFormSubmit(event) {
   event.preventDefault();
   profileTitle.textContent = profileTitleInputField.value;
   profileSubtitle.textContent = profileSubtitleInputField.value;
+  debugger;
   closeEditProfileModal();
 }
 
@@ -80,6 +85,17 @@ function openAddNewCardModal() {
 
 function closeAddNewCardModal() {
   addNewCardModal.classList.remove("modal_opened");
+}
+
+function openPreviewImageModal(cardData) {
+  previewImageModal.classList.add("modal_opened");
+  previewImageModal
+    .querySelector("#imagePreview")
+    .setAttribute("src", cardData.link);
+}
+
+function closeImageModal() {
+  previewImageModal.classList.remove("modal_opened");
 }
 
 function handleAddNewCardFormSubmit(event) {
@@ -93,6 +109,7 @@ function handleAddNewCardFormSubmit(event) {
 
 /* Event Listeners */
 editButton.addEventListener("click", openEditProfileModal);
+debugger;
 modalCloseButton.addEventListener("click", closeEditProfileModal());
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 
@@ -111,6 +128,11 @@ function getCardElement(cardData) {
     event.target.parentElement.parentElement.remove();
     cardElement.remove();
   });
+  //open image preview model by clicking on image
+  cardImage.addEventListener("click", () => {
+    openPreviewImageModal(cardData);
+  });
+  imageModalCloseButton.addEventListener("click", closeImageModal);
 
   favIconElement.addEventListener("click", () => {
     favIconElement.classList.toggle("card__fav-icon-selected");

@@ -5,11 +5,16 @@
   bottom: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  display: none;
+  visibility: hidden;
+  transition: visibility 0s linear 0.5s, opacity 0.5s linear;
+  opacity: 0;
+  display: flex;
 }
 
 .modal_opened {
-  display: flex;
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0s;
 }
 
 .modal__content {
@@ -117,4 +122,9 @@
     font-size: 14px;
     line-height: 17px;
   }
+}
+
+.modal-preview-image {
+  max-width: 75vw;
+  max-height: 75vh;
 }
