@@ -37,7 +37,9 @@ const previewImageModal = document.querySelector("#preview-image-modal");
 const imageModalCloseButton = document.querySelector(
   "#image-modal-close-button"
 );
-const modalCloseButton = document.querySelector(".js-modal-close-button");
+const editProfileModalCloseButton = document.querySelector(
+  "#edit-profile-modal-close-button"
+);
 //Extract title and subtitle elements
 const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__subtitle");
@@ -75,7 +77,6 @@ function handleProfileFormSubmit(event) {
   event.preventDefault();
   profileTitle.textContent = profileTitleInputField.value;
   profileSubtitle.textContent = profileSubtitleInputField.value;
-  debugger;
   closeEditProfileModal();
 }
 
@@ -109,8 +110,7 @@ function handleAddNewCardFormSubmit(event) {
 
 /* Event Listeners */
 editButton.addEventListener("click", openEditProfileModal);
-debugger;
-modalCloseButton.addEventListener("click", closeEditProfileModal());
+editProfileModalCloseButton.addEventListener("click", closeEditProfileModal);
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 
 addNewCardButton.addEventListener("click", openAddNewCardModal);
