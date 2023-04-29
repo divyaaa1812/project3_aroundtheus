@@ -122,9 +122,9 @@
     font-size: 14px;
     line-height: 17px;
   }
-}
 
-.modal-preview-image {
-  max-width: 75vw;
-  max-height: 75vh;
+  .modal-preview-image {
+    max-width: 75vw;
+    max-height: 75vh;
+  }
 }
