@@ -41,6 +41,7 @@
   border: none;
   background-size: contain;
   padding: 0px;
+  cursor: pointer;
 }
 
 .modal__title {
@@ -60,7 +61,6 @@
   margin-left: 36px;
   margin-right: 36px;
   border: 1px solid #000000;
-  max-width: 358px;
   width: 100%;
   border-top: 0;
   border-left: 0;
@@ -114,8 +114,11 @@
     right: 0px;
   }
 
+  .modal__close-button:hover {
+    cursor: pointer;
+  }
+
   .modal__text-input {
-    max-width: 282px;
     margin-left: 22px;
     margin-right: 22px;
     margin-bottom: 0px;
@@ -126,7 +129,6 @@
   }
 
   .modal__button {
-    width: 100%;
     margin-left: 22px;
     margin-right: 22px;
     margin-top: 45px;
