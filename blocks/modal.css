@@ -79,6 +79,8 @@
 .modal__button {
   margin-top: 48px;
   height: 50.15px;
+  padding-left: 36px;
+  padding-right: 36px;
   background: #000000;
   color: #ffffff;
   font-size: 18px;
@@ -122,7 +124,6 @@
 
   .modal__text-input {
     margin-bottom: 0px;
-    width: 100%;
   }
 
   .modal__text-input:first-of-type {
@@ -130,7 +131,8 @@
   }
 
   .modal__button {
-    width: 100%;
+    padding-left: 22px;
+    padding-right: 22px;
     margin-top: 45px;
     font-size: 14px;
     line-height: 17px;
