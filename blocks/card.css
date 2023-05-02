@@ -10,6 +10,10 @@
 .card__image {
   width: 282px;
   height: 282px;
+}
+
+.card__image:hover {
+  opacity: 0.5;
   cursor: pointer;
 }
 
@@ -62,4 +66,5 @@
 
 .card__del-button:hover {
   cursor: pointer;
+  opacity: 0.5;
 }

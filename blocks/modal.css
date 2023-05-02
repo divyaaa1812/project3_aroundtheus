@@ -22,6 +22,9 @@
   background-color: #ffffff;
   padding-bottom: 20px;
   border-radius: 10px;
+  box-sizing: border-box;
+  padding-left: 36px;
+  padding-right: 36px;
 }
 
 .modal__content {
@@ -41,7 +44,11 @@
   border: none;
   background-size: contain;
   padding: 0px;
+}
+
+.modal__close-button:hover {
   cursor: pointer;
+  opacity: 0.8;
 }
 
 .modal__title {
@@ -49,7 +56,6 @@
   line-height: 29px;
   margin-bottom: 54px;
   margin-top: 0;
-  margin-left: 36px;
   width: 100%;
   font-family: "Inter", sans-serif;
   font-weight: 900;
@@ -57,16 +63,13 @@
 }
 
 .modal__text-input {
-  padding: 0;
-  margin-left: 36px;
-  margin-right: 36px;
   border: 1px solid #000000;
-  width: 100%;
   border-top: 0;
   border-left: 0;
   border-right: 0;
   font-size: 14px;
   line-height: 17px;
+  width: 100%;
 }
 
 .modal__text-input:first-of-type {
@@ -76,9 +79,8 @@
 .modal__button {
   margin-top: 48px;
   height: 50.15px;
-  padding: 0;
-  margin-left: 36px;
-  margin-right: 36px;
+  padding-left: 36px;
+  padding-right: 36px;
   background: #000000;
   color: #ffffff;
   font-size: 18px;
@@ -86,6 +88,7 @@
   max-width: 358px;
   width: 100%;
   line-height: 22px;
+  border: none;
 }
 
 .modal__button:hover {
@@ -97,13 +100,13 @@
   .modal__content {
     max-width: 282px;
     width: 100%;
+    padding-left: 22px;
+    padding-right: 22px;
   }
 
   .modal__title {
     max-width: 282px;
     width: 100%;
-    margin-left: 22px;
-    margin-right: 22px;
     margin-top: 25px;
     margin-bottom: 75px;
   }
@@ -116,12 +119,12 @@
 
   .modal__close-button:hover {
     cursor: pointer;
+    opacity: 0.8;
   }
 
   .modal__text-input {
-    margin-left: 22px;
-    margin-right: 22px;
     margin-bottom: 0px;
+    width: 100%;
   }
 
   .modal__text-input:first-of-type {
@@ -129,8 +132,8 @@
   }
 
   .modal__button {
-    margin-left: 22px;
-    margin-right: 22px;
+    padding-left: 22px;
+    padding-right: 22px;
     margin-top: 45px;
     font-size: 14px;
     line-height: 17px;
