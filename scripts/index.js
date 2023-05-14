@@ -31,6 +31,7 @@ const editProfilePopup = document.querySelector("#edit-profile");
 const editProfileModalCloseButton = document.querySelector(
   "#edit-profile-modal-close-button"
 );
+const editProfileSaveButton = document.querySelector(".modal__button");
 const addNewCardButton = document.querySelector(".profile__add-button");
 const addNewCardPopup = document.querySelector("#add-new-card");
 const addNewCardModalCloseButton = addNewCardPopup.querySelector(
@@ -55,13 +56,18 @@ const previewImagePopup = document.querySelector("#preview-image-modal");
 const imageModalCloseButton = document.querySelector(
   "#image-modal-close-button"
 );
-//extract form elements
+//extract forms
 const profileFormElement = editProfilePopup.querySelector(
   "#modal-form-content"
 );
 const addNewCardFormElement = addNewCardPopup.querySelector(
   "#add-card-form-content"
 );
+
+// formElement.addEventListener("submit", function (evt) {
+//   // Cancel the browser default action, so that clicking on the submit button won't refresh the page
+//   evt.preventDefault();
+// });
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
@@ -105,18 +111,39 @@ editProfileButton.addEventListener("click", () => {
   profileTitleInputField.value = profileTitle.textContent;
   profileSubtitleInputField.value = profileSubtitle.textContent;
 });
-editProfileModalCloseButton.addEventListener("click", () => {
-  closeModal(editProfilePopup);
+
+// editProfileModalCloseButton.addEventListener("click", () => {
+//   closeModal(editProfilePopup);
+// });
+
+window.addEventListener("click", function (event) {
+  if (
+    event.target == editProfilePopup ||
+    event.target == editProfileModalCloseButton
+  ) {
+    closeModal(editProfilePopup);
+  }
 });
+
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 addNewCardButton.addEventListener("click", () => openModal(addNewCardPopup));
-addNewCardModalCloseButton.addEventListener("click", () => {
-  closeModal(addNewCardPopup);
+window.addEventListener("click", function (event) {
+  if (
+    event.target == addNewCardPopup ||
+    event.target == addNewCardModalCloseButton
+  ) {
+    closeModal(addNewCardPopup);
+  }
 });
 addNewCardFormElement.addEventListener("submit", handleAddNewCardFormSubmit);
-imageModalCloseButton.addEventListener("click", () =>
-  closeModal(previewImagePopup)
-);
+window.addEventListener("click", function (event) {
+  if (
+    event.target == previewImagePopup ||
+    event.target == imageModalCloseButton
+  ) {
+    closeModal(previewImagePopup);
+  }
+});
 
 function getCardElement(cardData) {
   const cardElement = cardTemplate
