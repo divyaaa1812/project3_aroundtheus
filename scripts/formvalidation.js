@@ -6,7 +6,6 @@ const inactiveButtonSelector = "modal__button_disabled";
 const inputErrorSelector = "form__input_field_error_visible";
 const errorSelector = "form__input_field_error_hide";
 
-1;
 //1. Validate error message is displayed for input fields
 const showInputError = (formElement, inputElement) => {
   const errorMessage = inputElement.validationMessage;
@@ -72,7 +71,7 @@ const setEventListeners = (formElement) => {
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
       isInputValid(formElement, inputElement);
-      // Call the toggleButtonState() and pass an array of fields and the button to i
+      // Call the toggleButtonState() and pass an array of fields and the button element
       toggleButtonState(inputList, buttonElement);
     });
   });
@@ -81,7 +80,6 @@ const setEventListeners = (formElement) => {
 const enableValidation = () => {
   // Find all forms in DOM and store in array
   const formList = Array.from(document.querySelectorAll(formElementSelector));
-  console.log(formList);
   // Iterate over the resulting array
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", (evt) => {

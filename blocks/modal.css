@@ -98,6 +98,7 @@
   border-radius: 2px;
   color: #000000;
   background-color: white;
+  pointer-events: none;
 }
 
 .modal__button:hover {
