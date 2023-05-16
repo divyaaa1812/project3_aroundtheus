@@ -106,18 +106,18 @@
   cursor: pointer;
 }
 
-.form_input_field_error_visible {
+.modal__form_input_field_error_visible {
   color: #ff0000;
   font-size: 12px;
   font-family: "Inter", sans-serif;
-}
-
-.form_input_error_visible {
   border-color: #ff0000;
   outline: none;
 }
 
-.form_input_field_error_hide {
+.form_input_error_visible {
+}
+
+.modal__form_input_field_error_hide {
   opacity: 0.2;
 }
 
