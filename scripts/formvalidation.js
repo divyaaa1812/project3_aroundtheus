@@ -3,15 +3,15 @@ const formElementSelector = ".modal__form-content";
 const inputElementSelector = ".modal__text-input";
 const submitButtonSelector = ".modal__button";
 const inactiveButtonSelector = "modal__button_disabled";
-const inputErrorSelector = "modal__form_input_field_error_visible";
-const errorSelector = "modal__form_input_field_error_hide";
+const inputErrorSelector = "js-form-input-field-error-visible";
+const errorSelector = "js-form-input-field-error-hide";
 
 // Validate error message is displayed for input fields
 const showInputError = (formElement, inputElement) => {
   const errorMessage = inputElement.validationMessage;
   inputElement.classList.add("form_input_error_visible");
   const errorElement = formElement.querySelector(
-    `#${inputElement.id}+.modal__form_input_field_error`
+    `#${inputElement.id}+.js-form-input-field-error`
   );
   errorElement.textContent = errorMessage;
   errorElement.classList.add(inputErrorSelector);
@@ -20,7 +20,7 @@ const showInputError = (formElement, inputElement) => {
 const hideInputError = (formElement, inputElement) => {
   inputElement.classList.remove("form_input_error_visible");
   const errorElement = formElement.querySelector(
-    `#${inputElement.id}+.modal__form_input_field_error`
+    `#${inputElement.id}+.js-form-input-field-error`
   );
   if (errorElement) {
     errorElement.classList.remove(errorSelector);
