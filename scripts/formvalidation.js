@@ -1,4 +1,4 @@
-// Get form elementmodal__form_input_field_error_visibles for validation
+// object to store form elements for validation
 validationConfig = {
   formElementSelector: ".modal__form-content",
   inputElementSelector: ".modal__text-input",
