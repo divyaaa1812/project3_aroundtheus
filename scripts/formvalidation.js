@@ -9,7 +9,7 @@ validationConfig = {
 };
 
 // Validate error message is displayed for input fields
-const showInputError = (formElement, inputElement) => {
+const showInputError = (formElement, inputElement, validationConfig) => {
   const errorMessage = inputElement.validationMessage;
   inputElement.classList.add("modal__input-error_visible");
   const errorElement = formElement.querySelector(
@@ -31,7 +31,7 @@ const hideInputError = (formElement, inputElement, validationConfig) => {
 
 const toggleInputError = (formElement, inputElement) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement);
+    showInputError(formElement, inputElement, validationConfig);
   } else {
     hideInputError(formElement, inputElement, validationConfig);
   }
@@ -71,8 +71,8 @@ const setEventListeners = (formElement, validationConfig) => {
   const buttonElement = formElement.querySelector(
     validationConfig.submitButtonSelector
   );
+  toggleButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
-    toggleButtonState(inputList, buttonElement);
     inputElement.addEventListener("input", () => {
       toggleInputError(formElement, inputElement);
       // Call the toggleButtonState() and pass an array of fields and the button element

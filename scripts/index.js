@@ -126,6 +126,7 @@ function handleAddNewCardFormSubmit(event) {
   cardsList.prepend(cardElement);
   addNewCardFormElement.reset();
   closeModal(addNewCardPopup);
+  toggleButtonState(inputList, buttonElement);
 }
 
 /* Event Listeners */
