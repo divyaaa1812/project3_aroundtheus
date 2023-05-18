@@ -86,7 +86,9 @@ function closeModalByOverlayClick(evt) {
   }
 }
 
-function openModal(modal) {
+function openModal(modal, buttonElement) {
+  buttonElement.classList.add("modal__button_disabled");
+  buttonElement.setAttribute("disabled", true);
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", closeModalByEscape);
   modal.addEventListener("mousedown", closeModalByOverlayClick);
@@ -128,7 +130,7 @@ function handleAddNewCardFormSubmit(event) {
 
 /* Event Listeners */
 editProfileButton.addEventListener("click", () => {
-  openModal(editProfilePopup);
+  openModal(editProfilePopup, editProfileSaveButton);
   profileTitleInputField.value = profileTitle.textContent;
   profileSubtitleInputField.value = profileSubtitle.textContent;
 });
@@ -139,7 +141,7 @@ window.addEventListener("click", function (event) {
   }
 });
 addNewCardButton.addEventListener("click", () => {
-  openModal(addNewCardPopup);
+  openModal(addNewCardPopup, addNewCardCreateButton);
 });
 window.addEventListener("click", function (event) {
   if (event.target == addNewCardModalCloseButton) {
