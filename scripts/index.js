@@ -99,8 +99,6 @@ function outSideClickHandler(evt) {
 }
 
 function openModal(modal) {
-  // buttonElement.classList.add("modal__button_disabled");
-  // buttonElement.setAttribute("disabled", true);
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", closeModalByEscape);
   modal.addEventListener("mousedown", closeModalByOverlayClick);
