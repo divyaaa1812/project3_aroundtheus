@@ -153,7 +153,6 @@ editProfileButton.addEventListener("click", () => {
   openModal(editProfilePopup);
   profileTitleInputField.value = profileTitle.textContent;
   profileSubtitleInputField.value = profileSubtitle.textContent;
-  // no validation is running here, call toggleButtonState()
 });
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 addNewCardButton.addEventListener("click", () => {
