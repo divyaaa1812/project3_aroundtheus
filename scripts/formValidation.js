@@ -53,11 +53,9 @@ const toggleButtonState = (inputList, buttonElement, validationConfig) => {
 };
 
 // The function takes an array of form input fields
-const hasInvalidInput = (inputList, validationConfig) => {
+const hasInvalidInput = (inputList) => {
   // iterate over the array using the some() method
   return inputList.some((inputElement) => {
-    // If the field is invalid, the callback will return true.
-    // The method will then stop, and hasInvalidInput() function will return true
     return !inputElement.validity.valid;
   });
 };

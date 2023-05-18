@@ -66,6 +66,18 @@ const addNewCardFormElement = addNewCardPopup.querySelector(
   "#add-card-form-content"
 );
 
+function closeModalByClickCloseButton(evt) {
+  if (
+    evt.target === editProfileModalCloseButton ||
+    evt.target === addNewCardModalCloseButton ||
+    evt.target === imageModalCloseButton
+  ) {
+    const openedModal = document.querySelector(".modal_opened");
+    // close it
+    closeModal(openedModal);
+  }
+}
+
 //close modal by pressing ESC key
 function closeModalByEscape(evt) {
   if (evt.key === "Escape") {
@@ -90,12 +102,14 @@ function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", closeModalByEscape);
   modal.addEventListener("mousedown", closeModalByOverlayClick);
+  modal.addEventListener("click", closeModalByClickCloseButton);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", closeModalByEscape);
   modal.removeEventListener("mousedown", closeModalByOverlayClick);
+  modal.removeEventListener("click", closeModalByClickCloseButton);
 }
 
 function openPreviewImageModal(cardData) {
@@ -114,7 +128,7 @@ function handleProfileFormSubmit(event) {
   profileSubtitle.textContent = profileSubtitleInputField.value;
   profileFormElement.reset();
   closeModal(editProfilePopup);
-  toggleButtonState(editProfilePopup, editProfileSaveButton);
+  toggleButtonState(editProfileSaveButton);
 }
 
 function handleAddNewCardFormSubmit(event) {
