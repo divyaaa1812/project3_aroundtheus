@@ -19,7 +19,7 @@ const showInputError = (formElement, inputElement, validationConfig) => {
   errorElement.classList.add(validationConfig.inputErrorSelector);
 };
 
-const hideInputError = (formElement, inputElement, validationConfig) => {
+const hideInputError = (formElement, inputElement) => {
   inputElement.classList.remove("modal__input-error_visible");
   const errorElement = formElement.querySelector(
     `#${inputElement.id}+.modal__input-error`
