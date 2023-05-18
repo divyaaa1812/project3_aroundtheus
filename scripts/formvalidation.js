@@ -24,8 +24,8 @@ const hideInputError = (formElement, inputElement, validationConfig) => {
   const errorElement = formElement.querySelector(
     `#${inputElement.id}+.modal__input-error`
   );
-  errorElement.classList.remove(validationConfig.errorSelector);
-  errorElement.classList.remove(validationConfig.inputElementSelector);
+  // errorElement.classList.remove(validationConfig.errorSelector);
+  // errorElement.classList.remove(validationConfig.inputElementSelector);
   errorElement.textContent = "";
 };
 
@@ -48,7 +48,7 @@ const toggleButtonState = (inputList, buttonElement) => {
     buttonElement.setAttribute("disabled", true);
   } else {
     buttonElement.classList.remove("modal__button_disabled");
-    buttonElement.removeAttribute("disabled", "disabled");
+    buttonElement.removeAttribute("disabled", false);
   }
 };
 
@@ -72,6 +72,7 @@ const setEventListeners = (formElement, validationConfig) => {
     validationConfig.submitButtonSelector
   );
   inputList.forEach((inputElement) => {
+    toggleButtonState(inputList, buttonElement);
     inputElement.addEventListener("input", () => {
       toggleInputError(formElement, inputElement);
       // Call the toggleButtonState() and pass an array of fields and the button element
