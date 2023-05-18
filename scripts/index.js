@@ -86,30 +86,16 @@ function closeModalByOverlayClick(evt) {
   }
 }
 
-function outSideClickHandler(evt) {
-  if (
-    evt.target === editProfileModalCloseButton ||
-    evt.target === addNewCardModalCloseButton ||
-    evt.target === imageModalCloseButton
-  ) {
-    const openedModal = document.querySelector(".modal_opened");
-    // close it
-    closeModal(openedModal);
-  }
-}
-
 function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", closeModalByEscape);
   modal.addEventListener("mousedown", closeModalByOverlayClick);
-  modal.addEventListener("click", outSideClickHandler);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", closeModalByEscape);
   modal.removeEventListener("mousedown", closeModalByOverlayClick);
-  modal.removeEventListener("click", outSideClickHandler);
 }
 
 function openPreviewImageModal(cardData) {
@@ -128,8 +114,7 @@ function handleProfileFormSubmit(event) {
   profileSubtitle.textContent = profileSubtitleInputField.value;
   profileFormElement.reset();
   closeModal(editProfilePopup);
-  editProfileSaveButton.classList.add("modal__button_disabled");
-  editProfileSaveButton.setAttribute("disabled", true);
+  toggleButtonState(editProfilePopup, editProfileSaveButton);
 }
 
 function handleAddNewCardFormSubmit(event) {
@@ -140,10 +125,7 @@ function handleAddNewCardFormSubmit(event) {
   cardsList.prepend(cardElement);
   addNewCardFormElement.reset();
   closeModal(addNewCardPopup);
-  //since I cannot use toggleButtonState() from formValidation.js in this file,
-  //I has to add class and set attribute to button
-  addNewCardCreateButton.classList.add("modal__button_disabled");
-  addNewCardCreateButton.setAttribute("disabled", true);
+  toggleButtonState(addNewCardPopup, addNewCardCreateButton);
 }
 
 /* Event Listeners */
