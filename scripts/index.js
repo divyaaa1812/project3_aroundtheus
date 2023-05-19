@@ -1,4 +1,4 @@
-import { disableButton } from "./formValidation.js";
+import { disableButton, validationConfig } from "./formValidation.js";
 
 const initialCards = [
   {
@@ -140,7 +140,7 @@ function handleAddNewCardFormSubmit(event) {
   cardsList.prepend(cardElement);
   addNewCardFormElement.reset();
   closeModal(addNewCardPopup);
-  disableButton(addNewCardCreateButton);
+  disableButton(addNewCardCreateButton, validationConfig);
 }
 
 /* Event Listeners */

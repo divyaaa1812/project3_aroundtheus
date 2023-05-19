@@ -1,11 +1,12 @@
 // object to store form elements for validation
-const validationConfig = {
+export const validationConfig = {
   formElementSelector: ".modal__form-content",
   inputElementSelector: ".modal__text-input",
   submitButtonSelector: ".modal__button",
   inactiveButtonSelector: "modal__button_disabled",
   inputErrorSelector: "modal__input-error_visible",
-  errorSelector: "modal__input-error_hide",
+  errorSelectorHide: "modal__input-error-hide",
+  errorSelector: "modal__input-error",
 };
 
 // Validate error message is displayed for input fields
@@ -13,7 +14,7 @@ const showInputError = (formElement, inputElement, validationConfig) => {
   const errorMessage = inputElement.validationMessage;
   inputElement.classList.add(validationConfig.inputErrorSelector);
   const errorElement = formElement.querySelector(
-    `#${inputElement.id}+.modal__input-error`
+    `#${inputElement.id}+ .${validationConfig.errorSelector}`
   );
   errorElement.textContent = errorMessage;
   errorElement.classList.add(validationConfig.inputErrorSelector);
@@ -22,14 +23,14 @@ const showInputError = (formElement, inputElement, validationConfig) => {
 const hideInputError = (formElement, inputElement, validationConfig) => {
   inputElement.classList.remove(validationConfig.inputErrorSelector);
   const errorElement = formElement.querySelector(
-    `#${inputElement.id}+.modal__input-error`
+    `#${inputElement.id}+.${validationConfig.errorSelector}`
   );
-  // errorElement.classList.remove(validationConfig.errorSelector);
-  // errorElement.classList.remove(validationConfig.inputElementSelector);
+  errorElement.classList.remove(validationConfig.errorSelectorHide);
+  errorElement.classList.remove(validationConfig.inputElementSelector);
   errorElement.textContent = "";
 };
 
-const toggleInputError = (formElement, inputElement) => {
+const toggleInputError = (formElement, inputElement, validationConfig) => {
   if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, validationConfig);
   } else {
@@ -44,23 +45,23 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
-export const disableButton = (buttonElement) => {
+export const disableButton = (buttonElement, validationConfig) => {
   buttonElement.classList.add(validationConfig.inactiveButtonSelector);
   buttonElement.setAttribute("disabled", true);
 };
 
-const enableButton = (buttonElement) => {
+const enableButton = (buttonElement, validationConfig) => {
   buttonElement.classList.remove(validationConfig.inactiveButtonSelector);
   buttonElement.removeAttribute("disabled", false);
 };
 
 //toggle button based on input text validity
-const toggleButtonState = (inputList, buttonElement) => {
+const toggleButtonState = (inputList, buttonElement, validationConfig) => {
   // If there is at least one invalid input
   if (hasInvalidInput(inputList)) {
-    disableButton(buttonElement);
+    disableButton(buttonElement, validationConfig);
   } else {
-    enableButton(buttonElement);
+    enableButton(buttonElement, validationConfig);
   }
 };
 
@@ -73,12 +74,12 @@ const setEventListeners = (formElement, validationConfig) => {
   const buttonElement = formElement.querySelector(
     validationConfig.submitButtonSelector
   );
-  toggleButtonState(inputList, buttonElement);
+  toggleButtonState(inputList, buttonElement, validationConfig);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
-      toggleInputError(formElement, inputElement);
+      toggleInputError(formElement, inputElement, validationConfig);
       // Call the toggleButtonState() and pass an array of fields and the button element
-      toggleButtonState(inputList, buttonElement);
+      toggleButtonState(inputList, buttonElement, validationConfig);
     });
   });
 };
