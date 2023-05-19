@@ -68,18 +68,6 @@ const addNewCardFormElement = addNewCardPopup.querySelector(
   "#add-card-form-content"
 );
 
-function closeModalByClickCloseButton(evt) {
-  if (
-    evt.target === editProfileModalCloseButton ||
-    evt.target === addNewCardModalCloseButton ||
-    evt.target === imageModalCloseButton
-  ) {
-    const openedModal = document.querySelector(".modal_opened");
-    // close it
-    closeModal(openedModal);
-  }
-}
-
 //close modal by pressing ESC key
 function closeModalByEscape(evt) {
   if (evt.key === "Escape") {
@@ -95,7 +83,10 @@ function closeModalByOverlayClick(evt) {
   // target is the element on which the event happened
   // currentTarget is the modal
   // if they are the same then we should close the modal
-  if (evt.target === evt.currentTarget) {
+  if (
+    evt.target === evt.currentTarget ||
+    evt.target.classList.contains(".modal__close-button")
+  ) {
     closeModal(evt.target);
   }
 }
@@ -104,14 +95,12 @@ function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", closeModalByEscape);
   modal.addEventListener("mousedown", closeModalByOverlayClick);
-  modal.addEventListener("click", closeModalByClickCloseButton);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", closeModalByEscape);
   modal.removeEventListener("mousedown", closeModalByOverlayClick);
-  modal.removeEventListener("click", closeModalByClickCloseButton);
 }
 
 function openPreviewImageModal(cardData) {
