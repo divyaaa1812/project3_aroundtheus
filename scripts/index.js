@@ -30,15 +30,9 @@ const initialCards = [
 /*Declare Elements */
 const editProfileButton = document.querySelector(".js-profile-edit-button");
 const editProfilePopup = document.querySelector("#edit-profile");
-const editProfileModalCloseButton = document.querySelector(
-  "#edit-profile-modal-close-button"
-);
 const editProfileSaveButton = document.querySelector(".modal__button");
 const addNewCardButton = document.querySelector(".profile__add-button");
 const addNewCardPopup = document.querySelector("#add-new-card");
-const addNewCardModalCloseButton = addNewCardPopup.querySelector(
-  "#add-new-card-modal-close-button"
-);
 const addNewCardCreateButton = document.querySelector("#create-button");
 const cardsList = document.querySelector(".cards__list");
 //Extract title and subtitle elements
@@ -56,9 +50,6 @@ const addNewCardLink = document.querySelector(".card__image");
 const addNewCardTitleInput = document.querySelector("#add-title-input");
 const addNewCardImageURLInput = document.querySelector("#image-link-input");
 const previewImagePopup = document.querySelector("#preview-image-modal");
-const imageModalCloseButton = document.querySelector(
-  "#image-modal-close-button"
-);
 
 //extract forms
 const profileFormElement = editProfilePopup.querySelector(
