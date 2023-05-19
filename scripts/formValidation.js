@@ -1,9 +1,9 @@
 // object to store form elements for validation
-validationConfig = {
+const validationConfig = {
   formElementSelector: ".modal__form-content",
   inputElementSelector: ".modal__text-input",
   submitButtonSelector: ".modal__button",
-  inactiveButtonSelector: ".modal__button_disabled",
+  inactiveButtonSelector: "modal__button_disabled",
   inputErrorSelector: "modal__input-error_visible",
   errorSelector: "modal__input-error_hide",
 };
@@ -40,14 +40,13 @@ const toggleInputError = (formElement, inputElement) => {
 // The function takes an array of input fields and the button element,
 // whose state need to be changed
 
-const toggleButtonState = (inputList, buttonElement, validationConfig) => {
+export const toggleButtonState = (inputList, buttonElement) => {
   // If there is at least one invalid input
-  if (hasInvalidInput(inputList, validationConfig)) {
-    // make the button inactive
-    buttonElement.classList.add(validationConfig.inactiveButtonSelector);
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add("modal__button_disabled");
     buttonElement.setAttribute("disabled", true);
   } else {
-    buttonElement.classList.remove(validationConfig.inactiveButtonSelector);
+    buttonElement.classList.remove("modal__button_disabled");
     buttonElement.removeAttribute("disabled", false);
   }
 };
@@ -69,12 +68,12 @@ const setEventListeners = (formElement, validationConfig) => {
   const buttonElement = formElement.querySelector(
     validationConfig.submitButtonSelector
   );
-  toggleButtonState(inputList, buttonElement, validationConfig);
+  toggleButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
       toggleInputError(formElement, inputElement);
       // Call the toggleButtonState() and pass an array of fields and the button element
-      toggleButtonState(inputList, buttonElement, validationConfig);
+      toggleButtonState(inputList, buttonElement);
     });
   });
 };

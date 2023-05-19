@@ -1,3 +1,5 @@
+import { toggleButtonState } from "./formValidation.js";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -128,7 +130,6 @@ function handleProfileFormSubmit(event) {
   profileSubtitle.textContent = profileSubtitleInputField.value;
   profileFormElement.reset();
   closeModal(editProfilePopup);
-  toggleButtonState(editProfileSaveButton);
 }
 
 function handleAddNewCardFormSubmit(event) {
@@ -139,7 +140,6 @@ function handleAddNewCardFormSubmit(event) {
   cardsList.prepend(cardElement);
   addNewCardFormElement.reset();
   closeModal(addNewCardPopup);
-  toggleButtonState(addNewCardPopup, addNewCardCreateButton);
 }
 
 /* Event Listeners */
@@ -151,6 +151,7 @@ editProfileButton.addEventListener("click", () => {
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 addNewCardButton.addEventListener("click", () => {
   openModal(addNewCardPopup);
+  disableButton(modalSubmitButton);
 });
 
 addNewCardFormElement.addEventListener("submit", handleAddNewCardFormSubmit);
