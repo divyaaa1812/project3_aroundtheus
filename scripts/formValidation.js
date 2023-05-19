@@ -54,6 +54,7 @@ const enableButton = (buttonElement) => {
   buttonElement.removeAttribute("disabled", false);
 };
 
+//toggle button based on input text validity
 const toggleButtonState = (inputList, buttonElement) => {
   // If there is at least one invalid input
   if (hasInvalidInput(inputList)) {
