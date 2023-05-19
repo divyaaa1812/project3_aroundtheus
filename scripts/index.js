@@ -85,8 +85,9 @@ function closeModalByOverlayClick(evt) {
   // if they are the same then we should close the modal
   if (
     evt.target === evt.currentTarget ||
-    evt.target.classList.contains(".modal__close-button")
+    evt.target.classList.contains(modal_opened)
   ) {
+    debugger;
     closeModal(evt.target);
   }
 }
