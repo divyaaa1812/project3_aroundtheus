@@ -77,7 +77,6 @@ function closeModalByOverlayClick(evt) {
     evt.target === evt.currentTarget ||
     evt.target.classList.contains("modal__close-button")
   ) {
-    console.log(modalCloseButton);
     closeModal(evt.target);
   }
 }
