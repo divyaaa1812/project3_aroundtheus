@@ -50,7 +50,6 @@ const addNewCardLink = document.querySelector(".card__image");
 const addNewCardTitleInput = document.querySelector("#add-title-input");
 const addNewCardImageURLInput = document.querySelector("#image-link-input");
 const previewImagePopup = document.querySelector("#preview-image-modal");
-const modalCloseButton = document.querySelector(".modal__close-button");
 //extract forms
 const profileFormElement = editProfilePopup.querySelector(
   "#modal-form-content"
@@ -77,7 +76,7 @@ function closeModalByOverlayClick(evt) {
   debugger;
   if (
     evt.target === evt.currentTarget ||
-    evt.target.classList.contains(modalCloseButton)
+    evt.target.classList.contains("modal__close-button")
   ) {
     console.log(modalCloseButton);
     closeModal(evt.target);
