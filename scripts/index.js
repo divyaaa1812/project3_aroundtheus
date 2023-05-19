@@ -68,29 +68,25 @@ function closeModalByEscape(evt) {
   }
 }
 
-//close modal by clicking on overlay
-function closeModalByOverlayClick(evt) {
-  // target is the element on which the event happened
-  // currentTarget is the modal
-  // if they are the same then we should close the modal
+function closeModalByClick(evt) {
   if (
     evt.target === evt.currentTarget ||
     evt.target.classList.contains("modal__close-button")
   ) {
-    closeModal(evt.target);
+    closeModal(evt.currentTarget); // currentTarget is the modal
   }
 }
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", closeModalByEscape);
-  modal.addEventListener("mousedown", closeModalByOverlayClick);
+  modal.addEventListener("mousedown", closeModalByClick);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", closeModalByEscape);
-  modal.removeEventListener("mousedown", closeModalByOverlayClick);
+  modal.removeEventListener("mousedown", closeModalByClick);
 }
 
 function openPreviewImageModal(cardData) {
