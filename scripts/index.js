@@ -74,10 +74,12 @@ function closeModalByOverlayClick(evt) {
   // target is the element on which the event happened
   // currentTarget is the modal
   // if they are the same then we should close the modal
+  debugger;
   if (
     evt.target === evt.currentTarget ||
     evt.target.classList.contains(modalCloseButton)
   ) {
+    console.log(modalCloseButton);
     closeModal(evt.target);
   }
 }
