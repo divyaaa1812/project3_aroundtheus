@@ -1,4 +1,4 @@
-import { toggleButtonState } from "./formValidation.js";
+import { disableButton } from "./formValidation.js";
 
 const initialCards = [
   {
@@ -140,6 +140,7 @@ function handleAddNewCardFormSubmit(event) {
   cardsList.prepend(cardElement);
   addNewCardFormElement.reset();
   closeModal(addNewCardPopup);
+  disableButton(addNewCardCreateButton);
 }
 
 /* Event Listeners */
@@ -151,7 +152,6 @@ editProfileButton.addEventListener("click", () => {
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 addNewCardButton.addEventListener("click", () => {
   openModal(addNewCardPopup);
-  disableButton(modalSubmitButton);
 });
 
 addNewCardFormElement.addEventListener("submit", handleAddNewCardFormSubmit);
@@ -173,7 +173,7 @@ function getCardElement(cardData) {
   });
   cardTitle.textContent = cardData.name;
   cardImage.setAttribute("src", cardData.link);
-  cardImage.setAttribute("alt", `photo of ${cardData.name}`);
+  cardImage.setAttribute("alt", `Image of ${cardData.name}`);
   return cardElement;
 }
 

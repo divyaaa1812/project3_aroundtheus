@@ -36,27 +36,31 @@ const toggleInputError = (formElement, inputElement) => {
     hideInputError(formElement, inputElement, validationConfig);
   }
 };
-
-// The function takes an array of input fields and the button element,
-// whose state need to be changed
-
-export const toggleButtonState = (inputList, buttonElement) => {
-  // If there is at least one invalid input
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add("modal__button_disabled");
-    buttonElement.setAttribute("disabled", true);
-  } else {
-    buttonElement.classList.remove("modal__button_disabled");
-    buttonElement.removeAttribute("disabled", false);
-  }
-};
-
 // The function takes an array of form input fields
 const hasInvalidInput = (inputList) => {
   // iterate over the array using the some() method
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
   });
+};
+
+export const disableButton = (buttonElement) => {
+  buttonElement.classList.add(validationConfig.inactiveButtonSelector);
+  buttonElement.setAttribute("disabled", true);
+};
+
+const enableButton = (buttonElement) => {
+  buttonElement.classList.remove(validationConfig.inactiveButtonSelector);
+  buttonElement.removeAttribute("disabled", false);
+};
+
+const toggleButtonState = (inputList, buttonElement) => {
+  // If there is at least one invalid input
+  if (hasInvalidInput(inputList)) {
+    disableButton(buttonElement);
+  } else {
+    enableButton(buttonElement);
+  }
 };
 
 const setEventListeners = (formElement, validationConfig) => {
