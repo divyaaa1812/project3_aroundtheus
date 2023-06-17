@@ -46,20 +46,20 @@ export default class Card {
     this._cardElement = null;
   };
 
-  // _openPreviewImage() {
-  //   openModal(previewImagePopup);
-  //   previewImagePopup
-  //     .querySelector("#imagePreview")
-  //     .setAttribute("src", this._link);
-  //   previewImagePopup
-  //     .querySelector("#imagePreview")
-  //     .setAttribute("alt", `Photo of ${this._name}`);
-  // }
+  _openPreviewImage = () => {
+    openModal(previewImagePopup);
+    previewImagePopup
+      .querySelector("#imagePreview")
+      .setAttribute("src", `${this._link}`);
+    previewImagePopup
+      .querySelector("#imagePreview")
+      .setAttribute("alt", `Photo of ${this._name}`);
+  };
 
   _setEventListeners() {
     this._favIconElement.addEventListener("click", this._handleFavIcon);
     this._deleteCardButton.addEventListener("click", this._handleDelButton);
-    // this._cardImage.addEventListener("click", this._openPreviewImage());
+    this._addNewCardLink.addEventListener("click", this._openPreviewImage);
   }
 
   getCardElement() {
@@ -70,11 +70,11 @@ export default class Card {
     this._deleteCardButton =
       this._cardElement.querySelector(".card__del-button");
     this._favIconElement = this._cardElement.querySelector(".card__fav-icon");
-    this._cardTitle = this._cardElement.querySelector(".card__title");
-    this._cardImage = this._cardElement.querySelector(".card__image");
-    this._cardTitle.textContent = this._name;
-    this._cardImage.setAttribute("src", `${this._link}`);
-    this._cardImage.setAttribute("alt", `Image of ${this._name}`);
+    this._addNewCardTitle = this._cardElement.querySelector(".card__title");
+    this._addNewCardLink = this._cardElement.querySelector(".card__image");
+    this._addNewCardTitle.textContent = this._name;
+    this._addNewCardLink.setAttribute("src", `${this._link}`);
+    this._addNewCardLink.setAttribute("alt", `Image of ${this._name}`);
     //call eventlistener
     this._setEventListeners();
     //return the card element that is created

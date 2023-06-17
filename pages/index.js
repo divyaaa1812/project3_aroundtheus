@@ -9,11 +9,6 @@ const cardData = [
     name: "Lake Louise",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
   },
-
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
   {
     name: "Bald Mountains",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
@@ -42,17 +37,9 @@ export const settings = {
   errorSelectorHide: "modal__input-error-hide",
   errorSelector: "modal__input-error",
 };
+
 const editProfileModalFormElement = document.querySelector("#edit-profile");
 const addNewCardModalFormElement = document.querySelector("#add-new-card");
-
-const addNewCardFormValidator = new FormValidator(
-  settings,
-  addNewCardModalFormElement
-);
-const editProfileFormValidator = new FormValidator(
-  settings,
-  editProfileModalFormElement
-);
 
 /*Declare Elements */
 const editProfileButton = document.querySelector(".js-profile-edit-button");
@@ -187,5 +174,15 @@ cardData.forEach((cardData) => {
   cardsList.append(cardElement);
 });
 
+//instance of FormValidator class
+const addNewCardFormValidator = new FormValidator(
+  settings,
+  addNewCardModalFormElement
+);
+const editProfileFormValidator = new FormValidator(
+  settings,
+  editProfileModalFormElement
+);
+//start form validations
 editProfileFormValidator.enableValidation();
 addNewCardFormValidator.enableValidation();
