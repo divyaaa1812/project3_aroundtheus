@@ -179,8 +179,11 @@ addNewCardFormElement.addEventListener("submit", handleAddNewCardFormSubmit);
 // }
 
 cardData.forEach((cardData) => {
+  //instance of class for each card
   const card = new Card(cardData, "#card-template");
+  //create a card by calling getCardElement method from Card class
   const cardElement = card.getCardElement();
+  //append the created card to DOM
   cardsList.append(cardElement);
 });
 
