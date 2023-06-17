@@ -63,19 +63,18 @@ export default class Card {
   }
 
   getCardElement() {
-    this._cardTemplate = document
-      .querySelector(this._cardSelector)
-      .content.querySelector(".card")
+    this._cardTemplate = document.querySelector(this._cardSelector);
+    this._cardElement = this._cardTemplate.content
+      .querySelector(".card")
       .cloneNode(true);
     this._deleteCardButton =
-      this._cardTemplate.querySelector(".card__del-button");
-    this._favIconElement = this._cardTemplate.querySelector(".card__fav-icon");
-    this._cardImage = this._cardTemplate.querySelector(".card__image");
+      this._cardElement.querySelector(".card__del-button");
+    this._favIconElement = this._cardElement.querySelector(".card__fav-icon");
+    this._cardTitle = this._cardElement.querySelector(".card__title");
+    this._cardImage = this._cardElement.querySelector(".card__image");
+    this._cardTitle.textContent = this._name;
     this._cardImage.setAttribute("src", this._link);
-    this._cardTemplate.querySelector(".card__title").textContent = this._name;
-    this._cardTemplate
-      .querySelector(".card__title")
-      .setAttribute("alt", `Image of ${this._name}`);
+    this._cardImage.setAttribute("alt", `Image of ${this._name}`);
     //call eventlisteners
     this._setEventListeners();
   }
