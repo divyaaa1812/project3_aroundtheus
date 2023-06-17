@@ -1,5 +1,5 @@
 // object to store form elements for validation
-export const validationConfig = {
+const validationConfig = {
   formElementSelector: ".modal__form-content",
   inputElementSelector: ".modal__text-input",
   submitButtonSelector: ".modal__button",
@@ -45,7 +45,7 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
-export const disableButton = (buttonElement, validationConfig) => {
+const disableButton = (buttonElement, validationConfig) => {
   buttonElement.classList.add(validationConfig.inactiveButtonSelector);
   buttonElement.setAttribute("disabled", true);
 };
