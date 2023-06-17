@@ -32,6 +32,8 @@ const cardData = [
   },
 ];
 
+const card = new Card(cardData, "#card-template");
+
 export const settings = {
   inputElementSelector: ".modal__text-input",
   submitButtonSelector: ".modal__button",
@@ -135,7 +137,6 @@ function handleAddNewCardFormSubmit(event) {
   event.preventDefault();
   const newCardTitle = addNewCardTitleInput.value;
   const newCardLink = addNewCardImageURLInput.value;
-  const card = new Card(cardData, "#card-template");
   const cardElement = card.getCardElement();
   cardsList.prepend(cardElement);
   addNewCardFormElement.reset();
