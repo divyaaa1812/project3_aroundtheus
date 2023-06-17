@@ -27,8 +27,6 @@ const cardData = [
   },
 ];
 
-const card = new Card(cardData, "#card-template");
-
 export const settings = {
   inputElementSelector: ".modal__text-input",
   submitButtonSelector: ".modal__button",
@@ -101,15 +99,15 @@ function closeModal(modal) {
   modal.removeEventListener("mousedown", closeModalByClick);
 }
 
-function openPreviewImageModal(cardData) {
-  openModal(previewImagePopup);
-  previewImagePopup
-    .querySelector("#imagePreview")
-    .setAttribute("src", cardData.link);
-  previewImagePopup
-    .querySelector("#imagePreview")
-    .setAttribute("alt", `Photo of ${cardData.name}`);
-}
+// function openPreviewImageModal(cardData) {
+//   openModal(previewImagePopup);
+//   previewImagePopup
+//     .querySelector("#imagePreview")
+//     .setAttribute("src", cardData.link);
+//   previewImagePopup
+//     .querySelector("#imagePreview")
+//     .setAttribute("alt", `Photo of ${cardData.name}`);
+// }
 
 function handleProfileFormSubmit(event) {
   event.preventDefault();
@@ -122,9 +120,12 @@ function handleProfileFormSubmit(event) {
 
 function handleAddNewCardFormSubmit(event) {
   event.preventDefault();
-  const newCardTitle = addNewCardTitleInput.value;
-  const newCardLink = addNewCardImageURLInput.value;
+  const name = addNewCardTitleInput.value;
+  const link = addNewCardImageURLInput.value;
+  const cardData = { name, link };
+  const card = new Card(cardData, "#card-template");
   const cardElement = card.getCardElement();
+  console.log(cardElement);
   cardsList.prepend(cardElement);
   addNewCardFormElement.reset();
   closeModal(addNewCardModalFormElement);
