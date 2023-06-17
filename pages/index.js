@@ -1,32 +1,36 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
-const cardData = {
-  name: "Yosemite Valley",
-  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-};
+const cardData = [
+  {
+    name: "Yosemite Valley",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+  },
+  {
+    name: "Lake Louise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
+  },
 
-// {
-//   name: "Lake Louise",
-//   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-// },
-// {
-//   name: "Bald Mountains",
-//   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-// },
-// {
-//   name: "Latemar",
-//   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-// },
-// {
-//   name: "Vanoise National Park",
-//   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-// },
-// {
-//   name: "Lago di Braies",
-//   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-// },
-
-const card = new Card(cardData, "#card-template");
+  {
+    name: "Lake Louise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
+  },
+  {
+    name: "Bald Mountains",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
+  },
+  {
+    name: "Latemar",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
+  },
+  {
+    name: "Vanoise National Park",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
+  },
+];
 
 export const settings = {
   inputElementSelector: ".modal__text-input",
@@ -131,6 +135,7 @@ function handleAddNewCardFormSubmit(event) {
   event.preventDefault();
   const newCardTitle = addNewCardTitleInput.value;
   const newCardLink = addNewCardImageURLInput.value;
+  const card = new Card(cardData, "#card-template");
   const cardElement = card.getCardElement();
   cardsList.prepend(cardElement);
   addNewCardFormElement.reset();
@@ -171,6 +176,12 @@ addNewCardFormElement.addEventListener("submit", handleAddNewCardFormSubmit);
 // cardImage.setAttribute("alt", `Image of ${cardData.name}`);
 //   return cardElement;
 // }
-cardsList.append(card.getCardElement());
+
+cardData.forEach((cardData) => {
+  const card = new Card(cardData, "#card-template");
+  const cardElement = card.getCardElement();
+  cardsList.append(cardElement);
+});
+
 editProfileFormValidator.enableValidation();
 addNewCardFormValidator.enableValidation();

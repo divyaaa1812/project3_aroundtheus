@@ -31,9 +31,9 @@ function closeModalByClick(evt) {
 }
 
 export default class Card {
-  constructor({ name, link }, cardSelector) {
-    this._name = name;
-    this._link = link;
+  constructor(cardData, cardSelector) {
+    this._name = cardData.name;
+    this._link = cardData.link;
     this._cardSelector = cardSelector;
   }
 
@@ -64,21 +64,20 @@ export default class Card {
 
   getCardElement() {
     this._cardTemplate = document.querySelector(this._cardSelector);
-    console.log(this);
     this._cardElement = this._cardTemplate.content
       .querySelector(".card")
       .cloneNode(true);
     this._deleteCardButton =
       this._cardElement.querySelector(".card__del-button");
     this._favIconElement = this._cardElement.querySelector(".card__fav-icon");
-    console.log(this._favIconElement);
     this._cardTitle = this._cardElement.querySelector(".card__title");
     this._cardImage = this._cardElement.querySelector(".card__image");
     this._cardTitle.textContent = this._name;
     this._cardImage.setAttribute("src", `${this._link}`);
     this._cardImage.setAttribute("alt", `Image of ${this._name}`);
-    //call eventlisteners
+    //call eventlistener
     this._setEventListeners();
+    //return the card element that is created
     return this._cardElement;
   }
 }
