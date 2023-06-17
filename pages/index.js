@@ -2,7 +2,7 @@ import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 const cardData = {
   name: "Yosemite Valley",
-  Link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
 };
 
 // {
@@ -27,7 +27,6 @@ const cardData = {
 // },
 
 const card = new Card(cardData, "#card-template");
-card.getCardElement();
 
 export const settings = {
   inputElementSelector: ".modal__text-input",
@@ -172,11 +171,6 @@ addNewCardFormElement.addEventListener("submit", handleAddNewCardFormSubmit);
 // cardImage.setAttribute("alt", `Image of ${cardData.name}`);
 //   return cardElement;
 // }
-
-// cardData.forEach((cardData) => {
-//   const cardElement = getCardElement(cardData);
-//   cardsList.append(cardElement);
-// });
-
+cardsList.append(card.getCardElement());
 editProfileFormValidator.enableValidation();
 addNewCardFormValidator.enableValidation();

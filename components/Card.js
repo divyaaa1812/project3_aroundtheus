@@ -37,14 +37,14 @@ export default class Card {
     this._cardSelector = cardSelector;
   }
 
-  _handleFavIcon() {
+  _handleFavIcon = () => {
     this._favIconElement.classList.toggle("card__fav-icon-selected");
-  }
+  };
 
-  _handleDelButton() {
-    this._cardTemplate.remove();
-    this._cardTemplate = null;
-  }
+  _handleDelButton = () => {
+    this._cardElement.remove();
+    this._cardElement = null;
+  };
 
   // _openPreviewImage() {
   //   openModal(previewImagePopup);
@@ -57,25 +57,28 @@ export default class Card {
   // }
 
   _setEventListeners() {
-    this._favIconElement.addEventListener("click", this._handleFavIcon());
-    this._deleteCardButton.addEventListener("click", this._handleDelButton());
+    this._favIconElement.addEventListener("click", this._handleFavIcon);
+    this._deleteCardButton.addEventListener("click", this._handleDelButton);
     // this._cardImage.addEventListener("click", this._openPreviewImage());
   }
 
   getCardElement() {
     this._cardTemplate = document.querySelector(this._cardSelector);
+    console.log(this);
     this._cardElement = this._cardTemplate.content
       .querySelector(".card")
       .cloneNode(true);
     this._deleteCardButton =
       this._cardElement.querySelector(".card__del-button");
     this._favIconElement = this._cardElement.querySelector(".card__fav-icon");
+    console.log(this._favIconElement);
     this._cardTitle = this._cardElement.querySelector(".card__title");
     this._cardImage = this._cardElement.querySelector(".card__image");
     this._cardTitle.textContent = this._name;
-    this._cardImage.setAttribute("src", this._link);
+    this._cardImage.setAttribute("src", `${this._link}`);
     this._cardImage.setAttribute("alt", `Image of ${this._name}`);
     //call eventlisteners
     this._setEventListeners();
+    return this._cardElement;
   }
 }
