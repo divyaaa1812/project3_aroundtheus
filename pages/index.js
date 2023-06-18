@@ -69,7 +69,7 @@ const addNewCardFormElement = addNewCardModalFormElement.querySelector(
 );
 
 // close modal by pressing ESC key
-function closeModalByEscape(evt) {
+export function closeModalByEscape(evt) {
   if (evt.key === "Escape") {
     // search for an opened modal
     const openedModal = document.querySelector(".modal_opened");
@@ -78,7 +78,7 @@ function closeModalByEscape(evt) {
   }
 }
 
-function closeModalByClick(evt) {
+export function closeModalByClick(evt) {
   if (
     evt.target === evt.currentTarget ||
     evt.target.classList.contains("modal__close-button")
@@ -87,13 +87,13 @@ function closeModalByClick(evt) {
   }
 }
 
-function openModal(modal) {
+export function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", closeModalByEscape);
   modal.addEventListener("mousedown", closeModalByClick);
 }
 
-function closeModal(modal) {
+export function closeModal(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", closeModalByEscape);
   modal.removeEventListener("mousedown", closeModalByClick);
