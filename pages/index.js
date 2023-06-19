@@ -99,16 +99,6 @@ export function closeModal(modal) {
   modal.removeEventListener("mousedown", closeModalByClick);
 }
 
-// function openPreviewImageModal(cardData) {
-//   openModal(previewImagePopup);
-//   previewImagePopup
-//     .querySelector("#imagePreview")
-//     .setAttribute("src", cardData.link);
-//   previewImagePopup
-//     .querySelector("#imagePreview")
-//     .setAttribute("alt", `Photo of ${cardData.name}`);
-// }
-
 function handleProfileFormSubmit(event) {
   event.preventDefault();
   profileTitle.textContent = profileTitleInputField.value;
@@ -118,15 +108,21 @@ function handleProfileFormSubmit(event) {
   editProfileFormValidator.disableButton();
 }
 
+function createCard(item) {
+  // create instance of Card class
+  const card = new Card(item, "#card-template");
+  //create a card by calling getCardElement method from Card class
+  const cardElement = card.getCardElement();
+  //return the card
+  return cardElement;
+}
+
 function handleAddNewCardFormSubmit(event) {
   event.preventDefault();
   const name = addNewCardTitleInput.value;
   const link = addNewCardImageURLInput.value;
   const cardData = { name, link };
-  const card = new Card(cardData, "#card-template");
-  const cardElement = card.getCardElement();
-  console.log(cardElement);
-  cardsList.prepend(cardElement);
+  cardsList.prepend(createCard(cardData));
   addNewCardFormElement.reset();
   closeModal(addNewCardModalFormElement);
   addNewCardFormValidator.disableButton();
@@ -145,34 +141,9 @@ addNewCardButton.addEventListener("click", () => {
 
 addNewCardFormElement.addEventListener("submit", handleAddNewCardFormSubmit);
 
-// function getCardElement(cardData) {
-//   const cardElement = cardTemplate
-//     .cloneNode(true)
-//     .content.querySelector(".card");
-//   const cardTitle = cardElement.querySelector(".card__title");
-//   const cardImage = cardElement.querySelector(".card__image");
-//   // const favIconElement = cardElement.querySelector(".card__fav-icon");
-//   // const deleteCardButton = cardElement.querySelector(".card__del-button");
-//   // deleteCardButton.addEventListener("click", () => cardElement.remove());
-//   cardImage.addEventListener("click", () => {
-//     openPreviewImageModal(cardData);
-//   });
-//   // favIconElement.addEventListener("click", () => {
-//   //   favIconElement.classList.toggle("card__fav-icon-selected");
-//   // });
-//   cardTitle.textContent = cardData.name;
-//   cardImage.setAttribute("src", cardData.link);
-// cardImage.setAttribute("alt", `Image of ${cardData.name}`);
-//   return cardElement;
-// }
-
 cardData.forEach((cardData) => {
-  //instance of class for each card
-  const card = new Card(cardData, "#card-template");
-  //create a card by calling getCardElement method from Card class
-  const cardElement = card.getCardElement();
-  //append the created card to DOM
-  cardsList.append(cardElement);
+  // //append the created card to DOM for each itm in card data list declared above
+  cardsList.append(createCard(cardData));
 });
 
 //instance of FormValidator class
