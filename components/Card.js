@@ -6,36 +6,6 @@ import {
 } from "../pages/index.js";
 const previewImagePopup = document.querySelector("#preview-image-modal");
 
-// const openModal = (modal) => {
-//   modal.classList.add("modal_opened");
-//   document.addEventListener("keydown", closeModalByEscape);
-//   modal.addEventListener("mousedown", closeModalByClick);
-// };
-
-// function closeModal(modal) {
-//   modal.classList.remove("modal_opened");
-//   document.removeEventListener("keydown", closeModalByEscape);
-//   modal.removeEventListener("mousedown", closeModalByClick);
-// }
-
-// function closeModalByEscape(evt) {
-//   if (evt.key === "Escape") {
-//     // search for an opened modal
-//     const openedModal = document.querySelector(".modal_opened");
-//     // close it
-//     closeModal(openedModal);
-//   }
-// }
-
-// function closeModalByClick(evt) {
-//   if (
-//     evt.target === evt.currentTarget ||
-//     evt.target.classList.contains("modal__close-button")
-//   ) {
-//     closeModal(evt.currentTarget); // currentTarget is the modal
-//   }
-// }
-
 export default class Card {
   constructor(cardData, cardSelector) {
     this._name = cardData.name;

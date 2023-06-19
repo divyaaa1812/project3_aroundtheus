@@ -115,7 +115,7 @@ function handleProfileFormSubmit(event) {
   profileSubtitle.textContent = profileSubtitleInputField.value;
   profileFormElement.reset();
   closeModal(editProfileModalFormElement);
-  editProfileFormValidator._disableButton();
+  editProfileFormValidator.disableButton();
 }
 
 function handleAddNewCardFormSubmit(event) {
@@ -129,7 +129,7 @@ function handleAddNewCardFormSubmit(event) {
   cardsList.prepend(cardElement);
   addNewCardFormElement.reset();
   closeModal(addNewCardModalFormElement);
-  addNewCardFormValidator._disableButton();
+  addNewCardFormValidator.disableButton();
 }
 
 /* Event Listeners */
