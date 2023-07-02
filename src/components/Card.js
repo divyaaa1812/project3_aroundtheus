@@ -5,7 +5,7 @@
 //   openModal,
 // } from "../pages/index.js";
 const previewImagePopup = document.querySelector("#preview-image-modal");
-import Popup from "./Popup";
+import Popup from "./Popup.js";
 export default class Card {
   constructor(cardData, cardSelector, handleCardClick) {
     this._name = cardData.name;
