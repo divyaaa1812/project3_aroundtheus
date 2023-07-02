@@ -1,5 +1,9 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
+import Section from "../components/Section.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
+
 const cardData = [
   {
     name: "Yosemite Valley",
@@ -87,30 +91,38 @@ export function closeModalByClick(evt) {
   }
 }
 
-export function openModal(modal) {
-  modal.classList.add("modal_opened");
-  document.addEventListener("keydown", closeModalByEscape);
-  modal.addEventListener("mousedown", closeModalByClick);
+const newCardPopup = new PopupWithForm(
+  "#add-new-card",
+  handleAddNewCardFormSubmit
+);
+const addProfilePopup = new PopupWithForm(
+  "#edit-profile",
+  handleProfileFormSubmit
+);
+const userInfo = new UserInfo({
+  $name: profileTitle,
+  $subtitle: profileSubtitle,
+});
+
+function handleOpenEditProfileForm() {
+  addProfilePopup.openModal();
+  addProfilePopup.setEventListeners();
+  const { name, subtitle } = userInfo.getUserInfo();
+  profileTitleInputField.value = name;
+  profileSubtitleInputField.value = subtitle;
 }
 
-export function closeModal(modal) {
-  modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", closeModalByEscape);
-  modal.removeEventListener("mousedown", closeModalByClick);
-}
-
-function handleProfileFormSubmit(event) {
+export function handleProfileFormSubmit(event) {
   event.preventDefault();
-  profileTitle.textContent = profileTitleInputField.value;
-  profileSubtitle.textContent = profileSubtitleInputField.value;
-  profileFormElement.reset();
-  closeModal(editProfileModalFormElement);
+  const newEditFormFieldValues = addProfilePopup._getInputValues();
+  userInfo.setUserInfo(newEditFormFieldValues);
+  addProfilePopup.closeModal();
   editProfileFormValidator.disableButton();
 }
 
 function createCard(item) {
   // create instance of Card class
-  const card = new Card(item, "#card-template");
+  const card = new Card(item, "#card-template", () => {});
   //create a card by calling getCardElement method from Card class
   const cardElement = card.getCardElement();
   //return the card
@@ -119,32 +131,31 @@ function createCard(item) {
 
 function handleAddNewCardFormSubmit(event) {
   event.preventDefault();
-  const name = addNewCardTitleInput.value;
-  const link = addNewCardImageURLInput.value;
-  const cardData = { name, link };
-  cardsList.prepend(createCard(cardData));
-  addNewCardFormElement.reset();
-  closeModal(addNewCardModalFormElement);
+  const userInputValues = newCardPopup._getInputValues();
+  const section = new Section(
+    { items: [userInputValues], renderer: createCard },
+    cardsList
+  );
+  section.renderItems();
+  newCardPopup.closeModal();
   addNewCardFormValidator.disableButton();
 }
 
 /* Event Listeners */
-editProfileButton.addEventListener("click", () => {
-  openModal(editProfileModalFormElement);
-  profileTitleInputField.value = profileTitle.textContent;
-  profileSubtitleInputField.value = profileSubtitle.textContent;
-});
+editProfileButton.addEventListener("click", handleOpenEditProfileForm);
+
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 addNewCardButton.addEventListener("click", () => {
-  openModal(addNewCardModalFormElement);
+  newCardPopup.openModal();
+  newCardPopup.setEventListeners();
 });
 
-addNewCardFormElement.addEventListener("submit", handleAddNewCardFormSubmit);
+// addNewCardFormElement.addEventListener("submit", handleAddNewCardFormSubmit);
 
-cardData.forEach((cardData) => {
-  // //append the created card to DOM for each itm in card data list declared above
-  cardsList.append(createCard(cardData));
-});
+// cardData.forEach((cardData) => {
+//   // //append the created card to DOM for each itm in card data list declared above
+//   cardsList.append(createCard(cardData));
+// });
 
 //instance of FormValidator class
 const addNewCardFormValidator = new FormValidator(

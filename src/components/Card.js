@@ -1,16 +1,17 @@
-import {
-  closeModal,
-  closeModalByClick,
-  closeModalByEscape,
-  openModal,
-} from "../pages/index.js";
+// import {
+//   closeModal,
+//   closeModalByClick,
+//   closeModalByEscape,
+//   openModal,
+// } from "../pages/index.js";
 const previewImagePopup = document.querySelector("#preview-image-modal");
-
+import Popup from "./Popup";
 export default class Card {
-  constructor(cardData, cardSelector) {
+  constructor(cardData, cardSelector, handleCardClick) {
     this._name = cardData.name;
     this._link = cardData.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _handleFavIcon = () => {
