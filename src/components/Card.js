@@ -1,13 +1,6 @@
-// import {
-//   closeModal,
-//   closeModalByClick,
-//   closeModalByEscape,
-//   openModal,
-// } from "../pages/index.js";
-const previewImagePopup = document.querySelector("#preview-image-modal");
-import Popup from "./Popup.js";
 export default class Card {
   constructor(cardData, cardSelector, handleCardClick) {
+    this._cardData = cardData;
     this._name = cardData.name;
     this._link = cardData.link;
     this._cardSelector = cardSelector;
@@ -23,20 +16,16 @@ export default class Card {
     this._cardElement = null;
   };
 
-  _openPreviewImage = () => {
-    openModal(previewImagePopup);
-    previewImagePopup
-      .querySelector("#imagePreview")
-      .setAttribute("src", `${this._link}`);
-    previewImagePopup
-      .querySelector("#imagePreview")
-      .setAttribute("alt", `Photo of ${this._name}`);
+  _onCardClick = (ev) => {
+    this._handleCardClick(this._cardData);
   };
 
   _setEventListeners() {
     this._favIconElement.addEventListener("click", this._handleFavIcon);
     this._deleteCardButton.addEventListener("click", this._handleDelButton);
-    this._addNewCardLink.addEventListener("click", this._openPreviewImage);
+    this._cardElement
+      .querySelector(".card__image")
+      .addEventListener("click", this._onCardClick);
   }
 
   getCardElement() {

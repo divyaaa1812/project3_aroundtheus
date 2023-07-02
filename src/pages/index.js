@@ -3,6 +3,7 @@ import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
+import PopupWithImage from "../components/PopupWithImage.js";
 
 const cardData = [
   {
@@ -72,25 +73,6 @@ const addNewCardFormElement = addNewCardModalFormElement.querySelector(
   "#add-card-form-content"
 );
 
-// close modal by pressing ESC key
-export function closeModalByEscape(evt) {
-  if (evt.key === "Escape") {
-    // search for an opened modal
-    const openedModal = document.querySelector(".modal_opened");
-    // close it
-    closeModal(openedModal);
-  }
-}
-
-export function closeModalByClick(evt) {
-  if (
-    evt.target === evt.currentTarget ||
-    evt.target.classList.contains("modal__close-button")
-  ) {
-    closeModal(evt.currentTarget); // currentTarget is the modal
-  }
-}
-
 const newCardPopup = new PopupWithForm(
   "#add-new-card",
   handleAddNewCardFormSubmit
@@ -112,21 +94,12 @@ function handleOpenEditProfileForm() {
   profileSubtitleInputField.value = subtitle;
 }
 
-export function handleProfileFormSubmit(event) {
+function handleProfileFormSubmit(event) {
   event.preventDefault();
   const newEditFormFieldValues = addProfilePopup._getInputValues();
   userInfo.setUserInfo(newEditFormFieldValues);
   addProfilePopup.closeModal();
   editProfileFormValidator.disableButton();
-}
-
-function createCard(item) {
-  // create instance of Card class
-  const card = new Card(item, "#card-template", () => {});
-  //create a card by calling getCardElement method from Card class
-  const cardElement = card.getCardElement();
-  //return the card
-  return cardElement;
 }
 
 function handleAddNewCardFormSubmit(event) {
@@ -141,21 +114,37 @@ function handleAddNewCardFormSubmit(event) {
   addNewCardFormValidator.disableButton();
 }
 
+function onCardClick(card) {
+  const cardImagePopup = new PopupWithImage(
+    "#preview-image-modal",
+    ".modal-preview-image"
+  );
+  cardImagePopup.openModal(card);
+}
+
+function createCard(item) {
+  // create instance of Card class
+  const card = new Card(item, "#card-template", onCardClick);
+  //create a card by calling getCardElement method from Card class
+  const cardElement = card.getCardElement();
+  //return the card
+  return cardElement;
+}
+
 /* Event Listeners */
 editProfileButton.addEventListener("click", handleOpenEditProfileForm);
-
-profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 addNewCardButton.addEventListener("click", () => {
   newCardPopup.openModal();
   newCardPopup.setEventListeners();
 });
 
+// profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 // addNewCardFormElement.addEventListener("submit", handleAddNewCardFormSubmit);
 
-// cardData.forEach((cardData) => {
-//   // //append the created card to DOM for each itm in card data list declared above
-//   cardsList.append(createCard(cardData));
-// });
+cardData.forEach((cardData) => {
+  // //append the created card to DOM for each itm in card data list declared above
+  cardsList.append(createCard(cardData));
+});
 
 //instance of FormValidator class
 const addNewCardFormValidator = new FormValidator(
