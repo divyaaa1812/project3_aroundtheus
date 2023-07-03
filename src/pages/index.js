@@ -46,9 +46,7 @@ const addNewCardModalFormElement = document.querySelector("#add-new-card");
 
 /*Declare Elements */
 const editProfileButton = document.querySelector(".js-profile-edit-button");
-const editProfileSaveButton = document.querySelector(".modal__button");
 const addNewCardButton = document.querySelector(".profile__add-button");
-const addNewCardCreateButton = document.querySelector("#create-button");
 const cardsList = document.querySelector(".cards__list");
 //Extract title and subtitle elements
 const profileTitle = document.querySelector(".profile__title");
@@ -59,19 +57,21 @@ const profileSubtitleInputField = document.querySelector(
   "#profile-subtitle-input"
 );
 //find card template & extract add new card elements
-const cardTemplate = document.querySelector("#card-template");
-const addNewCardTitle = document.querySelector(".card__title");
-const addNewCardLink = document.querySelector(".card__image");
-const addNewCardTitleInput = document.querySelector("#add-title-input");
-const addNewCardImageURLInput = document.querySelector("#image-link-input");
-const previewImagePopup = document.querySelector("#preview-image-modal");
-//extract forms
-const profileFormElement = editProfileModalFormElement.querySelector(
-  "#modal-form-content"
-);
-const addNewCardFormElement = addNewCardModalFormElement.querySelector(
-  "#add-card-form-content"
-);
+// const cardTemplate = document.querySelector("#card-template");
+// const addNewCardTitle = document.querySelector(".card__title");
+// const addNewCardLink = document.querySelector(".card__image");
+// const addNewCardTitleInput = document.querySelector("#add-title-input");
+// const addNewCardImageURLInput = document.querySelector("#image-link-input");
+// const previewImagePopup = document.querySelector("#preview-image-modal");
+// //extract forms
+// const profileFormElement = editProfileModalFormElement.querySelector(
+//   "#modal-form-content"
+// );
+// const addNewCardFormElement = addNewCardModalFormElement.querySelector(
+//   "#add-card-form-content"
+// );
+// const addNewCardCreateButton = document.querySelector("#create-button");
+// const editProfileSaveButton = document.querySelector(".modal__button");
 
 const newCardPopup = new PopupWithForm(
   "#add-new-card",
@@ -138,15 +138,12 @@ addNewCardButton.addEventListener("click", () => {
   newCardPopup.setEventListeners();
 });
 
-// profileFormElement.addEventListener("submit", handleProfileFormSubmit);
-// addNewCardFormElement.addEventListener("submit", handleAddNewCardFormSubmit);
-
 cardData.forEach((cardData) => {
   // //append the created card to DOM for each itm in card data list declared above
   cardsList.append(createCard(cardData));
 });
 
-//instance of FormValidator class
+//instantiate FormValidator class
 const addNewCardFormValidator = new FormValidator(
   settings,
   addNewCardModalFormElement
