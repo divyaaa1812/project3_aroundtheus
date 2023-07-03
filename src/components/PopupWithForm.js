@@ -18,12 +18,13 @@ export default class PopupWithForm extends Popup {
   }
 
   closeModal() {
-    this._removeEventListeners();
+    this.removeEventListeners();
     this._popupForm.querySelector(".modal__form-content").reset();
     super.closeModal();
   }
 
-  _removeEventListeners() {
+  removeEventListeners() {
+    super.removeEventListener();
     this._popupForm.removeEventListener("submit", this._handleFormSubmit);
     this._popupForm
       .querySelector(".modal__close-button")
@@ -33,11 +34,12 @@ export default class PopupWithForm extends Popup {
   }
 
   setEventListeners() {
+    super.setEventListeners();
     this._popupForm.addEventListener("submit", this._handleFormSubmit);
-    this._popupForm
-      .querySelector(".modal__close-button")
-      .addEventListener("click", () => {
-        this.closeModal();
-      });
+    // this._popupForm
+    //   .querySelector(".modal__close-button")
+    //   .addEventListener("click", () => {
+    //     this.closeModal();
+    //   });
   }
 }
