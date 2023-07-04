@@ -57,22 +57,6 @@ const profileTitleInputField = document.querySelector("#profile-title-input");
 const profileSubtitleInputField = document.querySelector(
   "#profile-subtitle-input"
 );
-//find card template & extract add new card elements
-// const cardTemplate = document.querySelector("#card-template");
-// const addNewCardTitle = document.querySelector(".card__title");
-// const addNewCardLink = document.querySelector(".card__image");
-// const addNewCardTitleInput = document.querySelector("#add-title-input");
-// const addNewCardImageURLInput = document.querySelector("#image-link-input");
-// const previewImagePopup = document.querySelector("#preview-image-modal");
-// //extract forms
-// const profileFormElement = editProfileModalFormElement.querySelector(
-//   "#modal-form-content"
-// );
-// const addNewCardFormElement = addNewCardModalFormElement.querySelector(
-//   "#add-card-form-content"
-// );
-// const addNewCardCreateButton = document.querySelector("#create-button");
-// const editProfileSaveButton = document.querySelector(".modal__button");
 
 const newCardPopup = new PopupWithForm(
   "#add-new-card",
