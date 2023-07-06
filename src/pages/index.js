@@ -83,7 +83,6 @@ const section = new Section(
 section.renderItems();
 
 function handleOpenEditProfileForm() {
-  // editProfileFormValidator.disableButton();
   addProfilePopup.openModal();
   const { name, subtitle } = userInfo.getUserInfo();
   profileTitleInputField.value = name;
