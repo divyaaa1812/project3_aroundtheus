@@ -83,11 +83,15 @@ const section = new Section(
 section.renderItems();
 
 function handleOpenEditProfileForm() {
-  // disableButton();
+  // editProfileFormValidator.disableButton();
   addProfilePopup.openModal();
   const { name, subtitle } = userInfo.getUserInfo();
   profileTitleInputField.value = name;
   profileSubtitleInputField.value = subtitle;
+}
+
+function handleAddNewCardButton() {
+  newCardPopup.openModal();
 }
 
 function handleProfileFormSubmit(inputValues) {
@@ -120,9 +124,7 @@ function createCard(item) {
 
 /* Event Listeners */
 editProfileButton.addEventListener("click", handleOpenEditProfileForm);
-addNewCardButton.addEventListener("click", () => {
-  newCardPopup.openModal();
-});
+addNewCardButton.addEventListener("click", handleAddNewCardButton);
 
 //instantiate FormValidator class
 const addNewCardFormValidator = new FormValidator(

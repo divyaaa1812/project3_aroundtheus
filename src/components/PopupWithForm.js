@@ -30,11 +30,6 @@ export default class PopupWithForm extends Popup {
   removeEventListeners() {
     super._removeEventListeners();
     this._popupForm.removeEventListener("submit", this.handleSubmit);
-    // this._popupForm
-    //   .querySelector(".modal__close-button")
-    //   .removeEventListener("click", () => {
-    //     this.closeModal();
-    //   });
   }
 
   setEventListeners() {

@@ -74,7 +74,6 @@ class FormValidator {
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this.toggleInputError(inputElement);
-        this._toggleButtonState(this._inputList);
       });
     });
   }

@@ -1,6 +1,3 @@
-import { settings } from "../pages";
-import FormValidator from "./FormValidator";
-
 export default class Popup {
   constructor({ popupModalSelector }) {
     this._popupModalSelector = document.querySelector(popupModalSelector);
