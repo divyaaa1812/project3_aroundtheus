@@ -4,6 +4,7 @@ export default class PopupWithForm extends Popup {
     super({ popupModalSelector });
     this._popupForm = document.querySelector(popupModalSelector);
     this._handleFormSubmit = handleFormSubmit;
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   _getInputValues() {
@@ -19,12 +20,16 @@ export default class PopupWithForm extends Popup {
 
   closeModal() {
     super.closeModal();
-    this._popupForm.querySelector(".modal__form-content").reset();
+    this._popupModalSelector.querySelector(".modal__form-content").reset();
+  }
+
+  handleSubmit() {
+    this._handleFormSubmit(this._getInputValues());
   }
 
   removeEventListeners() {
     super._removeEventListeners();
-    this._popupForm.removeEventListener("submit", this._handleFormSubmit);
+    this._popupForm.removeEventListener("submit", this.handleSubmit);
     // this._popupForm
     //   .querySelector(".modal__close-button")
     //   .removeEventListener("click", () => {
@@ -34,6 +39,6 @@ export default class PopupWithForm extends Popup {
 
   setEventListeners() {
     super._setEventListeners();
-    this._popupForm.addEventListener("submit", this._handleFormSubmit);
+    this._popupForm.addEventListener("submit", this.handleSubmit);
   }
 }

@@ -70,37 +70,36 @@ const userInfo = new UserInfo({
   name: profileTitle,
   subtitle: profileSubtitle,
 });
-const userInputValues = newCardPopup._getInputValues();
 const cardImagePopup = new PopupWithImage(
   "#preview-image-modal",
   ".modal-preview-image"
 );
-const section = new Section(
-  { items: [userInputValues], renderer: createCard },
-  cardsList
-);
+
 // To render initial cards declared above in cardData array
-const initialCards = new Section(
+const section = new Section(
   { items: cardData, renderer: createCard },
   cardsList
 );
-initialCards.renderItems();
+section.renderItems();
 
 function handleOpenEditProfileForm() {
+  // disableButton();
   addProfilePopup.openModal();
   const { name, subtitle } = userInfo.getUserInfo();
   profileTitleInputField.value = name;
   profileSubtitleInputField.value = subtitle;
 }
 
-function handleProfileFormSubmit() {
-  const newEditFormFieldValues = addProfilePopup._getInputValues();
-  userInfo.setUserInfo(newEditFormFieldValues);
+function handleProfileFormSubmit(inputValues) {
+  userInfo.setUserInfo(inputValues);
   addProfilePopup.closeModal();
   editProfileFormValidator.disableButton();
 }
 
-function handleAddNewCardFormSubmit() {
+function handleAddNewCardFormSubmit(inputValues) {
+  // adding new item to section items array
+  section._items.push(inputValues);
+  // re-render section items
   section.renderItems();
   newCardPopup.closeModal();
   addNewCardFormValidator.disableButton();
