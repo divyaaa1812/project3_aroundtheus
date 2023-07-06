@@ -18,23 +18,22 @@ export default class PopupWithForm extends Popup {
   }
 
   closeModal() {
-    this.removeEventListeners();
-    this._popupForm.querySelector(".modal__form-content").reset();
     super.closeModal();
+    this._popupForm.querySelector(".modal__form-content").reset();
   }
 
   removeEventListeners() {
-    super.removeEventListener();
+    super._removeEventListeners();
     this._popupForm.removeEventListener("submit", this._handleFormSubmit);
-    this._popupForm
-      .querySelector(".modal__close-button")
-      .removeEventListener("click", () => {
-        this.closeModal();
-      });
+    // this._popupForm
+    //   .querySelector(".modal__close-button")
+    //   .removeEventListener("click", () => {
+    //     this.closeModal();
+    //   });
   }
 
   setEventListeners() {
-    super.setEventListeners();
+    super._setEventListeners();
     this._popupForm.addEventListener("submit", this._handleFormSubmit);
   }
 }

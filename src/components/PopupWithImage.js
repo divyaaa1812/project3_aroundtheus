@@ -6,7 +6,6 @@ class PopupWithImage extends Popup {
   }
 
   openModal({ name, link }) {
-    this.setEventListeners();
     const imageEl = this._popupModalSelector.querySelector(this.imageSelector);
     imageEl.setAttribute("src", link);
     imageEl.setAttribute("alt", name);
@@ -15,28 +14,17 @@ class PopupWithImage extends Popup {
 
   closeModal() {
     super.closeModal();
-    this.removeEventListeners();
     const imageEl = this._popupModalSelector.querySelector(this.imageSelector);
     imageEl.setAttribute("src", "");
     imageEl.setAttribute("alt", "");
   }
 
   setEventListeners() {
-    super.setEventListeners();
-    this._popupModalSelector
-      .querySelector(".modal__close-button")
-      .addEventListener("click", () => {
-        this.closeModal();
-      });
+    super._setEventListeners();
   }
 
   removeEventListeners() {
-    super.removeEventListener();
-    this._popupModalSelector
-      .querySelector(".modal__close-button")
-      .removeEventListener("click", () => {
-        this.closeModal();
-      });
+    super._removeEventListener();
   }
 }
 

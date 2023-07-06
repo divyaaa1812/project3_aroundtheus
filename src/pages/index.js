@@ -67,8 +67,8 @@ const addProfilePopup = new PopupWithForm(
   handleProfileFormSubmit
 );
 const userInfo = new UserInfo({
-  $name: profileTitle,
-  $subtitle: profileSubtitle,
+  name: profileTitle,
+  subtitle: profileSubtitle,
 });
 const userInputValues = newCardPopup._getInputValues();
 const cardImagePopup = new PopupWithImage(

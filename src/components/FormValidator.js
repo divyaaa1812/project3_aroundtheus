@@ -85,7 +85,6 @@ class FormValidator {
       evt.preventDefault();
     });
     this._setEventListeners();
-    this.disableButton();
   }
 }
 
