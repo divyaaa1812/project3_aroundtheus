@@ -71,7 +71,6 @@ class FormValidator {
     );
     // Find the submit button in the current form
     this._buttonElement = this._form.querySelector(this._submitButtonSelector);
-    this._toggleButtonState(this._inputList);
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this.toggleInputError(inputElement);

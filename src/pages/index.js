@@ -70,40 +70,43 @@ const userInfo = new UserInfo({
   $name: profileTitle,
   $subtitle: profileSubtitle,
 });
+const userInputValues = newCardPopup._getInputValues();
+const cardImagePopup = new PopupWithImage(
+  "#preview-image-modal",
+  ".modal-preview-image"
+);
+const section = new Section(
+  { items: [userInputValues], renderer: createCard },
+  cardsList
+);
+// To render initial cards declared above in cardData array
+const initialCards = new Section(
+  { items: cardData, renderer: createCard },
+  cardsList
+);
+initialCards.renderItems();
 
 function handleOpenEditProfileForm() {
   addProfilePopup.openModal();
-  addProfilePopup.setEventListeners();
   const { name, subtitle } = userInfo.getUserInfo();
   profileTitleInputField.value = name;
   profileSubtitleInputField.value = subtitle;
 }
 
-function handleProfileFormSubmit(event) {
-  event.preventDefault();
+function handleProfileFormSubmit() {
   const newEditFormFieldValues = addProfilePopup._getInputValues();
   userInfo.setUserInfo(newEditFormFieldValues);
   addProfilePopup.closeModal();
   editProfileFormValidator.disableButton();
 }
 
-function handleAddNewCardFormSubmit(event) {
-  event.preventDefault();
-  const userInputValues = newCardPopup._getInputValues();
-  const section = new Section(
-    { items: [userInputValues], renderer: createCard },
-    cardsList
-  );
+function handleAddNewCardFormSubmit() {
   section.renderItems();
   newCardPopup.closeModal();
   addNewCardFormValidator.disableButton();
 }
 
 function onCardClick(card) {
-  const cardImagePopup = new PopupWithImage(
-    "#preview-image-modal",
-    ".modal-preview-image"
-  );
   cardImagePopup.openModal(card);
 }
 
@@ -120,12 +123,6 @@ function createCard(item) {
 editProfileButton.addEventListener("click", handleOpenEditProfileForm);
 addNewCardButton.addEventListener("click", () => {
   newCardPopup.openModal();
-  newCardPopup.setEventListeners();
-});
-
-cardData.forEach((cardData) => {
-  // //append the created card to DOM for each itm in card data list declared above
-  cardsList.append(createCard(cardData));
 });
 
 //instantiate FormValidator class
