@@ -8,7 +8,7 @@ export default class Section {
   }
 
   //takes a DOM element and add it to container
-  addItem(element) {
+  appendItem(element) {
     this._containerSelector.append(element);
   }
 
@@ -16,12 +16,12 @@ export default class Section {
   renderItems() {
     this._items.forEach((cardData) => {
       const cardItem = this._renderer(cardData);
-      this.addItem(cardItem);
+      this.appendItem(cardItem);
     });
   }
 
-  prependItem(inputValues) {
-    const cardItem = this._renderer(inputValues);
-    this.addItem(cardItem);
+  prependItem(item) {
+    const cardItem = this._renderer(item);
+    this._containerSelector.prepend(cardItem);
   }
 }

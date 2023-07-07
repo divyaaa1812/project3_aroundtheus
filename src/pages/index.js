@@ -110,8 +110,11 @@ function handleProfileFormSubmit(inputValues) {
 }
 
 function handleAddNewCardFormSubmit(inputValues) {
-  // adding new item to section items array
-  section.prependItem(inputValues);
+  //create a new card with input values from user
+  const card = createCard(inputValues);
+  //Attach new card to begining of container
+  section.prependItem(card);
+  //close popup after submit
   newCardPopup.closeModal();
 }
 
