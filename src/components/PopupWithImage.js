@@ -18,14 +18,6 @@ class PopupWithImage extends Popup {
     imageEl.setAttribute("src", "");
     imageEl.setAttribute("alt", "");
   }
-
-  setEventListeners() {
-    super._setEventListeners();
-  }
-
-  removeEventListeners() {
-    super._removeEventListener();
-  }
 }
 
 export default PopupWithImage;

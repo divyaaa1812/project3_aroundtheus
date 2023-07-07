@@ -32,13 +32,15 @@ class FormValidator {
   toggleInputError(inputElement) {
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement);
+      this.disableButton();
     } else {
       this._hideInputError(inputElement);
+      this._enableButton();
     }
   }
 
   // The function takes an array of form input fields
-  _hasInvalidInput(inputList) {
+  _hasInvalidInput() {
     // iterate over the array using the some() method
     return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
@@ -55,14 +57,14 @@ class FormValidator {
     this._buttonElement.removeAttribute("disabled", false);
   }
 
-  _toggleButtonState(inputList) {
-    // If there is at least one invalid input
-    if (this._hasInvalidInput(this._inputList)) {
-      this.disableButton();
-    } else {
-      this._enableButton();
-    }
-  }
+  // _toggleButtonState() {
+  //   // If there is at least one invalid input
+  //   if (this._hasInvalidInput(this._inputList)) {
+  //     this.disableButton();
+  //   } else {
+  //     this._enableButton();
+  //   }
+  // }
 
   _setEventListeners() {
     // Find all the form fields and make an array of them

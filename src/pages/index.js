@@ -74,6 +74,15 @@ const cardImagePopup = new PopupWithImage(
   "#preview-image-modal",
   ".modal-preview-image"
 );
+//instantiate FormValidator class
+const addNewCardFormValidator = new FormValidator(
+  settings,
+  addNewCardModalFormElement
+);
+const editProfileFormValidator = new FormValidator(
+  settings,
+  editProfileModalFormElement
+);
 
 // To render initial cards declared above in cardData array
 const section = new Section(
@@ -83,6 +92,7 @@ const section = new Section(
 section.renderItems();
 
 function handleOpenEditProfileForm() {
+  editProfileFormValidator.disableButton();
   addProfilePopup.openModal();
   const { name, subtitle } = userInfo.getUserInfo();
   profileTitleInputField.value = name;
@@ -90,22 +100,19 @@ function handleOpenEditProfileForm() {
 }
 
 function handleAddNewCardButton() {
+  addNewCardFormValidator.disableButton();
   newCardPopup.openModal();
 }
 
 function handleProfileFormSubmit(inputValues) {
   userInfo.setUserInfo(inputValues);
   addProfilePopup.closeModal();
-  editProfileFormValidator.disableButton();
 }
 
 function handleAddNewCardFormSubmit(inputValues) {
   // adding new item to section items array
-  section._items.push(inputValues);
-  // re-render section items
-  section.renderItems();
+  section.prependItem(inputValues);
   newCardPopup.closeModal();
-  addNewCardFormValidator.disableButton();
 }
 
 function onCardClick(card) {
@@ -125,15 +132,6 @@ function createCard(item) {
 editProfileButton.addEventListener("click", handleOpenEditProfileForm);
 addNewCardButton.addEventListener("click", handleAddNewCardButton);
 
-//instantiate FormValidator class
-const addNewCardFormValidator = new FormValidator(
-  settings,
-  addNewCardModalFormElement
-);
-const editProfileFormValidator = new FormValidator(
-  settings,
-  editProfileModalFormElement
-);
 //start form validations
 editProfileFormValidator.enableValidation();
 addNewCardFormValidator.enableValidation();

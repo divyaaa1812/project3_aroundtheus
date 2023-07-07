@@ -19,4 +19,9 @@ export default class Section {
       this.addItem(cardItem);
     });
   }
+
+  prependItem(inputValues) {
+    const cardItem = this._renderer(inputValues);
+    this.addItem(cardItem);
+  }
 }

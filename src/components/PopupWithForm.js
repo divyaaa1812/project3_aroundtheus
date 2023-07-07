@@ -11,8 +11,8 @@ export default class PopupWithForm extends Popup {
     const inputFields = Array.from(
       this._popupForm.querySelectorAll(".modal__text-input")
     );
-    let result = {};
-    for (let field of inputFields) {
+    const result = {};
+    for (const field of inputFields) {
       result[field["name"]] = field["value"];
     }
     return result;
@@ -27,12 +27,12 @@ export default class PopupWithForm extends Popup {
     this._handleFormSubmit(this._getInputValues());
   }
 
-  removeEventListeners() {
+  _removeEventListeners() {
     super._removeEventListeners();
     this._popupForm.removeEventListener("submit", this.handleSubmit);
   }
 
-  setEventListeners() {
+  _setEventListeners() {
     super._setEventListeners();
     this._popupForm.addEventListener("submit", this.handleSubmit);
   }
