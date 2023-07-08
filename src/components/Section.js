@@ -1,15 +1,15 @@
 import Card from "../components/Card.js";
 
 export default class Section {
-  constructor({ items, renderer }, containerSelector) {
+  constructor({ items, renderer }, container) {
     this._items = items;
     this._renderer = renderer;
-    this._containerSelector = containerSelector;
+    this._container = container;
   }
 
   //takes a DOM element and add it to container
   appendItem(element) {
-    this._containerSelector.append(element);
+    this._container.append(element);
   }
 
   //render all card elements
@@ -20,8 +20,7 @@ export default class Section {
     });
   }
 
-  prependItem(item) {
-    const cardItem = this._renderer(item);
-    this._containerSelector.prepend(cardItem);
+  prependItem(element) {
+    this._container.prepend(element);
   }
 }
