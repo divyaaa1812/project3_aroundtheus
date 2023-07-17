@@ -68,3 +68,7 @@
   cursor: pointer;
   opacity: 0.5;
 }
+
+.card__del-button-hidden {
+  display: none;
+}

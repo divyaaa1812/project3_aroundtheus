@@ -1,19 +1,71 @@
+import Api from "../components/Api.js";
+const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/cohort-3-en",
+  headers: {
+    authorization: "b685d3e0-616a-4dae-bc5b-53892a4f7953",
+    "Content-Type": "application/json",
+  },
+});
 export default class Card {
-  constructor(cardData, cardSelector, handleCardClick) {
+  constructor(cardData, cardSelector, handleCardClick, handleCardDeleteClick) {
     this._cardData = cardData;
+    this._id = cardData._id;
     this._name = cardData.name;
     this._link = cardData.link;
+    this._owner = cardData.owner._id;
+    this._cardId = cardData._id;
+    this._likes = cardData.likes;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._handleCardDeleteClick = handleCardDeleteClick;
   }
 
-  _handleFavIcon = () => {
-    this._favIconElement.classList.toggle("card__fav-icon-selected");
+  _handleFavIconClick = () => {
+    //variable to register if current user liked the image or not
+    const currentUserLike = this._likes.find((user) => {
+      return user._id === "f50447686616d1fa985ca0e1";
+    });
+    const didCurrentUserLikeThisCard = currentUserLike ? true : false;
+    if (didCurrentUserLikeThisCard) {
+      // 1. remove current user from this._likes array
+      // 2. Make a call to network to remove the users like for this card
+      api.unLikeACard(this._cardId).then((data) => {
+        // 3. Update the state of the like button, but only change change it there are no more likes in the this._likes array
+        if (data.likes.length === 0) {
+          this._favIconElement.classList.remove("card__fav-icon-selected");
+        }
+      });
+    } else {
+      // 1. add current user to this._likes array
+      // 2. Make a call to network to add the users like for this card
+      api.likeACard(this._cardId).then(() => {
+        // 3. Update te state of the like button
+        this._favIconElement.classList.toggle("card__fav-icon-selected");
+      });
+    }
   };
 
-  _handleDelButton = () => {
+  _handleCardDelete = () => {
+    const confirmCardDeleteButton = document.querySelector(
+      "#delete-confirm-popup form button"
+    );
+    confirmCardDeleteButton.removeEventListener(
+      "click",
+      this._handleCardDeleteClick
+    );
     this._cardElement.remove();
-    this._cardElement = null;
+    this._handleCardDeleteClick(this._cardId);
+  };
+
+  _handleDeleteIcon = () => {
+    // this is to handle user action - when click on trash bin icon, open a delete confirmation popup
+    const deleteCardModal = document.querySelector("#delete-confirm-popup");
+    deleteCardModal.classList.add("modal_opened");
+    // set eventlistener on the delete confirmation popup confirm button.
+    const confirmCardDeleteButton = document.querySelector(
+      "#delete-confirm-popup form button"
+    );
+    confirmCardDeleteButton.addEventListener("click", this._handleCardDelete);
   };
 
   _onCardClick = (ev) => {
@@ -21,8 +73,10 @@ export default class Card {
   };
 
   _setEventListeners() {
-    this._favIconElement.addEventListener("click", this._handleFavIcon);
-    this._deleteCardButton.addEventListener("click", this._handleDelButton);
+    this._favIconElement.addEventListener("click", this._handleFavIconClick);
+    if (this._owner === "f50447686616d1fa985ca0e1") {
+      this._deleteCardIcon.addEventListener("click", this._handleDeleteIcon);
+    }
     this._cardElement
       .querySelector(".card__image")
       .addEventListener("click", this._onCardClick);
@@ -33,9 +87,20 @@ export default class Card {
     this._cardElement = this._cardTemplate.content
       .querySelector(".card")
       .cloneNode(true);
-    this._deleteCardButton =
-      this._cardElement.querySelector(".card__del-button");
+    if (this._owner === "f50447686616d1fa985ca0e1") {
+      this._deleteCardIcon =
+        this._cardElement.querySelector(".card__del-button");
+    } else {
+      this._cardElement
+        .querySelector(".card__del-button")
+        .classList.add("card__del-button-hidden");
+    }
     this._favIconElement = this._cardElement.querySelector(".card__fav-icon");
+    if (this._likes.length > 0) {
+      this._favIconElement.classList.add("card__fav-icon-selected");
+    } else {
+      this._favIconElement.classList.add("card__fav-icon");
+    }
     this._addNewCardTitle = this._cardElement.querySelector(".card__title");
     this._addNewCardLink = this._cardElement.querySelector(".card__image");
     this._addNewCardTitle.textContent = this._name;

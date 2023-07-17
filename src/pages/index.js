@@ -45,7 +45,6 @@ export const settings = {
 
 const editProfileModalFormElement = document.querySelector("#edit-profile");
 const addNewCardModalFormElement = document.querySelector("#add-new-card");
-
 /*Declare Elements */
 const editProfileButton = document.querySelector(".js-profile-edit-button");
 const addNewCardButton = document.querySelector(".profile__add-button");
@@ -67,6 +66,10 @@ const newCardPopup = new PopupWithForm(
 const addProfilePopup = new PopupWithForm(
   "#edit-profile",
   handleProfileFormSubmit
+);
+const deleteCardPopup = new PopupWithForm(
+  "#delete-confirm-popup",
+  handleCardDeleteClick
 );
 const userInfo = new UserInfo({
   name: profileTitle,
@@ -94,37 +97,17 @@ const api = new Api({
 });
 function createCard(item) {
   // create instance of Card class
-  const card = new Card(item, "#card-template", onCardClick);
+  const card = new Card(
+    item,
+    "#card-template",
+    onCardClick,
+    handleCardDeleteClick
+  );
   //create a card by calling getCardElement method from Card class
   const cardElement = card.getCardElement();
   //return the card
   return cardElement;
 }
-//render initial items from server
-// Promise.all([api.getUserInfo(), api.getInitialCards()])
-//   .then(([userInfo, initialCard]) => {
-//     console.log(userInfo);
-//     console.log(initialCard);
-
-//     // process the result
-//     initialCard.forEach((item) => {
-//       const cardItem = createCard(item);
-//       section.appendItem(cardItem);
-//     });
-//   })
-//   .catch((err) => console.log(err));
-
-api
-  .renderData()
-  .then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Error: ${res.status}`);
-  })
-  .catch((err) => {
-    console.error(err); // log the error to the console
-  });
 
 api.getUserInfo().then((data) => {
   const name = data.name;
@@ -173,22 +156,35 @@ function handleProfileFormSubmit(inputValues) {
 }
 
 function handleAddNewCardFormSubmit(inputValues) {
-  //create a new card with input values from user
-  const card = createCard(inputValues);
-  //Attach new card to begining of container
-  section.prependItem(card);
-  //close popup after submit
-  newCardPopup.closeModal();
+  //create a new card with input values from server
+  api.addNewCard(inputValues).then((data) => {
+    const card = createCard(data);
+    //Attach new card to begining of container
+    section.prependItem(card);
+    //close popup after submit
+    newCardPopup.closeModal();
+  });
 }
 
 function onCardClick(card) {
   cardImagePopup.openModal(card);
 }
 
+function handleCardDeleteClick(cardId) {
+  // Close the delete confirmation model as soon as user click on "yes" to delete card
+  deleteCardPopup.closeModal();
+  //Delete the card
+  api.deleteCard(cardId).then((data) => {
+    console.log(data);
+    // window.location.reload(true);
+  });
+}
+
+function handleAddProfilePic() {}
+
 /* Event Listeners */
 editProfileButton.addEventListener("click", handleOpenEditProfileForm);
 addNewCardButton.addEventListener("click", handleAddNewCardButton);
-
 //start form validations
 editProfileFormValidator.enableValidation();
 addNewCardFormValidator.enableValidation();
