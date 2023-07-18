@@ -30,15 +30,14 @@ export default class Card {
       // 1. remove current user from this._likes array
       // 2. Make a call to network to remove the users like for this card
       api.unLikeACard(this._cardId).then((data) => {
-        // 3. Update the state of the like button, but only change change it there are no more likes in the this._likes array
-        if (data.likes.length === 0) {
-          this._favIconElement.classList.remove("card__fav-icon-selected");
-        }
+        this._favCountElement.textContent = data.likes.length;
+        this._favIconElement.classList.remove("card__fav-icon-selected");
       });
     } else {
       // 1. add current user to this._likes array
       // 2. Make a call to network to add the users like for this card
-      api.likeACard(this._cardId).then(() => {
+      api.likeACard(this._cardId).then((data) => {
+        this._favCountElement.textContent = data.likes.length;
         // 3. Update te state of the like button
         this._favIconElement.classList.toggle("card__fav-icon-selected");
       });
@@ -87,6 +86,8 @@ export default class Card {
     this._cardElement = this._cardTemplate.content
       .querySelector(".card")
       .cloneNode(true);
+    this._favCountElement = this._cardElement.querySelector(".card__fav_count");
+    this._favCountElement.textContent = this._likes.length;
     if (this._owner === "f50447686616d1fa985ca0e1") {
       this._deleteCardIcon =
         this._cardElement.querySelector(".card__del-button");

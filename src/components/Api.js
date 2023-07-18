@@ -194,6 +194,7 @@ export default class Api {
       this.deleteCard,
       this.likeACard,
       this.unLikeACard,
+      this.updateProfilePic,
     ];
     return Promise.all(promises);
   }
