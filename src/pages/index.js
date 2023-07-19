@@ -195,7 +195,6 @@ function handleCardDeleteClick(cardId) {
 }
 
 function handleAvatarEditButton() {
-  debugger;
   avatarChangePopup.openModal();
   editAvatarFormValidator.disableButton();
 }
@@ -203,8 +202,6 @@ function handleAvatarEditButton() {
 function handleAvatarSaveButton() {
   avatarChangePopup.closeModal();
 }
-
-function handleAddProfilePic() {}
 
 /* Event Listeners */
 editProfileButton.addEventListener("click", handleOpenEditProfileForm);
