@@ -58,7 +58,7 @@ const profileTitleInputField = document.querySelector("#profile-title-input");
 const profileSubtitleInputField = document.querySelector(
   "#profile-subtitle-input"
 );
-const avatarEditButton = document.querySelector(".profile__edit-pic-button");
+const avatarEditButton = document.querySelector(".profile__avatar-edit-button");
 const avatarFormSaveButton = document.querySelector("#avatar-save-button");
 
 const newCardPopup = new PopupWithForm(
@@ -74,7 +74,7 @@ const deleteCardPopup = new PopupWithForm(
   handleCardDeleteClick
 );
 const avatarChangePopup = new PopupWithForm(
-  "change-avatar-popup",
+  "#avatar-edit-modal",
   handleAvatarSaveButton
 );
 
@@ -199,7 +199,8 @@ function handleAddProfilePic() {}
 /* Event Listeners */
 editProfileButton.addEventListener("click", handleOpenEditProfileForm);
 addNewCardButton.addEventListener("click", handleAddNewCardButton);
-avatarEditButton.addEventListener("Click", handleAvatarEditButton);
+console.log(avatarEditButton);
+avatarEditButton.addEventListener("click", handleAvatarEditButton);
 avatarFormSaveButton.addEventListener("click", handleAvatarSaveButton);
 //start form validations
 editProfileFormValidator.enableValidation();

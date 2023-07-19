@@ -37,16 +37,20 @@
   opacity: 0.5;
 }
 
-.profile__image-container:hover .profile__edit-pic-button {
+.profile__image-container:hover .profile__avatar-edit-button {
   display: inline-block;
 }
 
-.profile__edit-pic-button {
-  /* background: transparent url(../images/editbutton.svg) center no-repeat; */
+.profile__avatar-edit-button {
+  background: transparent url(../images/avatar-edit.svg) center no-repeat;
   position: absolute;
   left: 40%;
   top: 40%;
   display: none;
+  width: 26px;
+  height: 26px;
+  border: none;
+  cursor: pointer;
 }
 
 .profile__edit-button {

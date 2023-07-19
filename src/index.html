@@ -29,10 +29,10 @@
                 alt="avatar"
                 class="profile__image"
               />
-              <!-- <button type="button"></button> -->
-              <div class="profile__edit-pic-button">
-                <img src="<%=require('./images/edit-avatar.png')%>" />
-              </div>
+              <button
+                class="profile__avatar-edit-button"
+                type="button"
+              ></button>
             </div>
             <div class="profile__info">
               <h1 class="profile__title"></h1>
@@ -203,13 +203,13 @@
             </form>
           </div>
         </div>
-        <div class="modal js-modal" id="change-avatar-popup">
+        <div class="modal js-modal" id="avatar-edit-modal">
           <div class="modal__content page__container">
             <button class="modal__close-button" type="button"></button>
             <form class="modal__form-content" id="change-avatar-form-content">
               <h2 class="modal__title">Change profile picture</h2>
               <input
-                type="text"
+                type="url"
                 name="link"
                 class="modal__text-input"
                 id="avatar-link-input"
