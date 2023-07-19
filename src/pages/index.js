@@ -45,6 +45,8 @@ export const settings = {
 
 const editProfileModalFormElement = document.querySelector("#edit-profile");
 const addNewCardModalFormElement = document.querySelector("#add-new-card");
+const editAvatarModalFormElement = document.querySelector("#avatar-edit-modal");
+
 /*Declare Elements */
 const editProfileButton = document.querySelector(".js-profile-edit-button");
 const addNewCardButton = document.querySelector(".profile__add-button");
@@ -94,6 +96,10 @@ const addNewCardFormValidator = new FormValidator(
 const editProfileFormValidator = new FormValidator(
   settings,
   editProfileModalFormElement
+);
+const editAvatarFormValidator = new FormValidator(
+  settings,
+  editAvatarModalFormElement
 );
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/cohort-3-en",
@@ -151,6 +157,8 @@ function handleOpenEditProfileForm() {
 }
 
 function handleAddNewCardButton() {
+  debugger;
+  console.log(addNewCardFormValidator);
   addNewCardFormValidator.disableButton();
   newCardPopup.openModal();
 }
@@ -187,7 +195,9 @@ function handleCardDeleteClick(cardId) {
 }
 
 function handleAvatarEditButton() {
+  debugger;
   avatarChangePopup.openModal();
+  editAvatarFormValidator.disableButton();
 }
 
 function handleAvatarSaveButton() {
@@ -199,9 +209,9 @@ function handleAddProfilePic() {}
 /* Event Listeners */
 editProfileButton.addEventListener("click", handleOpenEditProfileForm);
 addNewCardButton.addEventListener("click", handleAddNewCardButton);
-console.log(avatarEditButton);
 avatarEditButton.addEventListener("click", handleAvatarEditButton);
 avatarFormSaveButton.addEventListener("click", handleAvatarSaveButton);
 //start form validations
 editProfileFormValidator.enableValidation();
 addNewCardFormValidator.enableValidation();
+editAvatarFormValidator.enableValidation();
