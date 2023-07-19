@@ -61,7 +61,6 @@ export default class Card {
   };
 
   _handleDeleteIcon = () => {
-    const popup = new Popup("#delete-confirm-popup");
     // this is to handle user action - when click on trash bin icon, open a delete confirmation popup
     const deleteCardModal = document.querySelector("#delete-confirm-popup");
     deleteCardModal.classList.add("modal_opened");
