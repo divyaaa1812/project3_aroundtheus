@@ -34,11 +34,10 @@ export default class Card {
         this._favIconElement.classList.remove("card__fav-icon-selected");
       });
     } else {
-      // 1. add current user to this._likes array
-      // 2. Make a call to network to add the users like for this card
+      // 1. Make a call to network to add the users like for this card
       api.likeACard(this._cardId).then((data) => {
         this._favCountElement.textContent = data.likes.length;
-        // 3. Update te state of the like button
+        // 2. Update te state of the like button
         this._favIconElement.classList.toggle("card__fav-icon-selected");
       });
     }
@@ -62,6 +61,7 @@ export default class Card {
   };
 
   _handleDeleteIcon = () => {
+    const popup = new Popup("#delete-confirm-popup");
     // this is to handle user action - when click on trash bin icon, open a delete confirmation popup
     const deleteCardModal = document.querySelector("#delete-confirm-popup");
     deleteCardModal.classList.add("modal_opened");
