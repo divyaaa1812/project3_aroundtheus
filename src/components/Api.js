@@ -91,7 +91,6 @@ export default class Api {
   }
 
   deleteCard(cardId) {
-    console.log(cardId);
     return fetch(
       `https://around.nomoreparties.co/v1/cohort-3-en/cards/${cardId}`,
       {

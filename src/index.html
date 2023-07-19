@@ -23,11 +23,17 @@
         </header>
         <main class="content">
           <section class="profile page__container">
-            <img
-              src="<%=require('./images/profile-pic.png')%>"
-              alt="avatar"
-              class="profile__image"
-            />
+            <div class="profile__image-container">
+              <img
+                src="<%=require('./images/profile-pic.png')%>"
+                alt="avatar"
+                class="profile__image"
+              />
+              <!-- <button type="button"></button> -->
+              <div class="profile__edit-pic-button">
+                <img src="<%=require('./images/edit-avatar.png')%>" />
+              </div>
+            </div>
             <div class="profile__info">
               <h1 class="profile__title"></h1>
               <button
@@ -191,9 +197,31 @@
         <div class="modal js-modal" id="delete-confirm-popup">
           <div class="modal__content page__container">
             <button class="modal__close-button" type="button"></button>
-            <form class="modal__form-content" id="delete-card-confirm-form">
+            <form class="modal__form-content" id="delete-card-form-content">
               <h2 class="modal__title">Are you sure?</h2>
               <button class="modal__button" type="button">Yes</button>
+            </form>
+          </div>
+        </div>
+        <div class="modal js-modal" id="change-avatar-popup">
+          <div class="modal__content page__container">
+            <button class="modal__close-button" type="button"></button>
+            <form class="modal__form-content" id="change-avatar-form-content">
+              <h2 class="modal__title">Change profile picture</h2>
+              <input
+                type="text"
+                name="link"
+                class="modal__text-input"
+                id="avatar-link-input"
+                required
+              />
+              <button
+                class="modal__button"
+                id="avatar-save-button"
+                type="submit"
+              >
+                Save
+              </button>
             </form>
           </div>
         </div>

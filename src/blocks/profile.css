@@ -25,6 +25,30 @@
   font-weight: 500;
 }
 
+.profile__image-container {
+  position: relative;
+}
+
+.profile__image:hover {
+  opacity: 0.5;
+}
+
+.profile__image-container:hover .profile__image {
+  opacity: 0.5;
+}
+
+.profile__image-container:hover .profile__edit-pic-button {
+  display: inline-block;
+}
+
+.profile__edit-pic-button {
+  /* background: transparent url(../images/editbutton.svg) center no-repeat; */
+  position: absolute;
+  left: 40%;
+  top: 40%;
+  display: none;
+}
+
 .profile__edit-button {
   background: transparent url(../images/editbutton.svg) center no-repeat;
   padding: 0;

@@ -58,6 +58,8 @@ const profileTitleInputField = document.querySelector("#profile-title-input");
 const profileSubtitleInputField = document.querySelector(
   "#profile-subtitle-input"
 );
+const avatarEditButton = document.querySelector(".profile__edit-pic-button");
+const avatarFormSaveButton = document.querySelector("#avatar-save-button");
 
 const newCardPopup = new PopupWithForm(
   "#add-new-card",
@@ -71,6 +73,11 @@ const deleteCardPopup = new PopupWithForm(
   "#delete-confirm-popup",
   handleCardDeleteClick
 );
+const avatarChangePopup = new PopupWithForm(
+  "change-avatar-popup",
+  handleAvatarSaveButton
+);
+
 const userInfo = new UserInfo({
   name: profileTitle,
   subtitle: profileSubtitle,
@@ -176,8 +183,15 @@ function handleCardDeleteClick(cardId) {
   //Delete the card
   api.deleteCard(cardId).then((data) => {
     console.log(data);
-    // window.location.reload(true);
   });
+}
+
+function handleAvatarEditButton() {
+  avatarChangePopup.openModal();
+}
+
+function handleAvatarSaveButton() {
+  avatarChangePopup.closeModal();
 }
 
 function handleAddProfilePic() {}
@@ -185,6 +199,8 @@ function handleAddProfilePic() {}
 /* Event Listeners */
 editProfileButton.addEventListener("click", handleOpenEditProfileForm);
 addNewCardButton.addEventListener("click", handleAddNewCardButton);
+avatarEditButton.addEventListener("Click", handleAvatarEditButton);
+avatarFormSaveButton.addEventListener("click", handleAvatarSaveButton);
 //start form validations
 editProfileFormValidator.enableValidation();
 addNewCardFormValidator.enableValidation();

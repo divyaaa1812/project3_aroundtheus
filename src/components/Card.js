@@ -44,6 +44,11 @@ export default class Card {
     }
   };
 
+  _deleteCard = () => {
+    this._cardElement.remove();
+    this._cardElement = "";
+  };
+
   _handleCardDelete = () => {
     const confirmCardDeleteButton = document.querySelector(
       "#delete-confirm-popup form button"
@@ -52,8 +57,8 @@ export default class Card {
       "click",
       this._handleCardDeleteClick
     );
-    this._cardElement.remove();
     this._handleCardDeleteClick(this._cardId);
+    this._deleteCard();
   };
 
   _handleDeleteIcon = () => {
@@ -73,9 +78,6 @@ export default class Card {
 
   _setEventListeners() {
     this._favIconElement.addEventListener("click", this._handleFavIconClick);
-    if (this._owner === "f50447686616d1fa985ca0e1") {
-      this._deleteCardIcon.addEventListener("click", this._handleDeleteIcon);
-    }
     this._cardElement
       .querySelector(".card__image")
       .addEventListener("click", this._onCardClick);
@@ -91,6 +93,7 @@ export default class Card {
     if (this._owner === "f50447686616d1fa985ca0e1") {
       this._deleteCardIcon =
         this._cardElement.querySelector(".card__del-button");
+      this._deleteCardIcon.addEventListener("click", this._handleDeleteIcon);
     } else {
       this._cardElement
         .querySelector(".card__del-button")
