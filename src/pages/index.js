@@ -207,9 +207,8 @@ function handleAvatarEditButton() {
 }
 
 function handleAvatarSaveButton(inputValues) {
-  debugger;
   api.editAvatarLink(inputValues).then((data) => {
-    userInfo.setNewAvatar(data.avatar);
+    profileAvatar.onload = userInfo.setNewAvatar(data.avatar);
   });
   avatarEditPopup.closeModal();
 }

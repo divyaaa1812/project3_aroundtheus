@@ -21,8 +21,6 @@ export default class UserInfo {
 
   //this meth to set avatar image
   setNewAvatar(data) {
-    console.log(data);
     this._link.setAttribute("src", `${data}`);
-    console.log(this._link);
   }
 }
