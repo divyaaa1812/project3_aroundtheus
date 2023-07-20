@@ -34,6 +34,7 @@ const profileSubtitleInputField = document.querySelector(
   "#profile-subtitle-input"
 );
 const avatarEditButton = document.querySelector(".profile__avatar-edit-button");
+const avatarSaveButton = document.querySelector("#avatar-save-button");
 
 const newCardPopup = new PopupWithForm(
   "#add-new-card",
@@ -185,9 +186,15 @@ function handleAvatarEditButton() {
 }
 
 function handleAvatarSaveButton(inputValues) {
-  api.editAvatarLink(inputValues).then((data) => {
-    profileAvatar.onload = userInfo.setNewAvatar(data.avatar);
-  });
+  avatarSaveButton.textContent = "Saving...";
+  api
+    .editAvatarLink(inputValues)
+    .then((data) => {
+      profileAvatar.onload = userInfo.setNewAvatar(data.avatar);
+    })
+    .finally(() => {
+      avatarSaveButton.textContent = "Save";
+    });
   avatarEditPopup.closeModal();
 }
 
