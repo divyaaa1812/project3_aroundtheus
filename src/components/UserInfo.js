@@ -1,7 +1,8 @@
 export default class UserInfo {
-  constructor({ name, subtitle }) {
+  constructor({ name, subtitle, link }) {
     this._name = name;
     this._subtitle = subtitle;
+    this._link = link; //profile picture image element to set new value
   }
 
   //method to dispaly user  name and title when form opens up
@@ -16,5 +17,12 @@ export default class UserInfo {
   setUserInfo({ name, subtitle }) {
     this._name.textContent = name;
     this._subtitle.textContent = subtitle;
+  }
+
+  //this meth to set avatar image
+  setNewAvatar(data) {
+    console.log(data);
+    this._link.setAttribute("src", `${data}`);
+    console.log(this._link);
   }
 }

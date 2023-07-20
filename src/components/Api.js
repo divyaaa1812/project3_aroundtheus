@@ -34,7 +34,8 @@ export default class Api {
       .then((data) => {
         const name = data.name;
         const subtitle = data.about;
-        return { name, subtitle };
+        const avatar = data.avatar;
+        return { name, subtitle, avatar };
       });
   }
 
@@ -55,12 +56,6 @@ export default class Api {
           return res.json();
         }
         return Promise.reject(`Error: ${res.status}`);
-      })
-      .then((data) => {
-        // process the result
-        const name = data.name;
-        const subtitle = data.about;
-        return { name, subtitle };
       })
       .catch((err) => {
         console.error(err); // log the error to the console
@@ -121,9 +116,6 @@ export default class Api {
           authorization: "b685d3e0-616a-4dae-bc5b-53892a4f7953",
           "Content-Type": "application/json",
         },
-        // body: JSON.stringify({
-        //   likes: values,
-        // }),
       }
     )
       .then((res) => {
@@ -159,9 +151,9 @@ export default class Api {
       });
   }
 
-  updateProfilePic(values) {
+  editAvatarLink(inputValues) {
     return fetch(
-      `PATCH https://around.nomoreparties.co/v1/cohort-3-en/users/me/avatar`,
+      `https://around.nomoreparties.co/v1/cohort-3-en/users/me/avatar`,
       {
         method: "PATCH",
         headers: {
@@ -169,7 +161,7 @@ export default class Api {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          avatar: values.avatar,
+          avatar: inputValues.link,
         }),
       }
     )
@@ -193,7 +185,7 @@ export default class Api {
       this.deleteCard,
       this.likeACard,
       this.unLikeACard,
-      this.updateProfilePic,
+      this.editAvatarLink,
     ];
     return Promise.all(promises);
   }
