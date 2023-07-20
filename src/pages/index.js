@@ -63,9 +63,6 @@ const profileSubtitleInputField = document.querySelector(
 const avatarEditButton = document.querySelector(".profile__avatar-edit-button");
 const avatarFormSaveButton = document.querySelector("#avatar-save-button");
 
-const spinner = document.querySelector(".spinner");
-const content = document.querySelector(".content");
-
 const newCardPopup = new PopupWithForm(
   "#add-new-card",
   handleAddNewCardFormSubmit
@@ -129,7 +126,9 @@ function createCard(item) {
 api.getUserInfo().then((data) => {
   const name = data.name;
   const subtitle = data.subtitle;
+  const url = data.avatar;
   userInfo.setUserInfo({ name, subtitle });
+  userInfo.setNewAvatar(url);
 });
 
 api
@@ -166,13 +165,20 @@ function handleAddNewCardButton() {
 }
 
 function handleProfileFormSubmit(inputValues) {
-  api.editUserInfo(inputValues).then((data) => {
-    // process the result
-    console.log(data);
-    const name = data.name;
-    const subtitle = data.about;
-    return { name, subtitle };
-  });
+  document.querySelector(settings.submitButtonSelector).textContent =
+    "Saving...";
+  api
+    .editUserInfo(inputValues)
+    .then((data) => {
+      // process the result
+      const name = data.name;
+      const subtitle = data.about;
+      return { name, subtitle };
+    })
+    .finally(() => {
+      document.querySelector(settings.submitButtonSelector).textContent =
+        "Save";
+    });
   userInfo.setUserInfo(inputValues);
   addProfilePopup.closeModal();
 }
@@ -211,16 +217,6 @@ function handleAvatarSaveButton(inputValues) {
     profileAvatar.onload = userInfo.setNewAvatar(data.avatar);
   });
   avatarEditPopup.closeModal();
-}
-
-function renderLoading(isLoading) {
-  if (isLoading) {
-    spinner.classList.add("spinner_visible");
-    content.classList.add("content_hidden");
-  } else {
-    spinner.classList.remove("spinner_visible");
-    content.classList.remove("content_hidden");
-  }
 }
 
 /* Event Listeners */
