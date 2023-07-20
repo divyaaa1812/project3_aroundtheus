@@ -61,8 +61,6 @@ const profileSubtitleInputField = document.querySelector(
   "#profile-subtitle-input"
 );
 const avatarEditButton = document.querySelector(".profile__avatar-edit-button");
-const avatarFormSaveButton = document.querySelector("#avatar-save-button");
-
 const newCardPopup = new PopupWithForm(
   "#add-new-card",
   handleAddNewCardFormSubmit
