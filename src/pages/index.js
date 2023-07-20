@@ -125,7 +125,7 @@ function createCard(item) {
 
 api.getUserInfo().then((data) => {
   const name = data.name;
-  const subtitle = data.subtitle;
+  const subtitle = data.about;
   const url = data.avatar;
   userInfo.setUserInfo({ name, subtitle });
   userInfo.setNewAvatar(url);
@@ -154,7 +154,7 @@ function handleOpenEditProfileForm() {
   api.getUserInfo().then((result) => {
     // process the result
     profileTitleInputField.value = result.name;
-    profileSubtitleInputField.value = result.subtitle;
+    profileSubtitleInputField.value = result.about;
   });
   addProfilePopup.openModal();
 }

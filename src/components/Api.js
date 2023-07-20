@@ -24,19 +24,12 @@ export default class Api {
       headers: {
         authorization: "b685d3e0-616a-4dae-bc5b-53892a4f7953",
       },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Error: ${res.status}`);
-      })
-      .then((data) => {
-        const name = data.name;
-        const subtitle = data.about;
-        const avatar = data.avatar;
-        return { name, subtitle, avatar };
-      });
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
   }
 
   editUserInfo(values) {
