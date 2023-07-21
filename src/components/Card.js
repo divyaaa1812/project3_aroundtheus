@@ -23,22 +23,27 @@ export default class Card {
   }
 
   _handleFavIconClick = () => {
+    debugger;
     //variable to register if current user liked the image or not
     const currentUserLike = this._likes.find((user) => {
       return user._id === "f50447686616d1fa985ca0e1";
     });
-    const didCurrentUserLikeThisCard = currentUserLike ? true : false;
+    let didCurrentUserLikeThisCard = currentUserLike ? true : false;
+    console.log(didCurrentUserLikeThisCard);
     if (didCurrentUserLikeThisCard) {
-      // 1. remove current user from this._likes array
-      // 2. Make a call to network to remove the users like for this card
+      // 1. Make a call to network to remove the users like for this card
       api.unLikeACard(this._cardId).then((data) => {
-        this._favCountElement.textContent = data.likes.length;
+        console.log(data);
+        this._likes = data.likes;
+        this._favCountElement.textContent = this._likes.length;
         this._favIconElement.classList.remove("card__fav-icon-selected");
       });
     } else {
       // 1. Make a call to network to add the users like for this card
       api.likeACard(this._cardId).then((data) => {
-        this._favCountElement.textContent = data.likes.length;
+        console.log(data);
+        this._likes = data.likes;
+        this._favCountElement.textContent = this._likes.length;
         // 2. Update te state of the like button
         this._favIconElement.classList.toggle("card__fav-icon-selected");
       });
@@ -89,8 +94,6 @@ export default class Card {
     this._cardElement = this._cardTemplate.content
       .querySelector(".card")
       .cloneNode(true);
-    this._favCountElement = this._cardElement.querySelector(".card__fav_count");
-    this._favCountElement.textContent = this._likes.length;
     if (this._owner === "f50447686616d1fa985ca0e1") {
       this._deleteCardIcon =
         this._cardElement.querySelector(".card__del-button");
@@ -104,11 +107,16 @@ export default class Card {
         .classList.add("card__del-button-hidden");
     }
     this._favIconElement = this._cardElement.querySelector(".card__fav-icon");
-    if (this._likes.length > 0) {
+    if (
+      this._likes.length > 0 &&
+      this._likes._id === "f50447686616d1fa985ca0e1"
+    ) {
       this._favIconElement.classList.add("card__fav-icon-selected");
     } else {
       this._favIconElement.classList.add("card__fav-icon");
     }
+    this._favCountElement = this._cardElement.querySelector(".card__fav_count");
+    this._favCountElement.textContent = this._likes.length;
     this._addNewCardTitle = this._cardElement.querySelector(".card__title");
     this._addNewCardLink = this._cardElement.querySelector(".card__image");
     this._addNewCardTitle.textContent = this._name;

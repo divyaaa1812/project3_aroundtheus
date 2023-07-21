@@ -102,7 +102,7 @@ export default class Api {
 
   likeACard(cardId) {
     return fetch(
-      `https://around.nomoreparties.co/v1/cohort-3-en/cards/likes/${cardId}`,
+      `https://around.nomoreparties.co/v1/cohort-3-en/cards/${cardId}/likes`,
       {
         method: "PUT",
         headers: {
@@ -124,7 +124,7 @@ export default class Api {
 
   unLikeACard(cardId) {
     return fetch(
-      `https://around.nomoreparties.co/v1/cohort-3-en/cards/likes/${cardId}`,
+      `https://around.nomoreparties.co/v1/cohort-3-en/cards/${cardId}/likes`,
       {
         method: "DELETE",
         headers: {

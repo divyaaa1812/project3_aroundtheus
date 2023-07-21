@@ -38,7 +38,6 @@
 }
 
 .card__fav-icon {
-  margin-right: 20px;
   background: transparent url(../images/fav-icon.svg) center no-repeat;
   width: 21px;
   height: 18px;
@@ -48,6 +47,8 @@
 .card__fav-labels {
   display: flex;
   flex-direction: column;
+  margin-right: 20px;
+  align-items: center;
 }
 
 .card__fav-icon:hover {
