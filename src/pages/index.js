@@ -35,6 +35,7 @@ const profileSubtitleInputField = document.querySelector(
 );
 const avatarEditButton = document.querySelector(".profile__avatar-edit-button");
 const avatarSaveButton = document.querySelector("#avatar-save-button");
+const caption = document.querySelector(".modal__image-caption");
 
 const newCardPopup = new PopupWithForm(
   "#add-new-card",
@@ -161,6 +162,7 @@ function handleAddNewCardFormSubmit(inputValues) {
 
 function onCardClick(card) {
   cardImagePopup.openModal(card);
+  caption.textContent = card.name;
 }
 
 function handleAvatarEditButton() {

@@ -39,9 +39,9 @@ export default class Card {
       // 1. Make a call to network to add the users like for this card
       api.likeACard(this._cardId).then((data) => {
         this._likes = data.likes;
+        // 2. Update te state of the like button
         this._favIconElement.classList.toggle("card__fav-icon-selected");
         this._favCountElement.textContent = this._likes.length;
-        // 2. Update te state of the like button
       });
     }
   };
@@ -76,6 +76,7 @@ export default class Card {
 
   _onCardClick = (ev) => {
     this._handleCardClick(this._cardData);
+    console.log(this._cardData);
   };
 
   _setEventListeners() {
