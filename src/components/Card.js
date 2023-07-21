@@ -31,19 +31,17 @@ export default class Card {
     if (didCurrentUserLikeThisCard) {
       // 1. Make a call to network to remove the users like for this card
       api.unLikeACard(this._cardId).then((data) => {
-        console.log(data);
         this._likes = data.likes;
-        this._favCountElement.textContent = this._likes.length;
         this._favIconElement.classList.remove("card__fav-icon-selected");
+        this._favCountElement.textContent = this._likes.length;
       });
     } else {
       // 1. Make a call to network to add the users like for this card
       api.likeACard(this._cardId).then((data) => {
-        console.log(data);
         this._likes = data.likes;
+        this._favIconElement.classList.toggle("card__fav-icon-selected");
         this._favCountElement.textContent = this._likes.length;
         // 2. Update te state of the like button
-        this._favIconElement.classList.toggle("card__fav-icon-selected");
       });
     }
   };
@@ -105,10 +103,7 @@ export default class Card {
         .classList.add("card__del-button-hidden");
     }
     this._favIconElement = this._cardElement.querySelector(".card__fav-icon");
-    if (
-      this._likes.length > 0 &&
-      this._likes._id === "f50447686616d1fa985ca0e1"
-    ) {
+    if (this._likes.length > 0 && this._likes === "f50447686616d1fa985ca0e1") {
       this._favIconElement.classList.add("card__fav-icon-selected");
     } else {
       this._favIconElement.classList.add("card__fav-icon");
