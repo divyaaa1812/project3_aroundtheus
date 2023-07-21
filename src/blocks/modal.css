@@ -121,6 +121,11 @@
   opacity: 0.2;
 }
 
+.modal__image-caption {
+  font-size: 10px;
+  font-family: "Inter", sans-serif;
+}
+
 @media screen and (max-width: 500px) {
   .modal__content {
     max-width: 282px;
