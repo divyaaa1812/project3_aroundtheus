@@ -57,30 +57,6 @@ export default class Card {
     );
   };
 
-  // _handleCardDelete = () => {
-  //   debugger;
-  //   this._handleCardDeleteClick(this._cardId);
-
-  //   const confirmCardDeleteButton = document.querySelector(
-  //     "#delete-confirm-popup form button"
-  //   );
-  //   confirmCardDeleteButton.removeEventListener(
-  //     "click",
-  //     this._handleCardDeleteClick
-  //   );
-  // };
-
-  // _handleDeleteIcon = () => {
-  //   // this is to handle user action - when click on trash bin icon, open a delete confirmation popup
-  //   const deleteCardModal = document.querySelector("#delete-confirm-popup");
-  //   deleteCardModal.classList.add("modal_opened");
-  //   // set eventlistener on the delete confirmation popup confirm button.
-  //   const confirmCardDeleteButton = document.querySelector(
-  //     "#delete-confirm-popup form button"
-  //   );
-  //   confirmCardDeleteButton.addEventListener("click", this._handleCardDelete);
-  // };
-
   _handleDeleteCardFormSubmit = () => {
     const deleteCardPopup = new PopupWithForm(
       "#delete-image-confirm-modal",
