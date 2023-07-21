@@ -1,4 +1,5 @@
 import Api from "../components/Api.js";
+import PopupWithForm from "./PopupWithForm.js";
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/cohort-3-en",
   headers: {
@@ -6,8 +7,10 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
+const deleteCardYesButton = document.querySelector("#delete-confirm-button");
+
 export default class Card {
-  constructor(cardData, cardSelector, handleCardClick, handleCardDeleteClick) {
+  constructor(cardData, cardSelector, handleCardClick) {
     this._cardData = cardData;
     this._id = cardData._id;
     this._name = cardData.name;
@@ -17,7 +20,6 @@ export default class Card {
     this._likes = cardData.likes;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
-    this._handleCardDeleteClick = handleCardDeleteClick;
   }
 
   _handleFavIconClick = () => {
@@ -43,32 +45,56 @@ export default class Card {
     }
   };
 
-  _deleteCard = () => {
-    this._cardElement.remove();
-    this._cardElement = "";
-  };
-
-  _handleCardDelete = () => {
-    const confirmCardDeleteButton = document.querySelector(
-      "#delete-confirm-popup form button"
+  _handleCardDeleteButton = () => {
+    const deleteCardPopup = new PopupWithForm(
+      "#delete-image-confirm-modal",
+      this._handleDeleteCardFormSubmit
     );
-    confirmCardDeleteButton.removeEventListener(
+    deleteCardPopup.openModal();
+    deleteCardYesButton.addEventListener(
       "click",
-      this._handleCardDeleteClick
+      this._handleDeleteCardFormSubmit
     );
-    this._handleCardDeleteClick(this._cardId);
-    this._deleteCard();
   };
 
-  _handleDeleteIcon = () => {
-    // this is to handle user action - when click on trash bin icon, open a delete confirmation popup
-    const deleteCardModal = document.querySelector("#delete-confirm-popup");
-    deleteCardModal.classList.add("modal_opened");
-    // set eventlistener on the delete confirmation popup confirm button.
-    const confirmCardDeleteButton = document.querySelector(
-      "#delete-confirm-popup form button"
+  // _handleCardDelete = () => {
+  //   debugger;
+  //   this._handleCardDeleteClick(this._cardId);
+
+  //   const confirmCardDeleteButton = document.querySelector(
+  //     "#delete-confirm-popup form button"
+  //   );
+  //   confirmCardDeleteButton.removeEventListener(
+  //     "click",
+  //     this._handleCardDeleteClick
+  //   );
+  // };
+
+  // _handleDeleteIcon = () => {
+  //   // this is to handle user action - when click on trash bin icon, open a delete confirmation popup
+  //   const deleteCardModal = document.querySelector("#delete-confirm-popup");
+  //   deleteCardModal.classList.add("modal_opened");
+  //   // set eventlistener on the delete confirmation popup confirm button.
+  //   const confirmCardDeleteButton = document.querySelector(
+  //     "#delete-confirm-popup form button"
+  //   );
+  //   confirmCardDeleteButton.addEventListener("click", this._handleCardDelete);
+  // };
+
+  _handleDeleteCardFormSubmit = () => {
+    const deleteCardPopup = new PopupWithForm(
+      "#delete-image-confirm-modal",
+      this._handleDeleteCardFormSubmit
     );
-    confirmCardDeleteButton.addEventListener("click", this._handleCardDelete);
+    deleteCardPopup.closeModal();
+    deleteCardYesButton.removeEventListener(
+      "click",
+      this._handleDeleteCardFormSubmit
+    );
+    api.deleteCard(this._cardId).then(() => {
+      window.alert("Hurray!! Delete Successful");
+    });
+    this._cardElement.remove();
   };
 
   _onCardClick = (ev) => {
@@ -92,7 +118,10 @@ export default class Card {
     if (this._owner === "f50447686616d1fa985ca0e1") {
       this._deleteCardIcon =
         this._cardElement.querySelector(".card__del-button");
-      this._deleteCardIcon.addEventListener("click", this._handleDeleteIcon);
+      this._deleteCardIcon.addEventListener(
+        "click",
+        this._handleCardDeleteButton
+      );
     } else {
       this._cardElement
         .querySelector(".card__del-button")

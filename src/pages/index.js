@@ -44,10 +44,7 @@ const addProfilePopup = new PopupWithForm(
   "#edit-profile",
   handleProfileFormSubmit
 );
-const deleteCardPopup = new PopupWithForm(
-  "#delete-confirm-popup",
-  handleCardDeleteClick
-);
+
 const avatarEditPopup = new PopupWithForm(
   "#avatar-edit-modal",
   handleAvatarSaveButton
@@ -84,12 +81,7 @@ const api = new Api({
 });
 function createCard(item) {
   // create instance of Card class
-  const card = new Card(
-    item,
-    "#card-template",
-    onCardClick,
-    handleCardDeleteClick
-  );
+  const card = new Card(item, "#card-template", onCardClick);
   //create a card by calling getCardElement method from Card class
   const cardElement = card.getCardElement();
   //return the card
@@ -169,15 +161,6 @@ function handleAddNewCardFormSubmit(inputValues) {
 
 function onCardClick(card) {
   cardImagePopup.openModal(card);
-}
-
-function handleCardDeleteClick(cardId) {
-  // Close the delete confirmation model as soon as user click on "yes" to delete card
-  deleteCardPopup.closeModal();
-  //Delete the card
-  api.deleteCard(cardId).then((data) => {
-    console.log(data);
-  });
 }
 
 function handleAvatarEditButton() {
