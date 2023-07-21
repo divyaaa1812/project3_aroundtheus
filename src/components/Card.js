@@ -23,13 +23,11 @@ export default class Card {
   }
 
   _handleFavIconClick = () => {
-    debugger;
     //variable to register if current user liked the image or not
     const currentUserLike = this._likes.find((user) => {
       return user._id === "f50447686616d1fa985ca0e1";
     });
     let didCurrentUserLikeThisCard = currentUserLike ? true : false;
-    console.log(didCurrentUserLikeThisCard);
     if (didCurrentUserLikeThisCard) {
       // 1. Make a call to network to remove the users like for this card
       api.unLikeACard(this._cardId).then((data) => {
