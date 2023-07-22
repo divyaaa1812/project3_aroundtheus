@@ -68,40 +68,25 @@ export default class Card {
       "click",
       this._handleDeleteCardFormSubmit
     );
-    api.deleteCard(this._cardId).then(() => {
-      window.alert("Hurray!! Delete Successful");
-    });
+    api.deleteCard(this._cardId).then(() => {});
     this._cardElement.remove();
   };
 
   _onCardClick = (ev) => {
     this._handleCardClick(this._cardData);
-    console.log(this._cardData);
   };
-
-  _setEventListeners() {
-    this._favIconElement.addEventListener("click", this._handleFavIconClick);
-    this._cardElement
-      .querySelector(".card__image")
-      .addEventListener("click", this._onCardClick);
-  }
 
   getCardElement() {
     this._cardTemplate = document.querySelector(this._cardSelector);
     this._cardElement = this._cardTemplate.content
       .querySelector(".card")
       .cloneNode(true);
+    this._deleteCardIcon = this._cardElement.querySelector(".card__del-button");
+
     if (this._owner === "f50447686616d1fa985ca0e1") {
-      this._deleteCardIcon =
-        this._cardElement.querySelector(".card__del-button");
-      this._deleteCardIcon.addEventListener(
-        "click",
-        this._handleCardDeleteButton
-      );
+      this._deleteCardIcon.classList.remove("card__del-button-hidden");
     } else {
-      this._cardElement
-        .querySelector(".card__del-button")
-        .classList.add("card__del-button-hidden");
+      this._deleteCardIcon.classList.add("card__del-button-hidden");
     }
     this._favIconElement = this._cardElement.querySelector(".card__fav-icon");
     if (this._likes.length > 0 && this._likes === "f50447686616d1fa985ca0e1") {
@@ -120,5 +105,16 @@ export default class Card {
     this._setEventListeners();
     //return the card element that is created
     return this._cardElement;
+  }
+
+  _setEventListeners() {
+    this._favIconElement.addEventListener("click", this._handleFavIconClick);
+    this._cardElement
+      .querySelector(".card__image")
+      .addEventListener("click", this._onCardClick);
+    this._deleteCardIcon.addEventListener(
+      "click",
+      this._handleCardDeleteButton
+    );
   }
 }

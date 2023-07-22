@@ -150,14 +150,21 @@ function handleProfileFormSubmit(inputValues) {
 }
 
 function handleAddNewCardFormSubmit(inputValues) {
+  //set button to Saving.. while api call is made
+  document.querySelector("#create-button").textContent = "Saving...";
   //create a new card with input values from server
-  api.addNewCard(inputValues).then((data) => {
-    const card = createCard(data);
-    //Attach new card to begining of container
-    section.prependItem(card);
-    //close popup after submit
-    newCardPopup.closeModal();
-  });
+  api
+    .addNewCard(inputValues)
+    .then((data) => {
+      const card = createCard(data);
+      //Attach new card to begining of container
+      section.prependItem(card);
+      //close popup after submit
+      newCardPopup.closeModal();
+    })
+    .finally(() => {
+      document.querySelector("#create-button").textContent = "Create";
+    });
 }
 
 function onCardClick(card) {
