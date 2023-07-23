@@ -1,5 +1,5 @@
 import Api from "../components/Api.js";
-import PopupWithForm from "./PopupWithForm.js";
+import DeleteCardForm from "./DeleteCardForm.js";
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/cohort-3-en",
   headers: {
@@ -7,10 +7,14 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
-const deleteCardYesButton = document.querySelector("#delete-confirm-button");
 
 export default class Card {
-  constructor(cardData, cardSelector, handleCardClick) {
+  constructor(
+    cardData,
+    cardSelector,
+    handleCardClick,
+    handleCardDeleteFunctionInIndexComponent
+  ) {
     this._cardData = cardData;
     this._id = cardData._id;
     this._name = cardData.name;
@@ -20,6 +24,8 @@ export default class Card {
     this._likes = cardData.likes;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._handleCardDeleteFunctionInIndexComponent =
+      handleCardDeleteFunctionInIndexComponent;
   }
 
   _handleFavIconClick = () => {
@@ -38,6 +44,7 @@ export default class Card {
     } else {
       // 1. Make a call to network to add the users like for this card
       api.likeACard(this._cardId).then((data) => {
+        this._favIconElement.classList.add("card__fav-icon-selected");
         this._likes = data.likes;
         // 2. Update te state of the like button
         this._favIconElement.classList.toggle("card__fav-icon-selected");
@@ -46,30 +53,20 @@ export default class Card {
     }
   };
 
-  _handleCardDeleteButton = () => {
-    const deleteCardPopup = new PopupWithForm(
+  _handleDeleteCardFunctionInCardComponent = () => {
+    this.deleteCardPopup = new DeleteCardForm(
       "#delete-image-confirm-modal",
       this._handleDeleteCardFormSubmit
     );
-    deleteCardPopup.openModal();
-    deleteCardYesButton.addEventListener(
-      "click",
-      this._handleDeleteCardFormSubmit
-    );
+    this.deleteCardPopup.openModal();
   };
 
   _handleDeleteCardFormSubmit = () => {
-    const deleteCardPopup = new PopupWithForm(
-      "#delete-image-confirm-modal",
-      this._handleDeleteCardFormSubmit
-    );
-    deleteCardPopup.closeModal();
-    deleteCardYesButton.removeEventListener(
-      "click",
-      this._handleDeleteCardFormSubmit
-    );
-    api.deleteCard(this._cardId).then(() => {});
     this._cardElement.remove();
+    this._handleCardDeleteFunctionInIndexComponent(this._cardId);
+    if (this.deleteCardPopup) {
+      this.deleteCardPopup.closeModal();
+    }
   };
 
   _onCardClick = (ev) => {
@@ -82,7 +79,6 @@ export default class Card {
       .querySelector(".card")
       .cloneNode(true);
     this._deleteCardIcon = this._cardElement.querySelector(".card__del-button");
-
     if (this._owner === "f50447686616d1fa985ca0e1") {
       this._deleteCardIcon.classList.remove("card__del-button-hidden");
     } else {
@@ -114,7 +110,7 @@ export default class Card {
       .addEventListener("click", this._onCardClick);
     this._deleteCardIcon.addEventListener(
       "click",
-      this._handleCardDeleteButton
+      this._handleDeleteCardFunctionInCardComponent
     );
   }
 }

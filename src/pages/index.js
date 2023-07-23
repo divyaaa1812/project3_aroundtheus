@@ -36,6 +36,7 @@ const profileSubtitleInputField = document.querySelector(
 const avatarEditButton = document.querySelector(".profile__avatar-edit-button");
 const avatarSaveButton = document.querySelector("#avatar-save-button");
 const caption = document.querySelector(".modal__image-caption");
+const deleteCardYesButton = document.querySelector("#delete-confirm-button");
 
 const newCardPopup = new PopupWithForm(
   "#add-new-card",
@@ -60,6 +61,7 @@ const cardImagePopup = new PopupWithImage(
   "#preview-image-modal",
   ".modal-preview-image"
 );
+
 //instantiate FormValidator class
 const addNewCardFormValidator = new FormValidator(
   settings,
@@ -82,7 +84,12 @@ const api = new Api({
 });
 function createCard(item) {
   // create instance of Card class
-  const card = new Card(item, "#card-template", onCardClick);
+  const card = new Card(
+    item,
+    "#card-template",
+    onCardClick,
+    handleCardDeleteFunctionInIndexComponent
+  );
   //create a card by calling getCardElement method from Card class
   const cardElement = card.getCardElement();
   //return the card
@@ -147,6 +154,10 @@ function handleProfileFormSubmit(inputValues) {
     });
   userInfo.setUserInfo(inputValues);
   addProfilePopup.closeModal();
+}
+
+function handleCardDeleteFunctionInIndexComponent(cardId) {
+  api.deleteCard(cardId).then(() => {});
 }
 
 function handleAddNewCardFormSubmit(inputValues) {

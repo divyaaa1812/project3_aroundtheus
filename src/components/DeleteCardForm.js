@@ -1,0 +1,28 @@
+import Popup from "./Popup";
+
+export default class DeleteCardForm extends Popup {
+  constructor(popupModalSelector, handleFormSubmit) {
+    super({ popupModalSelector });
+    this._popupModalSelector = document.querySelector(popupModalSelector);
+    this._handleFormSubmit = handleFormSubmit;
+  }
+
+  onYesClick = (ev) => {
+    ev.preventDefault();
+    this._handleFormSubmit();
+  };
+
+  _removeEventListeners() {
+    super._removeEventListeners();
+    document
+      .querySelector("#delete-confirm-button")
+      .removeEventListener("click", this.onYesClick);
+  }
+
+  _setEventListeners() {
+    super._setEventListeners();
+    document
+      .querySelector("#delete-confirm-button")
+      .addEventListener("click", this.onYesClick);
+  }
+}
