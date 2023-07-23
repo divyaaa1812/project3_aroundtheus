@@ -44,9 +44,8 @@ export default class Card {
     } else {
       // 1. Make a call to network to add the users like for this card
       api.likeACard(this._cardId).then((data) => {
-        this._favIconElement.classList.add("card__fav-icon-selected");
         this._likes = data.likes;
-        // 2. Update te state of the like button
+        // 2. Update state of the like button and update counter
         this._favIconElement.classList.toggle("card__fav-icon-selected");
         this._favCountElement.textContent = this._likes.length;
       });
@@ -85,7 +84,10 @@ export default class Card {
       this._deleteCardIcon.classList.add("card__del-button-hidden");
     }
     this._favIconElement = this._cardElement.querySelector(".card__fav-icon");
-    if (this._likes.length > 0 && this._likes === "f50447686616d1fa985ca0e1") {
+    const userLikes = this._likes.find((user) => {
+      return user._id === "f50447686616d1fa985ca0e1";
+    });
+    if (userLikes) {
       this._favIconElement.classList.add("card__fav-icon-selected");
     } else {
       this._favIconElement.classList.add("card__fav-icon");
