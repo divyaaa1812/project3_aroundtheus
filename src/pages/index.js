@@ -57,6 +57,7 @@ const userInfo = new UserInfo({
   subtitle: profileSubtitle,
   link: profileAvatar,
 });
+
 const cardImagePopup = new PopupWithImage(
   "#preview-image-modal",
   ".modal-preview-image"

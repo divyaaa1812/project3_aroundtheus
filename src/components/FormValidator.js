@@ -9,6 +9,11 @@ class FormValidator {
     this._errorSelector = settings.errorSelector;
   }
 
+  disableButton() {
+    this._buttonElement.classList.add(this._inactiveButtonSelector);
+    this._buttonElement.setAttribute("disabled", true);
+  }
+
   _showInputError(inputElement) {
     const errorMessage = inputElement.validationMessage;
     inputElement.classList.add(this._inputErrorSelector);
@@ -47,24 +52,10 @@ class FormValidator {
     });
   }
 
-  disableButton() {
-    this._buttonElement.classList.add(this._inactiveButtonSelector);
-    this._buttonElement.setAttribute("disabled", true);
-  }
-
   _enableButton() {
     this._buttonElement.classList.remove(this._inactiveButtonSelector);
     this._buttonElement.removeAttribute("disabled", false);
   }
-
-  // _toggleButtonState() {
-  //   // If there is at least one invalid input
-  //   if (this._hasInvalidInput(this._inputList)) {
-  //     this.disableButton();
-  //   } else {
-  //     this._enableButton();
-  //   }
-  // }
 
   _setEventListeners() {
     // Find all the form fields and make an array of them

@@ -15,7 +15,6 @@ export default class PopupWithForm extends Popup {
     for (const field of inputFields) {
       result[field["name"]] = field["value"];
     }
-    // console.log(result);
     return result;
   }
 

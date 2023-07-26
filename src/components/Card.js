@@ -53,10 +53,6 @@ export default class Card {
   };
 
   _handleDeleteCardFunctionInCardComponent = () => {
-    this.deleteCardPopup = new DeleteCardForm(
-      "#delete-image-confirm-modal",
-      this._handleDeleteCardFormSubmit
-    );
     this.deleteCardPopup.openModal();
   };
 
@@ -83,6 +79,10 @@ export default class Card {
     } else {
       this._deleteCardIcon.classList.add("card__del-button-hidden");
     }
+    this.deleteCardPopup = new DeleteCardForm(
+      "#delete-image-confirm-modal",
+      this._handleDeleteCardFormSubmit
+    );
     this._favIconElement = this._cardElement.querySelector(".card__fav-icon");
     const userLikes = this._likes.find((user) => {
       return user._id === "f50447686616d1fa985ca0e1";
@@ -95,10 +95,10 @@ export default class Card {
     this._favCountElement = this._cardElement.querySelector(".card__fav_count");
     this._favCountElement.textContent = this._likes.length;
     this._addNewCardTitle = this._cardElement.querySelector(".card__title");
-    this._addNewCardLink = this._cardElement.querySelector(".card__image");
+    this._cardImage = this._cardElement.querySelector(".card__image");
     this._addNewCardTitle.textContent = this._name;
-    this._addNewCardLink.setAttribute("src", `${this._link}`);
-    this._addNewCardLink.setAttribute("alt", `Image of ${this._name}`);
+    this._cardImage.setAttribute("src", `${this._link}`);
+    this._cardImage.setAttribute("alt", `Image of ${this._name}`);
     //call eventlistener
     this._setEventListeners();
     //return the card element that is created
@@ -107,9 +107,7 @@ export default class Card {
 
   _setEventListeners() {
     this._favIconElement.addEventListener("click", this._handleFavIconClick);
-    this._cardElement
-      .querySelector(".card__image")
-      .addEventListener("click", this._onCardClick);
+    this._cardImage.addEventListener("click", this._onCardClick);
     this._deleteCardIcon.addEventListener(
       "click",
       this._handleDeleteCardFunctionInCardComponent
