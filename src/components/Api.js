@@ -12,10 +12,6 @@ export default class Api {
     return Promise.reject(`Error: ${res.status}`);
   }
 
-  // _request(url, options) {
-  //   return fetch(url, options).then(this._checkResponse);
-  // }
-
   getInitialCards() {
     return fetch("https://around.nomoreparties.co/v1/cohort-3-en/cards/", {
       method: "GET",
@@ -96,18 +92,4 @@ export default class Api {
       }
     ).then(this._checkResponse);
   }
-
-  // renderData() {
-  //   const promises = [
-  //     this.getUserInfo,
-  //     this.getInitialCards,
-  //     this.editUserInfo,
-  //     this.addNewCard,
-  //     this.deleteCard,
-  //     this.likeACard,
-  //     this.unLikeACard,
-  //     this.editAvatarLink,
-  //   ];
-  //   return Promise.all(promises);
-  // }
 }

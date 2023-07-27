@@ -3,7 +3,6 @@ import Popup from "./Popup";
 export default class DeleteCardForm extends Popup {
   constructor(popupModalSelector, handleFormSubmit) {
     super({ popupModalSelector });
-    this._popupModalSelector = document.querySelector(popupModalSelector);
     this._handleFormSubmit = handleFormSubmit;
   }
 

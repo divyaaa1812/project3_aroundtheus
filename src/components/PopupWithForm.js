@@ -1,10 +1,11 @@
 import Popup from "./Popup.js";
 export default class PopupWithForm extends Popup {
-  constructor(popupModalSelector, handleFormSubmit) {
+  constructor(popupModalSelector, handleFormSubmit, inputList) {
     super({ popupModalSelector });
     this._popupForm = document.querySelector(popupModalSelector);
     this._handleFormSubmit = handleFormSubmit;
     this.handleSubmit = this.handleSubmit.bind(this);
+    this._inputFields = this._popupForm.querySelectorAll(".modal__text-input");
   }
 
   _getInputValues() {
@@ -16,6 +17,13 @@ export default class PopupWithForm extends Popup {
       result[field["name"]] = field["value"];
     }
     return result;
+  }
+
+  setInputValues(data) {
+    this._inputFields.forEach((input) => {
+      // here you insert the `value` by the `name` of the input
+      input.value = data[input.name];
+    });
   }
 
   closeModal() {

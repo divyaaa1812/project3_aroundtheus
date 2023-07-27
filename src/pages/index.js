@@ -19,6 +19,8 @@ export const settings = {
 const editProfileModalFormElement = document.querySelector("#edit-profile");
 const addNewCardModalFormElement = document.querySelector("#add-new-card");
 const editAvatarModalFormElement = document.querySelector("#avatar-edit-modal");
+const submitButton = document.querySelector(settings.submitButtonSelector);
+const createButton = document.querySelector("#create-button");
 
 /*Declare Elements */
 const editProfileButton = document.querySelector(".js-profile-edit-button");
@@ -35,12 +37,12 @@ const profileSubtitleInputField = document.querySelector(
 );
 const avatarEditButton = document.querySelector(".profile__avatar-edit-button");
 const avatarSaveButton = document.querySelector("#avatar-save-button");
-const caption = document.querySelector(".modal__image-caption");
 const deleteCardYesButton = document.querySelector("#delete-confirm-button");
 
 const newCardPopup = new PopupWithForm(
   "#add-new-card",
-  handleAddNewCardFormSubmit
+  handleAddNewCardFormSubmit,
+  ".profile__add-button"
 );
 const addProfilePopup = new PopupWithForm(
   "#edit-profile",
@@ -97,13 +99,18 @@ function createCard(item) {
   return cardElement;
 }
 
-api.getUserInfo().then((data) => {
-  const name = data.name;
-  const subtitle = data.about;
-  const url = data.avatar;
-  userInfo.setUserInfo({ name, subtitle });
-  userInfo.setNewAvatar(url);
-});
+api
+  .getUserInfo()
+  .then((data) => {
+    const name = data.name;
+    const subtitle = data.about;
+    const url = data.avatar;
+    userInfo.setUserInfo({ name, subtitle });
+    userInfo.setNewAvatar(url);
+  })
+  .then((err) => {
+    console.log(err);
+  });
 
 api
   .getInitialCards()
@@ -115,7 +122,7 @@ api
     });
   })
   .catch((err) => {
-    console.error(err); // log the error to the console
+    console.log(err); // log the error to the console
   });
 
 const section = new Section(
@@ -125,11 +132,8 @@ const section = new Section(
 
 function handleOpenEditProfileForm() {
   editProfileFormValidator.disableButton();
-  api.getUserInfo().then((result) => {
-    // process the result
-    profileTitleInputField.value = result.name;
-    profileSubtitleInputField.value = result.about;
-  });
+  const values = userInfo.getUserInfo();
+  addProfilePopup.setInputValues(values);
   addProfilePopup.openModal();
 }
 
@@ -139,31 +143,35 @@ function handleAddNewCardButton() {
 }
 
 function handleProfileFormSubmit(inputValues) {
-  document.querySelector(settings.submitButtonSelector).textContent =
-    "Saving...";
+  submitButton.textContent = "Saving...";
   api
     .editUserInfo(inputValues)
     .then((data) => {
       // process the result
       const name = data.name;
       const subtitle = data.about;
+      userInfo.setUserInfo(inputValues);
+      addProfilePopup.closeModal();
       return { name, subtitle };
     })
+    .then((err) => {
+      console.log(err);
+    })
     .finally(() => {
-      document.querySelector(settings.submitButtonSelector).textContent =
-        "Save";
+      submitButton.textContent = "Save";
     });
-  userInfo.setUserInfo(inputValues);
-  addProfilePopup.closeModal();
 }
 
 function handleCardDeleteFunctionInIndexComponent(cardId) {
-  api.deleteCard(cardId).then(() => {});
+  api.deleteCard(cardId).then(() => {
+    this.deleteCardPopup.closeModal();
+    this._cardElement.remove();
+  });
 }
 
 function handleAddNewCardFormSubmit(inputValues) {
   //set button to Saving.. while api call is made
-  document.querySelector("#create-button").textContent = "Saving...";
+  createButton.textContent = "Saving...";
   //create a new card with input values from server
   api
     .addNewCard(inputValues)
@@ -174,14 +182,16 @@ function handleAddNewCardFormSubmit(inputValues) {
       //close popup after submit
       newCardPopup.closeModal();
     })
+    .then((err) => {
+      console.log(err);
+    })
     .finally(() => {
-      document.querySelector("#create-button").textContent = "Create";
+      createButton.textContent = "Create";
     });
 }
 
 function onCardClick(card) {
   cardImagePopup.openModal(card);
-  caption.textContent = card.name;
 }
 
 function handleAvatarEditButton() {
@@ -194,7 +204,10 @@ function handleAvatarSaveButton(inputValues) {
   api
     .editAvatarLink(inputValues)
     .then((data) => {
-      profileAvatar.onload = userInfo.setNewAvatar(data.avatar);
+      userInfo.setNewAvatar(data.avatar);
+    })
+    .then((err) => {
+      console.log(err);
     })
     .finally(() => {
       avatarSaveButton.textContent = "Save";

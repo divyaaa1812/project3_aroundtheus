@@ -57,11 +57,7 @@ export default class Card {
   };
 
   _handleDeleteCardFormSubmit = () => {
-    this._cardElement.remove();
     this._handleCardDeleteFunctionInIndexComponent(this._cardId);
-    if (this.deleteCardPopup) {
-      this.deleteCardPopup.closeModal();
-    }
   };
 
   _onCardClick = (ev) => {
