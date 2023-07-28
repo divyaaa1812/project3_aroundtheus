@@ -6,6 +6,7 @@ import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Api from "../components/Api.js";
 import "../pages/index.css";
+import DeleteCardForm from "../components/DeleteCardForm.js";
 
 export const settings = {
   inputElementSelector: ".modal__text-input",
@@ -65,6 +66,11 @@ const cardImagePopup = new PopupWithImage(
   ".modal-preview-image"
 );
 
+const deleteCardPopup = new DeleteCardForm(
+  "#delete-image-confirm-modal",
+  handleDeleteCardFormSubmit
+);
+
 //instantiate FormValidator class
 const addNewCardFormValidator = new FormValidator(
   settings,
@@ -85,30 +91,22 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
-function createCard(item) {
-  // create instance of Card class
-  const card = new Card(
-    item,
-    "#card-template",
-    onCardClick,
-    handleCardDeleteFunctionInIndexComponent
-  );
-  //create a card by calling getCardElement method from Card class
-  const cardElement = card.getCardElement();
-  //return the card
-  return cardElement;
-}
+const section = new Section(
+  { items: api.getInitialCards, renderer: createCard },
+  cardsList
+);
 
 api
   .getUserInfo()
   .then((data) => {
+    console.log(data);
     const name = data.name;
     const subtitle = data.about;
     const url = data.avatar;
     userInfo.setUserInfo({ name, subtitle });
     userInfo.setNewAvatar(url);
   })
-  .then((err) => {
+  .catch((err) => {
     console.log(err);
   });
 
@@ -125,21 +123,11 @@ api
     console.log(err); // log the error to the console
   });
 
-const section = new Section(
-  { items: api.getInitialCards, renderer: createCard },
-  cardsList
-);
-
 function handleOpenEditProfileForm() {
   editProfileFormValidator.disableButton();
   const values = userInfo.getUserInfo();
   addProfilePopup.setInputValues(values);
   addProfilePopup.openModal();
-}
-
-function handleAddNewCardButton() {
-  addNewCardFormValidator.disableButton();
-  newCardPopup.openModal();
 }
 
 function handleProfileFormSubmit(inputValues) {
@@ -154,7 +142,7 @@ function handleProfileFormSubmit(inputValues) {
       addProfilePopup.closeModal();
       return { name, subtitle };
     })
-    .then((err) => {
+    .catch((err) => {
       console.log(err);
     })
     .finally(() => {
@@ -162,11 +150,24 @@ function handleProfileFormSubmit(inputValues) {
     });
 }
 
-function handleCardDeleteFunctionInIndexComponent(cardId) {
-  api.deleteCard(cardId).then(() => {
-    this.deleteCardPopup.closeModal();
-    this._cardElement.remove();
-  });
+function handleAddNewCardButton() {
+  addNewCardFormValidator.disableButton();
+  newCardPopup.openModal();
+}
+
+function createCard(item) {
+  // create instance of Card class
+  const card = new Card(
+    item,
+    "#card-template",
+    onCardClick,
+    handleDeleteCardBinButton,
+    handleDeleteCardFormSubmit
+  );
+  //create a card by calling getCardElement method from Card class
+  const cardElement = card.getCardElement();
+  //return the card
+  return cardElement;
 }
 
 function handleAddNewCardFormSubmit(inputValues) {
@@ -182,7 +183,7 @@ function handleAddNewCardFormSubmit(inputValues) {
       //close popup after submit
       newCardPopup.closeModal();
     })
-    .then((err) => {
+    .catch((err) => {
       console.log(err);
     })
     .finally(() => {
@@ -213,6 +214,27 @@ function handleAvatarSaveButton(inputValues) {
       avatarSaveButton.textContent = "Save";
     });
   avatarEditPopup.closeModal();
+}
+
+function handleDeleteCardBinButton(id) {
+  deleteCardPopup.openModal(id);
+}
+
+function handleDeleteCardFormSubmit(cardId) {
+  debugger;
+  api
+    .deleteCard(cardId)
+    .then(() => {
+      this._cardElement.remove();
+    })
+    .catch((err) => {
+      // show error
+      console.log(err);
+    })
+    .finally(() => {
+      // pass or fail close the confirmation modal
+      deleteCardPopup.closeModal();
+    });
 }
 
 /* Event Listeners */

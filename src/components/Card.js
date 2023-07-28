@@ -1,19 +1,12 @@
-import Api from "../components/Api.js";
-import DeleteCardForm from "./DeleteCardForm.js";
-const api = new Api({
-  baseUrl: "https://around.nomoreparties.co/v1/cohort-3-en",
-  headers: {
-    authorization: "b685d3e0-616a-4dae-bc5b-53892a4f7953",
-    "Content-Type": "application/json",
-  },
-});
+import Popup from "./Popup";
 
 export default class Card {
   constructor(
     cardData,
     cardSelector,
     handleCardClick,
-    handleCardDeleteFunctionInIndexComponent
+    handleDeleteCardBinButton,
+    handleDeleteCardFormSubmit
   ) {
     this._cardData = cardData;
     this._id = cardData._id;
@@ -24,8 +17,8 @@ export default class Card {
     this._likes = cardData.likes;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
-    this._handleCardDeleteFunctionInIndexComponent =
-      handleCardDeleteFunctionInIndexComponent;
+    this._handleDeleteCardBinButton = handleDeleteCardBinButton;
+    this._handleDeleteCardFormSubmit = handleDeleteCardFormSubmit;
   }
 
   _handleFavIconClick = () => {
@@ -52,15 +45,7 @@ export default class Card {
     }
   };
 
-  _handleDeleteCardFunctionInCardComponent = () => {
-    this.deleteCardPopup.openModal();
-  };
-
-  _handleDeleteCardFormSubmit = () => {
-    this._handleCardDeleteFunctionInIndexComponent(this._cardId);
-  };
-
-  _onCardClick = (ev) => {
+  _onCardClick = () => {
     this._handleCardClick(this._cardData);
   };
 
@@ -75,10 +60,6 @@ export default class Card {
     } else {
       this._deleteCardIcon.classList.add("card__del-button-hidden");
     }
-    this.deleteCardPopup = new DeleteCardForm(
-      "#delete-image-confirm-modal",
-      this._handleDeleteCardFormSubmit
-    );
     this._favIconElement = this._cardElement.querySelector(".card__fav-icon");
     const userLikes = this._likes.find((user) => {
       return user._id === "f50447686616d1fa985ca0e1";
@@ -104,9 +85,8 @@ export default class Card {
   _setEventListeners() {
     this._favIconElement.addEventListener("click", this._handleFavIconClick);
     this._cardImage.addEventListener("click", this._onCardClick);
-    this._deleteCardIcon.addEventListener(
-      "click",
-      this._handleDeleteCardFunctionInCardComponent
-    );
+    this._deleteCardIcon.addEventListener("click", () => {
+      this._handleDeleteCardBinButton(this._cardId);
+    });
   }
 }
