@@ -55,11 +55,7 @@ const avatarEditPopup = new PopupWithForm(
   handleAvatarSaveButton
 );
 
-const userInfo = new UserInfo({
-  name: profileTitle,
-  subtitle: profileSubtitle,
-  link: profileAvatar,
-});
+let userInfo;
 
 const cardImagePopup = new PopupWithImage(
   "#preview-image-modal",
@@ -68,7 +64,8 @@ const cardImagePopup = new PopupWithImage(
 
 const deleteCardPopup = new DeleteCardForm(
   "#delete-image-confirm-modal",
-  handleDeleteCardFormSubmit
+  handleDeleteCardFormSubmit,
+  "#delete-confirm-button"
 );
 
 //instantiate FormValidator class
@@ -98,13 +95,16 @@ const section = new Section(
 
 api
   .getUserInfo()
-  .then((data) => {
-    console.log(data);
-    const name = data.name;
-    const subtitle = data.about;
-    const url = data.avatar;
-    userInfo.setUserInfo({ name, subtitle });
-    userInfo.setNewAvatar(url);
+  .then((userData) => {
+    userInfo = new UserInfo({
+      userData,
+      selectors: {
+        name: profileTitle,
+        subtitle: profileSubtitle,
+        link: profileAvatar,
+      },
+    });
+    userInfo.setUserFields();
   })
   .catch((err) => {
     console.log(err);
@@ -123,6 +123,12 @@ api
     console.log(err); // log the error to the console
   });
 
+function handleUnlikeToggleButton(cardId, status, onCardUnlike) {
+  api.unLikeACard(this._cardId).then((data) => {
+    console.log(data);
+  });
+}
+
 function handleOpenEditProfileForm() {
   editProfileFormValidator.disableButton();
   const values = userInfo.getUserInfo();
@@ -134,13 +140,10 @@ function handleProfileFormSubmit(inputValues) {
   submitButton.textContent = "Saving...";
   api
     .editUserInfo(inputValues)
-    .then((data) => {
-      // process the result
-      const name = data.name;
-      const subtitle = data.about;
-      userInfo.setUserInfo(inputValues);
+    .then((userData) => {
+      userInfo.updateUserData(userData);
+      userInfo.setUserFields();
       addProfilePopup.closeModal();
-      return { name, subtitle };
     })
     .catch((err) => {
       console.log(err);
@@ -162,12 +165,24 @@ function createCard(item) {
     "#card-template",
     onCardClick,
     handleDeleteCardBinButton,
-    handleDeleteCardFormSubmit
+    onLikeButtonToggle,
+    userInfo
   );
   //create a card by calling getCardElement method from Card class
   const cardElement = card.getCardElement();
   //return the card
   return cardElement;
+}
+
+function onLikeButtonToggle(cardId, status, callbackFn) {
+  console.log(cardId);
+  if (status === "like") {
+    api.likeACard(cardId).then((data) => {
+      callbackFn(data);
+    });
+  } else {
+    api.unLikeACard(cardId).then(callbackFn);
+  }
 }
 
 function handleAddNewCardFormSubmit(inputValues) {
@@ -204,8 +219,9 @@ function handleAvatarSaveButton(inputValues) {
   avatarSaveButton.textContent = "Saving...";
   api
     .editAvatarLink(inputValues)
-    .then((data) => {
-      userInfo.setNewAvatar(data.avatar);
+    .then((userData) => {
+      userInfo.updateUserData(userData);
+      userInfo.setUserFields();
     })
     .then((err) => {
       console.log(err);
@@ -216,23 +232,21 @@ function handleAvatarSaveButton(inputValues) {
   avatarEditPopup.closeModal();
 }
 
-function handleDeleteCardBinButton(id) {
-  deleteCardPopup.openModal(id);
+function handleDeleteCardBinButton(id, cardElement) {
+  deleteCardPopup.openModal(id, cardElement);
 }
 
-function handleDeleteCardFormSubmit(cardId) {
-  debugger;
+function handleDeleteCardFormSubmit(cardId, cardElement) {
   api
     .deleteCard(cardId)
     .then(() => {
-      this._cardElement.remove();
+      cardElement.remove();
     })
     .catch((err) => {
       // show error
       console.log(err);
     })
     .finally(() => {
-      // pass or fail close the confirmation modal
       deleteCardPopup.closeModal();
     });
 }

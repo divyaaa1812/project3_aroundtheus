@@ -1,30 +1,34 @@
 import Popup from "./Popup";
 export default class DeleteCardForm extends Popup {
-  constructor(popupModalSelector, handleFormSubmit) {
+  constructor(
+    popupModalSelector,
+    handleFormSubmit,
+    deleteConfirmButtonSelector
+  ) {
     super({ popupModalSelector });
     this._handleFormSubmit = handleFormSubmit;
+    this._deleteConfirmButton = document.querySelector(
+      deleteConfirmButtonSelector
+    );
   }
 
   onYesClick = (ev) => {
     ev.preventDefault();
-    this._handleFormSubmit(this.cardId);
+    this._handleFormSubmit(this.cardId, this.cardElement);
   };
 
-  openModal(cardId) {
+  openModal(cardId, cardElement) {
     this.cardId = cardId;
+    this.cardElement = cardElement;
     super.openModal();
   }
   _removeEventListeners() {
     super._removeEventListeners();
-    document
-      .querySelector("#delete-confirm-button")
-      .removeEventListener("click", this.onYesClick);
+    this._deleteConfirmButton.removeEventListener("click", this.onYesClick);
   }
 
   _setEventListeners() {
     super._setEventListeners();
-    document
-      .querySelector("#delete-confirm-button")
-      .addEventListener("click", this.onYesClick);
+    this._deleteConfirmButton.addEventListener("click", this.onYesClick);
   }
 }
