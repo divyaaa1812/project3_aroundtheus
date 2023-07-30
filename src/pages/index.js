@@ -107,13 +107,23 @@ api
     console.log(err);
   });
 
-api
-  .getInitialCards()
-  .then((data) => {
-    section.renderItems(data);
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  // destructure the response
+  .then(([userData, cards]) => {
+    // set all the data
+    userInfo = new UserInfo({
+      userData,
+      selectors: {
+        name: profileTitle,
+        subtitle: profileSubtitle,
+        link: profileAvatar,
+      },
+    });
+    userInfo.setUserFields();
+    section.renderItems(cards);
   })
   .catch((err) => {
-    console.log(err); // log the error to the console
+    // catch possible errors
   });
 
 function handleOpenEditProfileForm() {
