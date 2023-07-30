@@ -32,27 +32,24 @@ const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__subtitle");
 const profileAvatar = document.querySelector(".profile__image");
 //Extract input fields from edit profile modal
-const profileTitleInputField = document.querySelector("#profile-title-input");
-const profileSubtitleInputField = document.querySelector(
-  "#profile-subtitle-input"
-);
 const avatarEditButton = document.querySelector(".profile__avatar-edit-button");
 const avatarSaveButton = document.querySelector("#avatar-save-button");
-const deleteCardYesButton = document.querySelector("#delete-confirm-button");
 
 const newCardPopup = new PopupWithForm(
   "#add-new-card",
   handleAddNewCardFormSubmit,
-  ".profile__add-button"
+  ".modal__button"
 );
 const addProfilePopup = new PopupWithForm(
   "#edit-profile",
-  handleProfileFormSubmit
+  handleProfileFormSubmit,
+  ".modal__button"
 );
 
 const avatarEditPopup = new PopupWithForm(
   "#avatar-edit-modal",
-  handleAvatarSaveButton
+  handleAvatarSaveButton,
+  ".modal__button"
 );
 
 let userInfo;
@@ -191,7 +188,7 @@ function handleAddNewCardFormSubmit(inputValues) {
       console.log(err);
     })
     .finally(() => {
-      createButton.textContent = "Create";
+      createButton.textContent = "Create...";
     });
 }
 
