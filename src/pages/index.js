@@ -113,21 +113,11 @@ api
 api
   .getInitialCards()
   .then((data) => {
-    // process the result
-    data.forEach((item) => {
-      const cardItem = createCard(item);
-      section.appendItem(cardItem);
-    });
+    section.renderItems(data);
   })
   .catch((err) => {
     console.log(err); // log the error to the console
   });
-
-function handleUnlikeToggleButton(cardId, status, onCardUnlike) {
-  api.unLikeACard(this._cardId).then((data) => {
-    console.log(data);
-  });
-}
 
 function handleOpenEditProfileForm() {
   editProfileFormValidator.disableButton();
@@ -175,7 +165,6 @@ function createCard(item) {
 }
 
 function onLikeButtonToggle(cardId, status, callbackFn) {
-  console.log(cardId);
   if (status === "like") {
     api.likeACard(cardId).then((data) => {
       callbackFn(data);
