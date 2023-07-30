@@ -7,33 +7,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import Api from "../components/Api.js";
 import "../pages/index.css";
 import DeleteCardForm from "../components/DeleteCardForm.js";
-
-export const settings = {
-  inputElementSelector: ".modal__text-input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonSelector: "modal__button_disabled",
-  inputErrorSelector: "modal__input-error_visible",
-  errorSelectorHide: "modal__input-error-hide",
-  errorSelector: "modal__input-error",
-};
-
-const editProfileModalFormElement = document.querySelector("#edit-profile");
-const addNewCardModalFormElement = document.querySelector("#add-new-card");
-const editAvatarModalFormElement = document.querySelector("#avatar-edit-modal");
-const submitButton = document.querySelector(settings.submitButtonSelector);
-const createButton = document.querySelector("#create-button");
-
-/*Declare Elements */
-const editProfileButton = document.querySelector(".js-profile-edit-button");
-const addNewCardButton = document.querySelector(".profile__add-button");
-const cardsList = document.querySelector(".cards__list");
-//Extract title and subtitle elements
-const profileTitle = document.querySelector(".profile__title");
-const profileSubtitle = document.querySelector(".profile__subtitle");
-const profileAvatar = document.querySelector(".profile__image");
-//Extract input fields from edit profile modal
-const avatarEditButton = document.querySelector(".profile__avatar-edit-button");
-const avatarSaveButton = document.querySelector("#avatar-save-button");
+import * as constant from "../utils/constants.js";
 
 const newCardPopup = new PopupWithForm(
   "#add-new-card",
@@ -67,16 +41,16 @@ const deleteCardPopup = new DeleteCardForm(
 
 //instantiate FormValidator class
 const addNewCardFormValidator = new FormValidator(
-  settings,
-  addNewCardModalFormElement
+  constant.settings,
+  constant.addNewCardModalFormElement
 );
 const editProfileFormValidator = new FormValidator(
-  settings,
-  editProfileModalFormElement
+  constant.settings,
+  constant.editProfileModalFormElement
 );
 const editAvatarFormValidator = new FormValidator(
-  settings,
-  editAvatarModalFormElement
+  constant.settings,
+  constant.editAvatarModalFormElement
 );
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/cohort-3-en",
@@ -87,7 +61,7 @@ const api = new Api({
 });
 const section = new Section(
   { items: api.getInitialCards, renderer: createCard },
-  cardsList
+  constant.cardsList
 );
 
 api
@@ -96,9 +70,9 @@ api
     userInfo = new UserInfo({
       userData,
       selectors: {
-        name: profileTitle,
-        subtitle: profileSubtitle,
-        link: profileAvatar,
+        name: constant.profileTitle,
+        subtitle: constant.profileSubtitle,
+        link: constant.profileAvatar,
       },
     });
     userInfo.setUserFields();
@@ -114,9 +88,9 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     userInfo = new UserInfo({
       userData,
       selectors: {
-        name: profileTitle,
-        subtitle: profileSubtitle,
-        link: profileAvatar,
+        name: constant.profileTitle,
+        subtitle: constant.profileSubtitle,
+        link: constant.profileAvatar,
       },
     });
     userInfo.setUserFields();
@@ -134,7 +108,7 @@ function handleOpenEditProfileForm() {
 }
 
 function handleProfileFormSubmit(inputValues) {
-  submitButton.textContent = "Saving...";
+  constant.submitButton.textContent = "Saving...";
   api
     .editUserInfo(inputValues)
     .then((userData) => {
@@ -146,7 +120,7 @@ function handleProfileFormSubmit(inputValues) {
       console.log(err);
     })
     .finally(() => {
-      submitButton.textContent = "Save";
+      constant.submitButton.textContent = "Save";
     });
 }
 
@@ -183,7 +157,7 @@ function onLikeButtonToggle(cardId, status, callbackFn) {
 
 function handleAddNewCardFormSubmit(inputValues) {
   //set button to Saving.. while api call is made
-  createButton.textContent = "Saving...";
+  constant.createButton.textContent = "Saving...";
   //create a new card with input values from server
   api
     .addNewCard(inputValues)
@@ -198,7 +172,7 @@ function handleAddNewCardFormSubmit(inputValues) {
       console.log(err);
     })
     .finally(() => {
-      createButton.textContent = "Create...";
+      constant.createButton.textContent = "Create...";
     });
 }
 
@@ -212,7 +186,7 @@ function handleAvatarEditButton() {
 }
 
 function handleAvatarSaveButton(inputValues) {
-  avatarSaveButton.textContent = "Saving...";
+  constant.avatarSaveButton.textContent = "Saving...";
   api
     .editAvatarLink(inputValues)
     .then((userData) => {
@@ -223,7 +197,7 @@ function handleAvatarSaveButton(inputValues) {
       console.log(err);
     })
     .finally(() => {
-      avatarSaveButton.textContent = "Save";
+      constant.avatarSaveButton.textContent = "Save";
     });
   avatarEditPopup.closeModal();
 }
@@ -248,9 +222,9 @@ function handleDeleteCardFormSubmit(cardId, cardElement) {
 }
 
 /* Event Listeners */
-editProfileButton.addEventListener("click", handleOpenEditProfileForm);
-addNewCardButton.addEventListener("click", handleAddNewCardButton);
-avatarEditButton.addEventListener("click", handleAvatarEditButton);
+constant.editProfileButton.addEventListener("click", handleOpenEditProfileForm);
+constant.addNewCardButton.addEventListener("click", handleAddNewCardButton);
+constant.avatarEditButton.addEventListener("click", handleAvatarEditButton);
 
 //start form validations
 editProfileFormValidator.enableValidation();
