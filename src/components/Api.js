@@ -17,95 +17,71 @@ export default class Api {
   }
 
   getInitialCards() {
-    return this._request(
-      "https://around.nomoreparties.co/v1/cohort-3-en/cards/",
-      {
-        method: "GET",
-        headers: this._headers,
-      }
-    );
+    return this._request(`${this._baseUrl}/cards/`, {
+      method: "GET",
+      headers: this._headers,
+    });
   }
 
   getUserInfo() {
-    return this._request(
-      "https://around.nomoreparties.co/v1/cohort-3-en/users/me",
-      {
-        method: "GET",
-        headers: this._headers,
-      }
-    );
+    return this._request(`${this._baseUrl}/users/me`, {
+      method: "GET",
+      headers: this._headers,
+    });
   }
 
   editUserInfo(values) {
-    return this._request(
-      "https://around.nomoreparties.co/v1/cohort-3-en/users/me",
-      {
-        method: "PATCH",
-        headers: this._headers,
+    return this._request(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this._headers,
 
-        body: JSON.stringify({
-          name: values.name,
-          about: values.subtitle,
-        }),
-      }
-    );
+      body: JSON.stringify({
+        name: values.name,
+        about: values.subtitle,
+      }),
+    });
   }
 
   addNewCard(cardValues) {
-    return this._request(
-      "https://around.nomoreparties.co/v1/cohort-3-en/cards",
-      {
-        method: "POST",
-        headers: this._headers,
+    return this._request(`${this._baseUrl}/cards`, {
+      method: "POST",
+      headers: this._headers,
 
-        body: JSON.stringify({
-          name: cardValues.name,
-          link: cardValues.link,
-        }),
-      }
-    );
+      body: JSON.stringify({
+        name: cardValues.name,
+        link: cardValues.link,
+      }),
+    });
   }
 
   deleteCard(cardId) {
-    return this._request(
-      `https://around.nomoreparties.co/v1/cohort-3-en/cards/${cardId}`,
-      {
-        method: "DELETE",
-        headers: this._headers,
-      }
-    );
+    return this._request(`${this._baseUrl}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers,
+    });
   }
 
   likeACard(cardId) {
-    return this._request(
-      `https://around.nomoreparties.co/v1/cohort-3-en/cards/${cardId}/likes`,
-      {
-        method: "PUT",
-        headers: this._headers,
-      }
-    );
+    return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: "PUT",
+      headers: this._headers,
+    });
   }
 
   unLikeACard(cardId) {
-    return this._request(
-      `https://around.nomoreparties.co/v1/cohort-3-en/cards/${cardId}/likes`,
-      {
-        method: "DELETE",
-        headers: this._headers,
-      }
-    );
+    return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: "DELETE",
+      headers: this._headers,
+    });
   }
 
   editAvatarLink(inputValues) {
-    return this._request(
-      `https://around.nomoreparties.co/v1/cohort-3-en/users/me/avatar`,
-      {
-        method: "PATCH",
-        headers: this._headers,
-        body: JSON.stringify({
-          avatar: inputValues.link,
-        }),
-      }
-    );
+    return this._request(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: inputValues.link,
+      }),
+    });
   }
 }

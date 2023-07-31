@@ -172,7 +172,7 @@ function handleAddNewCardFormSubmit(inputValues) {
       console.log(err);
     })
     .finally(() => {
-      constant.createButton.textContent = "Create...";
+      constant.createButton.textContent = "Create";
     });
 }
 
