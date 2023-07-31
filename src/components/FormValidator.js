@@ -34,12 +34,23 @@ class FormValidator {
     errorElement.textContent = "";
   }
 
-  toggleInputError(inputElement) {
-    if (!inputElement.validity.valid) {
-      this._showInputError(inputElement);
+  toggleInputError() {
+    const hasInvlidInputs = this._hasInvalidInput();
+
+    if (hasInvlidInputs) {
+      const invalidInputsElement = this._inputList.filter((inputElement) => {
+        return !inputElement.validity.valid;
+      });
+
+      invalidInputsElement.forEach((inputElement) => {
+        this._showInputError(inputElement);
+      });
+
       this.disableButton();
     } else {
-      this._hideInputError(inputElement);
+      this._inputList.forEach((inputElement) => {
+        this._hideInputError(inputElement);
+      });
       this._enableButton();
     }
   }
@@ -62,12 +73,11 @@ class FormValidator {
     this._inputList = Array.from(
       this._form.querySelectorAll(this._inputElementSelector)
     );
+
     // Find the submit button in the current form
     this._buttonElement = this._form.querySelector(this._submitButtonSelector);
     this._inputList.forEach((inputElement) => {
-      inputElement.addEventListener("input", () => {
-        this.toggleInputError(inputElement);
-      });
+      inputElement.addEventListener("change", () => this.toggleInputError());
     });
   }
 
