@@ -9,11 +9,6 @@ class FormValidator {
     this._errorSelector = settings.errorSelector;
   }
 
-  disableButton() {
-    this._buttonElement.classList.add(this._inactiveButtonSelector);
-    this._buttonElement.setAttribute("disabled", true);
-  }
-
   _showInputError(inputElement) {
     const errorMessage = inputElement.validationMessage;
     inputElement.classList.add(this._inputErrorSelector);
@@ -34,24 +29,11 @@ class FormValidator {
     errorElement.textContent = "";
   }
 
-  toggleInputError() {
-    const hasInvlidInputs = this._hasInvalidInput();
-
-    if (hasInvlidInputs) {
-      const invalidInputsElement = this._inputList.filter((inputElement) => {
-        return !inputElement.validity.valid;
-      });
-
-      invalidInputsElement.forEach((inputElement) => {
-        this._showInputError(inputElement);
-      });
-
-      this.disableButton();
+  toggleInputError(inputElement) {
+    if (!inputElement.validity.valid) {
+      this._showInputError(inputElement);
     } else {
-      this._inputList.forEach((inputElement) => {
-        this._hideInputError(inputElement);
-      });
-      this._enableButton();
+      this._hideInputError(inputElement);
     }
   }
 
@@ -68,16 +50,31 @@ class FormValidator {
     this._buttonElement.removeAttribute("disabled", false);
   }
 
+  disableButton() {
+    this._buttonElement.classList.add(this._inactiveButtonSelector);
+    this._buttonElement.setAttribute("disabled", true);
+  }
+
+  _toggleButtonState() {
+    if (this._hasInvalidInput()) {
+      this.disableButton();
+    } else {
+      this._enableButton();
+    }
+  }
+
   _setEventListeners() {
     // Find all the form fields and make an array of them
     this._inputList = Array.from(
       this._form.querySelectorAll(this._inputElementSelector)
     );
-
     // Find the submit button in the current form
     this._buttonElement = this._form.querySelector(this._submitButtonSelector);
     this._inputList.forEach((inputElement) => {
-      inputElement.addEventListener("input", () => this.toggleInputError());
+      inputElement.addEventListener("input", () => {
+        this.toggleInputError(inputElement);
+        this._toggleButtonState();
+      });
     });
   }
 
