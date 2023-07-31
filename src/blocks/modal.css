@@ -62,6 +62,10 @@
   color: #000000;
 }
 
+.modal__button-del-card {
+  margin: 0px;
+}
+
 .modal__text-input {
   border: 1px solid #000000;
   border-top: 0;
@@ -115,6 +119,11 @@
 
 .modal__input-error_hide {
   opacity: 0.2;
+}
+
+.modal__image-caption {
+  font-size: 10px;
+  font-family: "Inter", sans-serif;
 }
 
 @media screen and (max-width: 500px) {

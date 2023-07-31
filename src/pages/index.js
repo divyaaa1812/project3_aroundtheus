@@ -4,99 +4,108 @@ import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+import Api from "../components/Api.js";
 import "../pages/index.css";
-
-const cardData = [
-  {
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-  },
-];
-
-export const settings = {
-  inputElementSelector: ".modal__text-input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonSelector: "modal__button_disabled",
-  inputErrorSelector: "modal__input-error_visible",
-  errorSelectorHide: "modal__input-error-hide",
-  errorSelector: "modal__input-error",
-};
-
-const editProfileModalFormElement = document.querySelector("#edit-profile");
-const addNewCardModalFormElement = document.querySelector("#add-new-card");
-
-/*Declare Elements */
-const editProfileButton = document.querySelector(".js-profile-edit-button");
-const addNewCardButton = document.querySelector(".profile__add-button");
-const cardsList = document.querySelector(".cards__list");
-//Extract title and subtitle elements
-const profileTitle = document.querySelector(".profile__title");
-const profileSubtitle = document.querySelector(".profile__subtitle");
-//Extract input fields from edit profile modal
-const profileTitleInputField = document.querySelector("#profile-title-input");
-const profileSubtitleInputField = document.querySelector(
-  "#profile-subtitle-input"
-);
+import DeleteCardForm from "../components/DeleteCardForm.js";
+import * as constant from "../utils/constants.js";
 
 const newCardPopup = new PopupWithForm(
   "#add-new-card",
-  handleAddNewCardFormSubmit
+  handleAddNewCardFormSubmit,
+  ".modal__button"
 );
 const addProfilePopup = new PopupWithForm(
   "#edit-profile",
-  handleProfileFormSubmit
+  handleProfileFormSubmit,
+  ".modal__button"
 );
-const userInfo = new UserInfo({
-  name: profileTitle,
-  subtitle: profileSubtitle,
-});
+
+const avatarEditPopup = new PopupWithForm(
+  "#avatar-edit-modal",
+  handleAvatarSaveButton,
+  ".modal__button"
+);
+
+let userInfo;
+
 const cardImagePopup = new PopupWithImage(
   "#preview-image-modal",
   ".modal-preview-image"
 );
-//instantiate FormValidator class
-const addNewCardFormValidator = new FormValidator(
-  settings,
-  addNewCardModalFormElement
-);
-const editProfileFormValidator = new FormValidator(
-  settings,
-  editProfileModalFormElement
+
+const deleteCardPopup = new DeleteCardForm(
+  "#delete-image-confirm-modal",
+  handleDeleteCardFormSubmit,
+  "#delete-confirm-button"
 );
 
-// To render initial cards declared above in cardData array
-const section = new Section(
-  { items: cardData, renderer: createCard },
-  cardsList
+//instantiate FormValidator class
+const addNewCardFormValidator = new FormValidator(
+  constant.settings,
+  constant.addNewCardModalFormElement
 );
-section.renderItems();
+const editProfileFormValidator = new FormValidator(
+  constant.settings,
+  constant.editProfileModalFormElement
+);
+const editAvatarFormValidator = new FormValidator(
+  constant.settings,
+  constant.editAvatarModalFormElement
+);
+const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/cohort-3-en",
+  headers: {
+    authorization: "b685d3e0-616a-4dae-bc5b-53892a4f7953",
+    "Content-Type": "application/json",
+  },
+});
+const section = new Section(
+  { items: api.getInitialCards, renderer: createCard },
+  constant.cardsList
+);
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  // destructure the response
+  .then(([userData, cards]) => {
+    // set all the data
+    userInfo = new UserInfo({
+      userData,
+      selectors: {
+        name: constant.profileTitle,
+        subtitle: constant.profileSubtitle,
+        link: constant.profileAvatar,
+      },
+    });
+    userInfo.setUserFields();
+    section.renderItems(cards);
+  })
+  .catch((err) => {
+    console.error(err);
+    // catch possible errors
+  });
 
 function handleOpenEditProfileForm() {
   editProfileFormValidator.disableButton();
+  const values = userInfo.getUserInfo();
+  addProfilePopup.setInputValues(values);
   addProfilePopup.openModal();
-  const { name, subtitle } = userInfo.getUserInfo();
-  profileTitleInputField.value = name;
-  profileSubtitleInputField.value = subtitle;
+}
+
+function handleProfileFormSubmit(inputValues) {
+  constant.submitButton.textContent = "Saving...";
+  api
+    .editUserInfo(inputValues)
+    .then((userData) => {
+      userInfo.updateUserData(userData);
+      userInfo.setUserFields();
+      addProfilePopup.closeModal();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      constant.submitButton.textContent = "Save";
+    });
 }
 
 function handleAddNewCardButton() {
@@ -104,37 +113,112 @@ function handleAddNewCardButton() {
   newCardPopup.openModal();
 }
 
-function handleProfileFormSubmit(inputValues) {
-  userInfo.setUserInfo(inputValues);
-  addProfilePopup.closeModal();
-}
-
-function handleAddNewCardFormSubmit(inputValues) {
-  //create a new card with input values from user
-  const card = createCard(inputValues);
-  //Attach new card to begining of container
-  section.prependItem(card);
-  //close popup after submit
-  newCardPopup.closeModal();
-}
-
-function onCardClick(card) {
-  cardImagePopup.openModal(card);
-}
-
 function createCard(item) {
   // create instance of Card class
-  const card = new Card(item, "#card-template", onCardClick);
+  const card = new Card(
+    item,
+    "#card-template",
+    onCardClick,
+    handleDeleteCardBinButton,
+    onLikeButtonToggle,
+    userInfo
+  );
   //create a card by calling getCardElement method from Card class
   const cardElement = card.getCardElement();
   //return the card
   return cardElement;
 }
 
+function onLikeButtonToggle(cardId, status, callbackFn) {
+  if (status === "like") {
+    api
+      .likeACard(cardId)
+      .then((data) => {
+        callbackFn(data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  } else {
+    api
+      .unLikeACard(cardId)
+      .then(callbackFn)
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+}
+
+function handleAddNewCardFormSubmit(inputValues) {
+  //set button to Saving.. while api call is made
+  constant.createButton.textContent = "Saving...";
+  //create a new card with input values from server
+  api
+    .addNewCard(inputValues)
+    .then((data) => {
+      const card = createCard(data);
+      //Attach new card to begining of container
+      section.prependItem(card);
+      //close popup after submit
+      newCardPopup.closeModal();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      constant.createButton.textContent = "Create";
+    });
+}
+
+function onCardClick(card) {
+  cardImagePopup.openModal(card);
+}
+
+function handleAvatarEditButton() {
+  avatarEditPopup.openModal();
+  editAvatarFormValidator.disableButton();
+}
+
+function handleAvatarSaveButton(inputValues) {
+  constant.avatarSaveButton.textContent = "Saving...";
+  api
+    .editAvatarLink(inputValues)
+    .then((userData) => {
+      userInfo.updateUserData(userData);
+      userInfo.setUserFields();
+      avatarEditPopup.closeModal();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      constant.avatarSaveButton.textContent = "Save";
+    });
+}
+
+function handleDeleteCardBinButton(id, cardElement) {
+  deleteCardPopup.openModal(id, cardElement);
+}
+
+function handleDeleteCardFormSubmit(cardId, cardElement) {
+  api
+    .deleteCard(cardId)
+    .then(() => {
+      cardElement.remove();
+      deleteCardPopup.closeModal();
+    })
+    .catch((err) => {
+      // show error
+      console.log(err);
+    });
+}
+
 /* Event Listeners */
-editProfileButton.addEventListener("click", handleOpenEditProfileForm);
-addNewCardButton.addEventListener("click", handleAddNewCardButton);
+constant.editProfileButton.addEventListener("click", handleOpenEditProfileForm);
+constant.addNewCardButton.addEventListener("click", handleAddNewCardButton);
+constant.avatarEditButton.addEventListener("click", handleAvatarEditButton);
 
 //start form validations
 editProfileFormValidator.enableValidation();
 addNewCardFormValidator.enableValidation();
+editAvatarFormValidator.enableValidation();

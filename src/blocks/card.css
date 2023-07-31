@@ -25,8 +25,8 @@
   justify-content: space-between;
   line-height: 29px;
   padding-left: 20px;
-  padding-top: 25px;
-  padding-bottom: 25px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .card__title {
@@ -38,11 +38,17 @@
 }
 
 .card__fav-icon {
-  margin-right: 20px;
   background: transparent url(../images/fav-icon.svg) center no-repeat;
   width: 21px;
   height: 18px;
   border: none;
+}
+
+.card__fav-labels {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+  align-items: center;
 }
 
 .card__fav-icon:hover {
@@ -67,4 +73,8 @@
 .card__del-button:hover {
   cursor: pointer;
   opacity: 0.5;
+}
+
+.card__del-button-hidden {
+  display: none;
 }

@@ -23,18 +23,20 @@
         </header>
         <main class="content">
           <section class="profile page__container">
-            <img
-              src="<%=require('./images/profile-pic.png')%>"
-              alt="avatar"
-              class="profile__image"
-            />
+            <div class="profile__image-container">
+              <img alt="avatar" class="profile__image" />
+              <button
+                class="profile__avatar-edit-button"
+                type="button"
+              ></button>
+            </div>
             <div class="profile__info">
-              <h1 class="profile__title">Jacques Cousteau</h1>
+              <h1 class="profile__title"></h1>
               <button
                 class="profile__edit-button js-profile-edit-button"
                 type="button"
               ></button>
-              <p class="profile__subtitle">Explorer</p>
+              <p class="profile__subtitle"></p>
             </div>
             <button class="profile__add-button" type="button"></button>
           </section>
@@ -179,13 +181,54 @@
         <div class="modal js-modal" id="preview-image-modal">
           <div class="modal__content page__container">
             <button class="modal__close-button" type="button"></button>
-            <img
-              src="#"
-              alt="image in preview mode"
-              id="imagePreview"
-              class="modal-preview-image"
-            />
+            <figure>
+              <img
+                src="#"
+                alt="image in preview mode"
+                id="imagePreview"
+                class="modal-preview-image"
+              />
+              <figcaption class="modal__image-caption"></figcaption>
+            </figure>
             <span class="modal__input-error"></span>
+          </div>
+        </div>
+        <div class="modal js-modal" id="delete-image-confirm-modal">
+          <div class="modal__content page__container">
+            <button class="modal__close-button" type="button"></button>
+            <form class="modal__form-content" id="delete-card-form-content">
+              <h2 class="modal__title">Are you sure?</h2>
+              <button
+                class="modal__button"
+                type="button"
+                id="delete-confirm-button"
+              >
+                Yes
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="modal js-modal" id="avatar-edit-modal">
+          <div class="modal__content page__container">
+            <button class="modal__close-button" type="button"></button>
+            <form class="modal__form-content" id="change-avatar-form-content">
+              <h2 class="modal__title">Change profile picture</h2>
+              <input
+                type="url"
+                name="link"
+                class="modal__text-input"
+                id="avatar-link-input"
+                required
+              />
+              <span class="modal__input-error"></span>
+              <button
+                class="modal__button"
+                id="avatar-save-button"
+                type="submit"
+              >
+                Save
+              </button>
+            </form>
           </div>
         </div>
       </div>
@@ -196,7 +239,10 @@
         <img class="card__image" src="" alt="FamousPlaceToVisit" />
         <div class="card__description">
           <h2 class="card__title"></h2>
-          <button class="card__fav-icon" type="button"></button>
+          <div class="card__fav-labels">
+            <button class="card__fav-icon" type="button"></button>
+            <span class="card__fav_count"></span>
+          </div>
           <button class="card__del-button" type="button"></button>
         </div>
       </li>

@@ -25,6 +25,40 @@
   font-weight: 500;
 }
 
+.profile__image-container {
+  position: relative;
+}
+
+.profile__image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.profile__image:hover {
+  opacity: 0.5;
+}
+
+.profile__image-container:hover .profile__image {
+  opacity: 0.5;
+}
+
+.profile__image-container:hover .profile__avatar-edit-button {
+  display: inline-block;
+}
+
+.profile__avatar-edit-button {
+  background: transparent url(../images/avatar-edit.svg) center no-repeat;
+  position: absolute;
+  left: 40%;
+  top: 40%;
+  display: none;
+  width: 26px;
+  height: 26px;
+  border: none;
+  cursor: pointer;
+}
+
 .profile__edit-button {
   background: transparent url(../images/editbutton.svg) center no-repeat;
   padding: 0;
