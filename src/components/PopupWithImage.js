@@ -6,7 +6,7 @@ class PopupWithImage extends Popup {
   }
 
   openModal({ name, link }) {
-    const imageEl = this._popupModalSelector.querySelector(this.imageSelector);
+    const imageEl = this._popupModal.querySelector(this.imageSelector);
     const caption = document.querySelector(".modal__image-caption");
     imageEl.setAttribute("src", link);
     imageEl.setAttribute("alt", name);
@@ -16,7 +16,7 @@ class PopupWithImage extends Popup {
 
   closeModal() {
     super.closeModal();
-    const imageEl = this._popupModalSelector.querySelector(this.imageSelector);
+    const imageEl = this._popupModal.querySelector(this.imageSelector);
     imageEl.setAttribute("src", "");
     imageEl.setAttribute("alt", "");
   }

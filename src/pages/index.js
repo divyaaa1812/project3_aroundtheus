@@ -64,23 +64,6 @@ const section = new Section(
   constant.cardsList
 );
 
-api
-  .getUserInfo()
-  .then((userData) => {
-    userInfo = new UserInfo({
-      userData,
-      selectors: {
-        name: constant.profileTitle,
-        subtitle: constant.profileSubtitle,
-        link: constant.profileAvatar,
-      },
-    });
-    userInfo.setUserFields();
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   // destructure the response
   .then(([userData, cards]) => {
@@ -97,6 +80,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     section.renderItems(cards);
   })
   .catch((err) => {
+    console.error(err);
     // catch possible errors
   });
 
@@ -147,11 +131,21 @@ function createCard(item) {
 
 function onLikeButtonToggle(cardId, status, callbackFn) {
   if (status === "like") {
-    api.likeACard(cardId).then((data) => {
-      callbackFn(data);
-    });
+    api
+      .likeACard(cardId)
+      .then((data) => {
+        callbackFn(data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   } else {
-    api.unLikeACard(cardId).then(callbackFn);
+    api
+      .unLikeACard(cardId)
+      .then(callbackFn)
+      .catch((err) => {
+        console.error(err);
+      });
   }
 }
 
@@ -192,14 +186,14 @@ function handleAvatarSaveButton(inputValues) {
     .then((userData) => {
       userInfo.updateUserData(userData);
       userInfo.setUserFields();
+      avatarEditPopup.closeModal();
     })
-    .then((err) => {
-      console.log(err);
+    .catch((err) => {
+      console.error(err);
     })
     .finally(() => {
       constant.avatarSaveButton.textContent = "Save";
     });
-  avatarEditPopup.closeModal();
 }
 
 function handleDeleteCardBinButton(id, cardElement) {
@@ -211,13 +205,11 @@ function handleDeleteCardFormSubmit(cardId, cardElement) {
     .deleteCard(cardId)
     .then(() => {
       cardElement.remove();
+      deleteCardPopup.closeModal();
     })
     .catch((err) => {
       // show error
       console.log(err);
-    })
-    .finally(() => {
-      deleteCardPopup.closeModal();
     });
 }
 
