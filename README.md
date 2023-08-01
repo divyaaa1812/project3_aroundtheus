@@ -19,6 +19,7 @@ Technologies Used: CSS, HTML - Grid Layout, Flex
 **Website Link**
 
 - https://divyaaa1812.github.io/se_project_aroundtheus/
+
 **Images**
 Desktop View:
 ![Desktop View](<./images/desktop%20(2).png>)
