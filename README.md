@@ -2,7 +2,8 @@
 
 ### Overview
 
-- Intro
+### Intro
+
 - Figma
 - Website Link
 - Images
