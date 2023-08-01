@@ -2,13 +2,10 @@
 
 ### Overview
 
-### Intro
-
-### Figma
-
-### Website Link
-
-### Images
+- Intro
+- Figma
+- Website Link
+- Images
 
 ### Intro
 
