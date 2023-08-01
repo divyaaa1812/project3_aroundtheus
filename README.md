@@ -4,13 +4,14 @@
 
 - Intro
 - Figma
+- Website Link
 - Images
 
 **Intro**
 
 This project is made so all the elements are displayed correctly on popular screen sizes.
 
-Technologies Used: CSS, HTML - Grid Layout, Flex
+Technologies Used: CSS, HTML, Javascript
 
 **Figma**
 
