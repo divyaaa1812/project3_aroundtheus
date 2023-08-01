@@ -1,12 +1,12 @@
 # Project 3: Around The U.S.
 
-### Overview
-
 ### Intro
 
-- Figma
-- Website Link
-- Images
+### Figma
+
+### Website Link
+
+### Images
 
 ### Intro
 
